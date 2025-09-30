@@ -1,7 +1,7 @@
 package nl.openminetopia.modules.misc.utils;
 
 import lombok.experimental.UtilityClass;
-import nl.openminetopia.OpenMinetopia;
+import nl.openminetopia.DailyLife;
 import nl.openminetopia.modules.misc.objects.PvPItem;
 import nl.openminetopia.utils.item.ItemUtils;
 import org.bukkit.inventory.ItemStack;
@@ -10,11 +10,11 @@ import org.bukkit.inventory.ItemStack;
 public class MiscUtils {
 
     public boolean isValidHeadItem(ItemStack head) {
-        return ItemUtils.isSimilarToAny(head, OpenMinetopia.getDefaultConfiguration().getHeadWhitelist());
+        return ItemUtils.isSimilarToAny(head, DailyLife.getDefaultConfiguration().getHeadWhitelist());
     }
 
     public PvPItem getPvPItem(ItemStack item) {
-        for (PvPItem pvpItem : OpenMinetopia.getDefaultConfiguration().getPvpItems()) {
+        for (PvPItem pvpItem : DailyLife.getDefaultConfiguration().getPvpItems()) {
             if (pvpItem.isSimilar(item)) return pvpItem;
         }
         return null;

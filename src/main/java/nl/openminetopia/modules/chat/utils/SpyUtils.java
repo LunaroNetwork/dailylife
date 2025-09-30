@@ -1,7 +1,7 @@
 package nl.openminetopia.modules.chat.utils;
 
 import lombok.experimental.UtilityClass;
-import nl.openminetopia.OpenMinetopia;
+import nl.openminetopia.DailyLife;
 import nl.openminetopia.api.player.PlayerManager;
 import nl.openminetopia.api.player.objects.MinetopiaPlayer;
 import nl.openminetopia.configuration.DefaultConfiguration;
@@ -60,7 +60,7 @@ public class SpyUtils {
     }
 
     private void spyToDiscord(SpyType type, Player player, String content) {
-        DefaultConfiguration configuration = OpenMinetopia.getDefaultConfiguration();
+        DefaultConfiguration configuration = DailyLife.getDefaultConfiguration();
         String webhookUrl = (type == SpyType.CHAT) ? configuration.chatSpyWebhookUrl : configuration.commandSpyWebhookUrl;
 
         if (webhookUrl == null || webhookUrl.isEmpty()) return;
@@ -78,7 +78,7 @@ public class SpyUtils {
                 webhook.addEmbed(embed);
                 webhook.execute();
             } catch (Exception e) {
-                OpenMinetopia.getInstance().getLogger().warning("Failed to send spy message to Discord: " + e.getMessage());
+                DailyLife.getInstance().getLogger().warning("Failed to send spy message to Discord: " + e.getMessage());
             }
         });
     }

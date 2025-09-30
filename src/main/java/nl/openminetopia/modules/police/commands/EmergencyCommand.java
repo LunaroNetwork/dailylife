@@ -3,7 +3,7 @@ package nl.openminetopia.modules.police.commands;
 import co.aikar.commands.BaseCommand;
 import co.aikar.commands.annotation.CommandAlias;
 import co.aikar.commands.annotation.Default;
-import nl.openminetopia.OpenMinetopia;
+import nl.openminetopia.DailyLife;
 import nl.openminetopia.api.player.PlayerManager;
 import nl.openminetopia.api.player.objects.MinetopiaPlayer;
 import nl.openminetopia.configuration.MessageConfiguration;
@@ -26,14 +26,14 @@ public class EmergencyCommand extends BaseCommand {
         if (hasCooldown(player)) {
             MinetopiaPlayer minetopiaPlayer = PlayerManager.getInstance().getOnlineMinetopiaPlayer(player);
 
-            long cooldown = OpenMinetopia.getModuleManager().get(PoliceModule.class).getEmergencyCooldowns().get(player.getUniqueId());
+            long cooldown = DailyLife.getModuleManager().get(PoliceModule.class).getEmergencyCooldowns().get(player.getUniqueId());
             ChatUtils.sendFormattedMessage(minetopiaPlayer, MessageConfiguration.message("emergency_too_soon"));
             ChatUtils.sendFormattedMessage(minetopiaPlayer, MessageConfiguration.message("emergency_cooldown")
                     .replace("<time>", cooldownToTime(cooldown)));
             return;
         }
 
-        OpenMinetopia.getModuleManager().get(PoliceModule.class).getEmergencyCooldowns().put(player.getUniqueId(), System.currentTimeMillis());
+        DailyLife.getModuleManager().get(PoliceModule.class).getEmergencyCooldowns().put(player.getUniqueId(), System.currentTimeMillis());
         broadcastEmergency(message, sender);
     }
 
@@ -75,13 +75,13 @@ public class EmergencyCommand extends BaseCommand {
     }
 
     private boolean hasCooldown(Player player) {
-        PoliceModule policeModule = OpenMinetopia.getModuleManager().get(PoliceModule.class);
+        PoliceModule policeModule = DailyLife.getModuleManager().get(PoliceModule.class);
 
         if (!policeModule.getEmergencyCooldowns().containsKey(player.getUniqueId())) return false;
 
         long cooldown = policeModule.getEmergencyCooldowns().get(player.getUniqueId());
         // check if cooldown of 5 minutes has passed and remove from map if so
-        if (System.currentTimeMillis() - cooldown >= (OpenMinetopia.getDefaultConfiguration().getEmergencyCooldown() * 1000L)) {
+        if (System.currentTimeMillis() - cooldown >= (DailyLife.getDefaultConfiguration().getEmergencyCooldown() * 1000L)) {
             policeModule.getEmergencyCooldowns().remove(player.getUniqueId());
             return false;
         }
@@ -89,7 +89,7 @@ public class EmergencyCommand extends BaseCommand {
     }
 
     private String cooldownToTime(long cooldown) {
-        long millis = (OpenMinetopia.getDefaultConfiguration().getEmergencyCooldown() * 1000L) - (System.currentTimeMillis() - cooldown);
+        long millis = (DailyLife.getDefaultConfiguration().getEmergencyCooldown() * 1000L) - (System.currentTimeMillis() - cooldown);
         long seconds = millisToSeconds(millis);
         long minutes = millisToMinutes(millis);
         return minutes + " minuten en " + seconds + " seconden";

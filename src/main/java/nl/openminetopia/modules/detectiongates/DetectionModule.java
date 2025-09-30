@@ -3,7 +3,7 @@ package nl.openminetopia.modules.detectiongates;
 import nl.openminetopia.utils.modules.ExtendedSpigotModule;
 import com.jazzkuh.modulemanager.spigot.SpigotModuleManager;
 import lombok.Getter;
-import nl.openminetopia.OpenMinetopia;
+import nl.openminetopia.DailyLife;
 import nl.openminetopia.configuration.DefaultConfiguration;
 import nl.openminetopia.modules.detectiongates.listeners.DetectionListener;
 import org.bukkit.Location;
@@ -20,7 +20,7 @@ public class DetectionModule extends ExtendedSpigotModule {
 
     private final Map<Location, Material> blocks = new HashMap<>();
 
-    public DetectionModule(SpigotModuleManager<@NotNull OpenMinetopia> moduleManager) {
+    public DetectionModule(SpigotModuleManager<@NotNull DailyLife> moduleManager) {
         super(moduleManager);
     }
 
@@ -35,7 +35,7 @@ public class DetectionModule extends ExtendedSpigotModule {
     }
 
     public List<ItemStack> getFlaggedItems(Player player) {
-        DefaultConfiguration configuration = OpenMinetopia.getDefaultConfiguration();
+        DefaultConfiguration configuration = DailyLife.getDefaultConfiguration();
 
         return Arrays.stream(player.getInventory().getContents())
                 .filter(Objects::nonNull)

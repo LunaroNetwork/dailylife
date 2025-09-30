@@ -1,7 +1,7 @@
 package nl.openminetopia.modules.police.walkietalkie.menus;
 
 import dev.triumphteam.gui.guis.GuiItem;
-import nl.openminetopia.OpenMinetopia;
+import nl.openminetopia.DailyLife;
 import nl.openminetopia.configuration.MessageConfiguration;
 import nl.openminetopia.utils.ChatUtils;
 import nl.openminetopia.utils.item.ItemBuilder;
@@ -36,7 +36,7 @@ public class WalkieTalkieContactsMenu extends PaginatedMenu {
                 ChatUtils.sendMessage(player, MessageConfiguration.message("police_walkietalkie_type_your_message")
                         .replace("<player>", target.getName()));
 
-                OpenMinetopia.getChatInputHandler().waitForInput(player, response -> {
+                DailyLife.getChatInputHandler().waitForInput(player, response -> {
                     String formattedMessage = MessageConfiguration.message("police_walkietalkie_private_format")
                             .replace("<player>", player.getName())
                             .replace("<target>", target.getName())

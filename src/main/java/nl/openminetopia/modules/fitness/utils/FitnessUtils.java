@@ -1,7 +1,7 @@
 package nl.openminetopia.modules.fitness.utils;
 
 import lombok.experimental.UtilityClass;
-import nl.openminetopia.OpenMinetopia;
+import nl.openminetopia.DailyLife;
 import nl.openminetopia.api.player.PlayerManager;
 import nl.openminetopia.api.player.fitness.FitnessStatisticType;
 import nl.openminetopia.api.player.objects.MinetopiaPlayer;
@@ -71,7 +71,7 @@ public class FitnessUtils {
         FitnessConfiguration config = getFitnessConfiguration();
         List<PotionEffectType> effectsToRemove = getAllFitnessEffectTypes(config);
 
-        Bukkit.getScheduler().runTask(OpenMinetopia.getInstance(), () -> {
+        Bukkit.getScheduler().runTask(DailyLife.getInstance(), () -> {
             effectsToRemove.forEach(player::removePotionEffect);
             player.setWalkSpeed(DEFAULT_WALK_SPEED);
         });
@@ -116,7 +116,7 @@ public class FitnessUtils {
     // Private helper methods
 
     private static FitnessConfiguration getFitnessConfiguration() {
-        return OpenMinetopia.getModuleManager().get(FitnessModule.class).getConfiguration();
+        return DailyLife.getModuleManager().get(FitnessModule.class).getConfiguration();
     }
 
     private static FitnessLevelEffect findApplicableFitnessEffect(FitnessConfiguration config, int totalFitness) {
@@ -130,7 +130,7 @@ public class FitnessUtils {
     private static void clearExistingFitnessEffects(Player player, FitnessConfiguration config) {
         List<PotionEffectType> effectsToRemove = getAllFitnessEffectTypes(config);
 
-        Bukkit.getScheduler().runTask(OpenMinetopia.getInstance(), () -> {
+        Bukkit.getScheduler().runTask(DailyLife.getInstance(), () -> {
             effectsToRemove.forEach(player::removePotionEffect);
         });
     }
@@ -146,7 +146,7 @@ public class FitnessUtils {
     }
 
     private static void applyWalkSpeed(Player player, FitnessConfiguration config, float walkSpeed) {
-        Bukkit.getScheduler().runTask(OpenMinetopia.getInstance(), () -> {
+        Bukkit.getScheduler().runTask(DailyLife.getInstance(), () -> {
             float finalWalkSpeed = walkSpeed;
             if (player.getWorld().hasStorm() && config.isRainSlowdownEnabled()) {
                 finalWalkSpeed = Math.max(0.1f, walkSpeed - RAIN_SLOWDOWN_AMOUNT);
@@ -161,7 +161,7 @@ public class FitnessUtils {
                 .filter(Objects::nonNull)
                 .toList();
 
-        Bukkit.getScheduler().runTask(OpenMinetopia.getInstance(), () -> {
+        Bukkit.getScheduler().runTask(DailyLife.getInstance(), () -> {
             validEffects.forEach(effect -> {
                 player.removePotionEffect(effect.getType());
                 player.addPotionEffect(effect);
@@ -182,7 +182,7 @@ public class FitnessUtils {
 
             return new PotionEffect(effectType, PotionEffect.INFINITE_DURATION, amplifier, true, false);
         } catch (NumberFormatException e) {
-            OpenMinetopia.getInstance().getLogger().warning("Invalid effect format: " + effectString);
+            DailyLife.getInstance().getLogger().warning("Invalid effect format: " + effectString);
             return null;
         }
     }

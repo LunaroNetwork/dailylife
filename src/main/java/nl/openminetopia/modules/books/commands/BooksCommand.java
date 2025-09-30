@@ -4,7 +4,7 @@ import co.aikar.commands.BaseCommand;
 import co.aikar.commands.annotation.CommandAlias;
 import co.aikar.commands.annotation.CommandCompletion;
 import co.aikar.commands.annotation.Subcommand;
-import nl.openminetopia.OpenMinetopia;
+import nl.openminetopia.DailyLife;
 import nl.openminetopia.api.player.PlayerManager;
 import nl.openminetopia.api.player.objects.MinetopiaPlayer;
 import nl.openminetopia.modules.books.BooksModule;
@@ -22,7 +22,7 @@ public class BooksCommand extends BaseCommand {
     @Subcommand("krijg|get")
     @CommandCompletion("@books")
     public void getBook(Player player, String book) {
-        BooksModule booksModule = OpenMinetopia.getModuleManager().get(BooksModule.class);
+        BooksModule booksModule = DailyLife.getModuleManager().get(BooksModule.class);
 
         if (!player.hasPermission("openminetopia.books." + book)) {
             player.sendMessage(ChatUtils.color("<red>Je hebt geen toestemming om dit boek te krijgen."));
@@ -39,12 +39,12 @@ public class BooksCommand extends BaseCommand {
 
     private void askForVariables(Player player, CustomBook book, int index) {
         String[] keys = book.getVariables().keySet().toArray(new String[0]);
-        BooksModule booksModule = OpenMinetopia.getModuleManager().get(BooksModule.class);
+        BooksModule booksModule = DailyLife.getModuleManager().get(BooksModule.class);
         MinetopiaPlayer minetopiaPlayer = PlayerManager.getInstance().getOnlineMinetopiaPlayer(player);
 
         if (index >= keys.length) {
             // Alle variabelen zijn ingevuld, geef het boek
-            Bukkit.getScheduler().runTask(OpenMinetopia.getInstance(), () -> {
+            Bukkit.getScheduler().runTask(DailyLife.getInstance(), () -> {
                 if (book.isCopy()) {
                     player.getInventory().addItem(book.getBookItem(booksModule.getVariableResponses().get(player.getUniqueId()), player, true));
                 }
@@ -60,7 +60,7 @@ public class BooksCommand extends BaseCommand {
 
         player.sendMessage(ChatUtils.format(minetopiaPlayer, explanation));
 
-        OpenMinetopia.getChatInputHandler().waitForInput(player, response -> {
+        DailyLife.getChatInputHandler().waitForInput(player, response -> {
             Map<String, String> responded = new HashMap<>();
             if (booksModule.getVariableResponses().containsKey(player.getUniqueId())) {
                 responded = booksModule.getVariableResponses().get(player.getUniqueId());

@@ -5,7 +5,7 @@ import nl.openminetopia.utils.modules.ExtendedSpigotModule;
 import com.jazzkuh.modulemanager.spigot.SpigotModuleManager;
 import com.sk89q.worldguard.protection.regions.ProtectedRegion;
 import lombok.Getter;
-import nl.openminetopia.OpenMinetopia;
+import nl.openminetopia.DailyLife;
 import nl.openminetopia.modules.data.DataModule;
 import nl.openminetopia.modules.data.storm.StormDatabase;
 import nl.openminetopia.modules.data.utils.StormUtils;
@@ -38,7 +38,7 @@ public class PlacesModule extends ExtendedSpigotModule {
     public Collection<WorldModel> worldModels = new ArrayList<>();
     public Collection<CityModel> cityModels = new ArrayList<>();
 
-    public PlacesModule(SpigotModuleManager<@NotNull OpenMinetopia> moduleManager, DataModule dataModule) {
+    public PlacesModule(SpigotModuleManager<@NotNull DailyLife> moduleManager, DataModule dataModule) {
         super(moduleManager);
     }
 
@@ -58,36 +58,36 @@ public class PlacesModule extends ExtendedSpigotModule {
         registerComponent(new PlayerTeleportListener());
         registerComponent(new PlayerMoveListener());
 
-        Bukkit.getScheduler().runTaskLater(OpenMinetopia.getInstance(), () -> {
-            OpenMinetopia.getInstance().getLogger().info("Loading worlds...");
+        Bukkit.getScheduler().runTaskLater(DailyLife.getInstance(), () -> {
+            DailyLife.getInstance().getLogger().info("Loading worlds...");
 
             this.getWorlds().whenComplete((worldModels, throwable) -> {
                 if (throwable != null) {
-                    OpenMinetopia.getInstance().getLogger().severe("Failed to load worlds: " + throwable.getMessage());
+                    DailyLife.getInstance().getLogger().severe("Failed to load worlds: " + throwable.getMessage());
                     return;
                 }
 
                 this.worldModels = worldModels;
-                OpenMinetopia.getInstance().getLogger().info("Loaded " + worldModels.size() + " worlds.");
+                DailyLife.getInstance().getLogger().info("Loaded " + worldModels.size() + " worlds.");
             });
 
-            OpenMinetopia.getInstance().getLogger().info("Loading cities...");
+            DailyLife.getInstance().getLogger().info("Loading cities...");
 
             this.getCities().whenComplete((cityModels, throwable) -> {
                 if (throwable != null) {
-                    OpenMinetopia.getInstance().getLogger().severe("Failed to load cities: " + throwable.getMessage());
+                    DailyLife.getInstance().getLogger().severe("Failed to load cities: " + throwable.getMessage());
                     return;
                 }
 
                 this.cityModels = cityModels;
-                OpenMinetopia.getInstance().getLogger().info("Loaded " + cityModels.size() + " cities.");
+                DailyLife.getInstance().getLogger().info("Loaded " + cityModels.size() + " cities.");
             });
         }, 20L);
 
-        OpenMinetopia.getCommandManager().getCommandCompletions().registerCompletion("worldNames", c ->
+        DailyLife.getCommandManager().getCommandCompletions().registerCompletion("worldNames", c ->
                 this.getWorldModels().stream().map(WorldModel::getName).toList());
 
-        OpenMinetopia.getCommandManager().getCommandCompletions().registerCompletion("cityNames", c ->
+        DailyLife.getCommandManager().getCommandCompletions().registerCompletion("cityNames", c ->
                 this.getCityModels().stream().map(CityModel::getName).toList());
     }
 

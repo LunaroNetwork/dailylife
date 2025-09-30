@@ -1,6 +1,6 @@
 package nl.openminetopia.modules.fitness.listeners;
 
-import nl.openminetopia.OpenMinetopia;
+import nl.openminetopia.DailyLife;
 import nl.openminetopia.api.player.PlayerManager;
 import nl.openminetopia.api.player.fitness.FitnessStatisticType;
 import nl.openminetopia.api.player.objects.MinetopiaPlayer;
@@ -18,7 +18,7 @@ public class PlayerEatListener implements Listener {
     @EventHandler
     public void playerEat(final PlayerItemConsumeEvent event) {
         if (!event.getItem().getType().isEdible()) return;
-        FitnessModule fitnessModule = OpenMinetopia.getModuleManager().get(FitnessModule.class);
+        FitnessModule fitnessModule = DailyLife.getModuleManager().get(FitnessModule.class);
         FitnessConfiguration configuration = fitnessModule.getConfiguration();
 
         FitnessFood food = null;

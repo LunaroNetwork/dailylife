@@ -4,7 +4,7 @@ import com.craftmend.storm.api.enums.Where;
 import nl.openminetopia.utils.modules.ExtendedSpigotModule;
 import com.jazzkuh.modulemanager.spigot.SpigotModuleManager;
 import lombok.Getter;
-import nl.openminetopia.OpenMinetopia;
+import nl.openminetopia.DailyLife;
 import nl.openminetopia.api.player.PlayerManager;
 import nl.openminetopia.modules.currencies.commands.CurrencyCommand;
 import nl.openminetopia.modules.currencies.commands.CurrencyCommandHolder;
@@ -34,13 +34,13 @@ public class CurrencyModule extends ExtendedSpigotModule {
     @Getter
     private CurrencyTask currencyTask;
 
-    public CurrencyModule(SpigotModuleManager<@NotNull OpenMinetopia> moduleManager, PlayerModule playerModule) {
+    public CurrencyModule(SpigotModuleManager<@NotNull DailyLife> moduleManager, PlayerModule playerModule) {
         super(moduleManager);
     }
 
     @Override
     public void onEnable() {
-        configuration = new CurrencyConfiguration(this, OpenMinetopia.getInstance().getDataFolder());
+        configuration = new CurrencyConfiguration(this, DailyLife.getInstance().getDataFolder());
         configuration.saveConfiguration();
 
         registerComponent(new CurrencyJoinListener(this));
@@ -57,13 +57,13 @@ public class CurrencyModule extends ExtendedSpigotModule {
         }
 
         currencyTask = new CurrencyTask(this, PlayerManager.getInstance(), 5000L, 50, 30 * 1000L, () -> new ArrayList<>(PlayerManager.getInstance().getOnlinePlayers().keySet()));
-        OpenMinetopia.getInstance().registerDirtyPlayerRunnable(currencyTask, 20L);
+        DailyLife.getInstance().registerDirtyPlayerRunnable(currencyTask, 20L);
 
     }
 
     @Override
     public void onDisable() {
-        OpenMinetopia.getInstance().unregisterDirtyPlayerRunnable(currencyTask);
+        DailyLife.getInstance().unregisterDirtyPlayerRunnable(currencyTask);
     }
 
     public CompletableFuture<Collection<CurrencyModel>> getCurrencies(UUID uuid) {

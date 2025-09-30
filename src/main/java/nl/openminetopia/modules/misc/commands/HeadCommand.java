@@ -2,7 +2,7 @@ package nl.openminetopia.modules.misc.commands;
 
 import co.aikar.commands.BaseCommand;
 import co.aikar.commands.annotation.*;
-import nl.openminetopia.OpenMinetopia;
+import nl.openminetopia.DailyLife;
 import nl.openminetopia.configuration.DefaultConfiguration;
 import nl.openminetopia.modules.misc.utils.MiscUtils;
 import nl.openminetopia.utils.ChatUtils;
@@ -40,7 +40,7 @@ public class HeadCommand extends BaseCommand {
             return;
         }
 
-        DefaultConfiguration configuration = OpenMinetopia.getDefaultConfiguration();
+        DefaultConfiguration configuration = DailyLife.getDefaultConfiguration();
         configuration.addToHeadWhitelist(item);
 
         player.sendMessage(ChatUtils.color("<green>Je hebt het item toegevoegd aan de head whitelist!"));
@@ -57,7 +57,7 @@ public class HeadCommand extends BaseCommand {
             return;
         }
 
-        DefaultConfiguration configuration = OpenMinetopia.getDefaultConfiguration();
+        DefaultConfiguration configuration = DailyLife.getDefaultConfiguration();
         configuration.removeFromHeadWhitelist(item);
 
         player.sendMessage(ChatUtils.color("<green>Je hebt het item verwijderd van de head whitelist!"));

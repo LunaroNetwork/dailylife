@@ -3,7 +3,7 @@ package nl.openminetopia.api.player.objects;
 import lombok.AccessLevel;
 import lombok.Getter;
 import lombok.Setter;
-import nl.openminetopia.OpenMinetopia;
+import nl.openminetopia.DailyLife;
 import nl.openminetopia.api.places.MTPlaceManager;
 import nl.openminetopia.api.places.objects.MTPlace;
 import nl.openminetopia.api.player.fitness.Fitness;
@@ -17,7 +17,6 @@ import nl.openminetopia.modules.places.PlacesModule;
 import nl.openminetopia.modules.places.models.WorldModel;
 import nl.openminetopia.modules.player.PlayerModule;
 import nl.openminetopia.modules.player.models.PlayerModel;
-import nl.openminetopia.modules.player.runnables.LevelCalculateRunnable;
 import nl.openminetopia.modules.police.PoliceModule;
 import nl.openminetopia.modules.police.models.CriminalRecordModel;
 import nl.openminetopia.modules.prefix.PrefixModule;
@@ -64,12 +63,12 @@ public class MinetopiaPlayer {
 
     private @Setter Fitness fitness;
 
-    private final @Getter(AccessLevel.PRIVATE) PlayerModule playerModule = OpenMinetopia.getModuleManager().get(PlayerModule.class);
-    private final @Getter(AccessLevel.PRIVATE) PrefixModule prefixModule = OpenMinetopia.getModuleManager().get(PrefixModule.class);
-    private final @Getter(AccessLevel.PRIVATE) ColorModule colorModule = OpenMinetopia.getModuleManager().get(ColorModule.class);
-    private final @Getter(AccessLevel.PRIVATE) PlacesModule placesModule = OpenMinetopia.getModuleManager().get(PlacesModule.class);
-    private final @Getter(AccessLevel.PRIVATE) FitnessModule fitnessModule = OpenMinetopia.getModuleManager().get(FitnessModule.class);
-    private final @Getter(AccessLevel.PRIVATE) PoliceModule policeModule = OpenMinetopia.getModuleManager().get(PoliceModule.class);
+    private final @Getter(AccessLevel.PRIVATE) PlayerModule playerModule = DailyLife.getModuleManager().get(PlayerModule.class);
+    private final @Getter(AccessLevel.PRIVATE) PrefixModule prefixModule = DailyLife.getModuleManager().get(PrefixModule.class);
+    private final @Getter(AccessLevel.PRIVATE) ColorModule colorModule = DailyLife.getModuleManager().get(ColorModule.class);
+    private final @Getter(AccessLevel.PRIVATE) PlacesModule placesModule = DailyLife.getModuleManager().get(PlacesModule.class);
+    private final @Getter(AccessLevel.PRIVATE) FitnessModule fitnessModule = DailyLife.getModuleManager().get(FitnessModule.class);
+    private final @Getter(AccessLevel.PRIVATE) PoliceModule policeModule = DailyLife.getModuleManager().get(PoliceModule.class);
 
     public MinetopiaPlayer(UUID uuid, PlayerModel playerModel) {
         this.uuid = uuid;
@@ -79,7 +78,7 @@ public class MinetopiaPlayer {
     public CompletableFuture<Void> load() {
         CompletableFuture<Void> loadFuture = new CompletableFuture<>();
 
-        DefaultConfiguration configuration = OpenMinetopia.getDefaultConfiguration();
+        DefaultConfiguration configuration = DailyLife.getDefaultConfiguration();
 
         if (this.getBukkit().getPlayer() != null && this.getBukkit().isOnline())
             this.getBukkit().getPlayer().sendMessage(ChatUtils.color("<red>Je data wordt geladen..."));
@@ -190,7 +189,7 @@ public class MinetopiaPlayer {
     public void addPrefix(Prefix prefix) {
         prefixModule.addPrefix(this, prefix).whenComplete((id, throwable) -> {
             if (throwable != null) {
-                OpenMinetopia.getInstance().getLogger().severe("Failed to add prefix: " + throwable.getMessage());
+                DailyLife.getInstance().getLogger().severe("Failed to add prefix: " + throwable.getMessage());
                 return;
             }
             prefixes.add(new Prefix(id, prefix.getPrefix(), prefix.getExpiresAt()));
@@ -199,7 +198,7 @@ public class MinetopiaPlayer {
 
 
     public void removePrefix(Prefix prefix) {
-        DefaultConfiguration configuration = OpenMinetopia.getDefaultConfiguration();
+        DefaultConfiguration configuration = DailyLife.getDefaultConfiguration();
         prefixes.remove(prefix);
 
         if (activePrefix == prefix) {
@@ -218,7 +217,7 @@ public class MinetopiaPlayer {
 
 
     public Prefix getActivePrefix() {
-        DefaultConfiguration configuration = OpenMinetopia.getDefaultConfiguration();
+        DefaultConfiguration configuration = DailyLife.getDefaultConfiguration();
         if (activePrefix == null) {
             activePrefix = new Prefix(-1, configuration.getDefaultPrefix(), -1);
         }
@@ -241,7 +240,7 @@ public class MinetopiaPlayer {
     public void addColor(OwnableColor color) {
         this.colorModule.addColor(this, color).whenComplete((id, throwable) -> {
             if (throwable != null) {
-                OpenMinetopia.getInstance().getLogger().severe("Failed to add color: " + throwable.getMessage());
+                DailyLife.getInstance().getLogger().severe("Failed to add color: " + throwable.getMessage());
                 return;
             }
 

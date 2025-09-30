@@ -1,9 +1,9 @@
-name: OpenMinetopia
-version: '1.4.0'
-main: nl.openminetopia.OpenMinetopia
+name: DailyLife
+version: '1.0.0'
+main: nl.openminetopia.DailyLife
 api-version: '1.21'
-loader: nl.openminetopia.OpenMinetopiaLoader
-authors: [ 'KaasPlakje', 'OmeJan', 'TheBathDuck' ]
+loader: nl.openminetopia.DailyLifeLoader
+authors: [ '_GamingSkill' ]
 dependencies:
   server:
     PlaceholderAPI:

@@ -1,6 +1,6 @@
 package nl.openminetopia.modules.actionbar.runnables;
 
-import nl.openminetopia.OpenMinetopia;
+import nl.openminetopia.DailyLife;
 import nl.openminetopia.api.player.PlayerManager;
 import nl.openminetopia.api.player.objects.MinetopiaPlayer;
 import nl.openminetopia.configuration.DefaultConfiguration;
@@ -23,7 +23,7 @@ public class ActionbarRunnable extends AbstractDirtyRunnable<UUID> {
 
     @Override
     protected void process(UUID key) {
-        DefaultConfiguration configuration = OpenMinetopia.getDefaultConfiguration();
+        DefaultConfiguration configuration = DailyLife.getDefaultConfiguration();
         if (!configuration.isActionbarEnabled()) return;
         MinetopiaPlayer minetopiaPlayer = playerManager.getOnlinePlayers().get(key);
         if (minetopiaPlayer == null) return;

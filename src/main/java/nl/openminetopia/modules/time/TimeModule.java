@@ -2,7 +2,7 @@ package nl.openminetopia.modules.time;
 
 import nl.openminetopia.utils.modules.ExtendedSpigotModule;
 import com.jazzkuh.modulemanager.spigot.SpigotModuleManager;
-import nl.openminetopia.OpenMinetopia;
+import nl.openminetopia.DailyLife;
 import nl.openminetopia.modules.data.DataModule;
 import nl.openminetopia.modules.places.PlacesModule;
 import nl.openminetopia.modules.time.tasks.TimeSyncRunnable;
@@ -13,15 +13,15 @@ import org.jetbrains.annotations.NotNull;
 
 public class TimeModule extends ExtendedSpigotModule {
 
-    public TimeModule(SpigotModuleManager<@NotNull OpenMinetopia> moduleManager, DataModule dataModule) {
+    public TimeModule(SpigotModuleManager<@NotNull DailyLife> moduleManager, DataModule dataModule) {
         super(moduleManager);
     }
 
     @Override
     public void onEnable() {
-        if (!OpenMinetopia.getDefaultConfiguration().isSyncTime()) return;
+        if (!DailyLife.getDefaultConfiguration().isSyncTime()) return;
 
-        PlacesModule placesModule = OpenMinetopia.getModuleManager().get(PlacesModule.class);
+        PlacesModule placesModule = DailyLife.getModuleManager().get(PlacesModule.class);
         placesModule.worldModels.forEach(worldModel -> {
             World bukkitWorld = Bukkit.getWorld(worldModel.getName());
             if (bukkitWorld == null) return;
@@ -30,6 +30,6 @@ public class TimeModule extends ExtendedSpigotModule {
         });
 
         TimeSyncRunnable runnable = new TimeSyncRunnable();
-        runnable.runTaskTimer(OpenMinetopia.getInstance(), 0L, 200L);
+        runnable.runTaskTimer(DailyLife.getInstance(), 0L, 200L);
     }
 }

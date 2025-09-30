@@ -1,13 +1,12 @@
 package nl.openminetopia.modules.banking.menus;
 
 import dev.triumphteam.gui.guis.GuiItem;
-import nl.openminetopia.OpenMinetopia;
+import nl.openminetopia.DailyLife;
 import nl.openminetopia.configuration.MessageConfiguration;
 import nl.openminetopia.modules.banking.BankingModule;
 import nl.openminetopia.modules.banking.enums.AccountPermission;
 import nl.openminetopia.modules.banking.enums.AccountType;
 import nl.openminetopia.modules.banking.models.BankAccountModel;
-import nl.openminetopia.utils.ChatUtils;
 import nl.openminetopia.utils.item.ItemBuilder;
 import nl.openminetopia.utils.menu.PaginatedMenu;
 import org.bukkit.Material;
@@ -22,7 +21,7 @@ public class BankAccountSelectionMenu extends PaginatedMenu {
     public BankAccountSelectionMenu(Player player, AccountType type) {
         super(type.getColor() + type.getName(), 4, 27);
         gui.disableAllInteractions();
-        BankingModule bankingModule = OpenMinetopia.getModuleManager().get(BankingModule.class);
+        BankingModule bankingModule = DailyLife.getModuleManager().get(BankingModule.class);
 
         gui.setItem(29, this.previousPageItem());
         gui.setItem(33, this.nextPageItem());

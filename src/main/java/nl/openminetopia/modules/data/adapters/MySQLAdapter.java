@@ -6,7 +6,7 @@ import com.craftmend.storm.connection.hikaricp.HikariDriver;
 import com.craftmend.storm.parser.types.TypeRegistry;
 import com.zaxxer.hikari.HikariConfig;
 import lombok.SneakyThrows;
-import nl.openminetopia.OpenMinetopia;
+import nl.openminetopia.DailyLife;
 import nl.openminetopia.api.player.fitness.FitnessStatisticType;
 import nl.openminetopia.configuration.DefaultConfiguration;
 import nl.openminetopia.modules.banking.enums.AccountPermission;
@@ -33,7 +33,7 @@ public class MySQLAdapter implements DatabaseAdapter {
 
     @Override
     public void connect() {
-        DefaultConfiguration configuration = OpenMinetopia.getDefaultConfiguration();
+        DefaultConfiguration configuration = DailyLife.getDefaultConfiguration();
         String host = configuration.getDatabaseHost();
         int port = configuration.getDatabasePort();
         String name = configuration.getDatabaseName();
@@ -53,9 +53,9 @@ public class MySQLAdapter implements DatabaseAdapter {
             StormDatabase.getInstance().setStorm(new Storm(new HikariDriver(config)));
             registerStormModels();
         } catch (Exception e) {
-            OpenMinetopia.getInstance().getLogger().severe("Failed to connect to MySQL database: " + e.getMessage());
-            OpenMinetopia.getInstance().getLogger().severe("Disabling the plugin...");
-            OpenMinetopia.getInstance().getServer().getPluginManager().disablePlugin(OpenMinetopia.getInstance());
+            DailyLife.getInstance().getLogger().severe("Failed to connect to MySQL database: " + e.getMessage());
+            DailyLife.getInstance().getLogger().severe("Disabling the plugin...");
+            DailyLife.getInstance().getServer().getPluginManager().disablePlugin(DailyLife.getInstance());
         }
     }
 

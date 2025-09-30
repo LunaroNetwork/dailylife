@@ -2,7 +2,7 @@ package nl.openminetopia.modules.banking.tasks;
 
 import net.objecthunter.exp4j.Expression;
 import net.objecthunter.exp4j.ExpressionBuilder;
-import nl.openminetopia.OpenMinetopia;
+import nl.openminetopia.DailyLife;
 import nl.openminetopia.api.player.PlayerManager;
 import nl.openminetopia.api.player.objects.MinetopiaPlayer;
 import nl.openminetopia.configuration.MessageConfiguration;
@@ -23,8 +23,8 @@ import java.util.function.Supplier;
 public class WagePaymentTask extends AbstractDirtyRunnable<UUID > {
 
     private final Supplier<LevelCheckConfiguration> levelCheckConfigurationSupplier;
-    private final PlayerModule playerModule = OpenMinetopia.getModuleManager().get(PlayerModule.class);
-    private final BankingModule bankingModule = OpenMinetopia.getModuleManager().get(BankingModule.class);
+    private final PlayerModule playerModule = DailyLife.getModuleManager().get(PlayerModule.class);
+    private final BankingModule bankingModule = DailyLife.getModuleManager().get(BankingModule.class);
     private final PlayerManager playerManager;
 
     public WagePaymentTask(Supplier<LevelCheckConfiguration> levelCheckConfigurationSupplier, PlayerManager playerManager, long minIntervalMs, int batch, long heartbeatMs, Supplier<List<UUID>> allKeysSupplier) {

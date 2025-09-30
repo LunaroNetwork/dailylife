@@ -30,13 +30,13 @@ import java.util.UUID;
 import java.util.concurrent.CopyOnWriteArrayList;
 
 @Getter @Setter
-public final class OpenMinetopia extends JavaPlugin {
+public final class DailyLife extends JavaPlugin {
 
     @Getter
-    private static OpenMinetopia instance;
+    private static DailyLife instance;
 
     @Getter @Setter(AccessLevel.PRIVATE)
-    private static SpigotModuleManager<@NotNull OpenMinetopia> moduleManager;
+    private static SpigotModuleManager<@NotNull DailyLife> moduleManager;
 
     @Getter @Setter
     private static PaperCommandManager commandManager;
@@ -59,7 +59,7 @@ public final class OpenMinetopia extends JavaPlugin {
 
     private Vertx vertx;
 
-    public OpenMinetopia() {
+    public DailyLife() {
         instance = this;
         moduleManager = new SpigotModuleManager<>(this, getComponentLogger());
     }
@@ -141,7 +141,7 @@ public final class OpenMinetopia extends JavaPlugin {
 
     public void registerDirtyPlayerRunnable(AbstractDirtyRunnable<UUID> runnable, long periodTicks) {
         dirtyPlayerRunnables.add(runnable);
-        runnable.start(OpenMinetopia.getInstance(), periodTicks);
+        runnable.start(DailyLife.getInstance(), periodTicks);
     }
 
     public void unregisterDirtyPlayerRunnable(AbstractDirtyRunnable<UUID> runnable) {

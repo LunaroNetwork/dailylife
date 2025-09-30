@@ -1,7 +1,7 @@
 package nl.openminetopia.modules.staff.chat.listeners;
 
 import io.papermc.paper.event.player.AsyncChatEvent;
-import nl.openminetopia.OpenMinetopia;
+import nl.openminetopia.DailyLife;
 import nl.openminetopia.api.player.PlayerManager;
 import nl.openminetopia.api.player.objects.MinetopiaPlayer;
 import nl.openminetopia.configuration.MessageConfiguration;
@@ -18,7 +18,7 @@ public class PlayerChatListener implements Listener {
     public void onChat(AsyncChatEvent event) {
         Player source = event.getPlayer();
 
-        PoliceModule policeModule = OpenMinetopia.getModuleManager().get(PoliceModule.class);
+        PoliceModule policeModule = DailyLife.getModuleManager().get(PoliceModule.class);
         if (policeModule.getWalkieTalkieManager().isPoliceChatEnabled(source)) return;
 
         MinetopiaPlayer minetopiaPlayer = PlayerManager.getInstance().getOnlineMinetopiaPlayer(source);

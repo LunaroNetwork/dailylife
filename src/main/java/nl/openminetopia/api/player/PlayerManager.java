@@ -1,14 +1,12 @@
 package nl.openminetopia.api.player;
 
 import lombok.Getter;
-import nl.openminetopia.OpenMinetopia;
+import nl.openminetopia.DailyLife;
 import nl.openminetopia.api.player.objects.MinetopiaPlayer;
 import nl.openminetopia.modules.player.PlayerModule;
 import org.bukkit.OfflinePlayer;
 import org.bukkit.entity.Player;
 
-import java.util.ArrayList;
-import java.util.List;
 import java.util.Map;
 import java.util.UUID;
 import java.util.concurrent.CompletableFuture;
@@ -26,7 +24,7 @@ public class PlayerManager {
         return instance;
     }
 
-    private final PlayerModule playerModule = OpenMinetopia.getModuleManager().get(PlayerModule.class);
+    private final PlayerModule playerModule = DailyLife.getModuleManager().get(PlayerModule.class);
     private final Map<UUID, MinetopiaPlayer> onlinePlayers = new ConcurrentHashMap<>();
     private final Map<UUID, CompletableFuture<MinetopiaPlayer>> loadingPlayers = new ConcurrentHashMap<>();
 

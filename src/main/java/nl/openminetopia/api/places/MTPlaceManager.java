@@ -1,6 +1,6 @@
 package nl.openminetopia.api.places;
 
-import nl.openminetopia.OpenMinetopia;
+import nl.openminetopia.DailyLife;
 import nl.openminetopia.api.places.objects.MTPlace;
 import nl.openminetopia.modules.places.PlacesModule;
 import nl.openminetopia.modules.places.models.CityModel;
@@ -8,7 +8,7 @@ import org.bukkit.Location;
 
 public class MTPlaceManager {
 
-    private final PlacesModule placesModule = OpenMinetopia.getModuleManager().get(PlacesModule.class);
+    private final PlacesModule placesModule = DailyLife.getModuleManager().get(PlacesModule.class);
     private static MTPlaceManager instance;
 
     public static MTPlaceManager getInstance() {

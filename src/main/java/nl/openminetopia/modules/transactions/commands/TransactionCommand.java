@@ -2,7 +2,7 @@ package nl.openminetopia.modules.transactions.commands;
 
 import co.aikar.commands.BaseCommand;
 import co.aikar.commands.annotation.*;
-import nl.openminetopia.OpenMinetopia;
+import nl.openminetopia.DailyLife;
 import nl.openminetopia.configuration.MessageConfiguration;
 import nl.openminetopia.modules.banking.BankingModule;
 import nl.openminetopia.modules.banking.menus.BankTransactionsMenu;
@@ -15,8 +15,8 @@ import org.bukkit.entity.Player;
 @CommandPermission("openminetopia.transactions")
 public class TransactionCommand extends BaseCommand {
 
-    private final TransactionsModule transactionsModule = OpenMinetopia.getModuleManager().get(TransactionsModule.class);
-    private final BankingModule bankingModule = OpenMinetopia.getModuleManager().get(BankingModule.class);
+    private final TransactionsModule transactionsModule = DailyLife.getModuleManager().get(TransactionsModule.class);
+    private final BankingModule bankingModule = DailyLife.getModuleManager().get(BankingModule.class);
 
     @Default
     @Syntax("<name>")

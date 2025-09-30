@@ -1,7 +1,7 @@
 package nl.openminetopia.utils.placeholderapi;
 
 import me.clip.placeholderapi.expansion.PlaceholderExpansion;
-import nl.openminetopia.OpenMinetopia;
+import nl.openminetopia.DailyLife;
 import nl.openminetopia.api.player.PlayerManager;
 import nl.openminetopia.api.player.objects.MinetopiaPlayer;
 import nl.openminetopia.modules.banking.BankingModule;
@@ -15,7 +15,7 @@ import org.jetbrains.annotations.NotNull;
 
 public class OpenMinetopiaExpansion extends PlaceholderExpansion {
 
-    private final OpenMinetopia plugin = OpenMinetopia.getInstance();
+    private final DailyLife plugin = DailyLife.getInstance();
 
     @Override
     public @NotNull String getIdentifier() {
@@ -41,7 +41,7 @@ public class OpenMinetopiaExpansion extends PlaceholderExpansion {
     @Override
     public String onRequest(OfflinePlayer player, @NotNull String params) {
         MinetopiaPlayer minetopiaPlayer = PlayerManager.getInstance().getOnlinePlayers().get(player.getUniqueId());
-        FitnessModule fitnessModule = OpenMinetopia.getModuleManager().get(FitnessModule.class);
+        FitnessModule fitnessModule = DailyLife.getModuleManager().get(FitnessModule.class);
 
         if (minetopiaPlayer == null) return null;
 
@@ -53,7 +53,7 @@ public class OpenMinetopiaExpansion extends PlaceholderExpansion {
 
         if (params.startsWith("currency_")) {
             String currencyId = params.substring("currency_".length());
-            CurrencyModule module = OpenMinetopia.getModuleManager().get(CurrencyModule.class);
+            CurrencyModule module = DailyLife.getModuleManager().get(CurrencyModule.class);
             CurrencyModel currencyModel = module.getCurrencyModels().get(player.getUniqueId()).stream()
                     .filter(currency -> currency.getName().equals(currencyId))
                     .findFirst().orElse(null);
@@ -75,7 +75,7 @@ public class OpenMinetopiaExpansion extends PlaceholderExpansion {
             case "chat_color" -> minetopiaPlayer.getActiveColor(OwnableColorType.CHAT).color();
             case "level_color" -> minetopiaPlayer.getActiveColor(OwnableColorType.LEVEL).color();
             case "balance", "balance_formatted" -> {
-                BankingModule bankingModule = OpenMinetopia.getModuleManager().get(BankingModule.class);
+                BankingModule bankingModule = DailyLife.getModuleManager().get(BankingModule.class);
                 BankAccountModel accountModel = bankingModule.getAccountById(player.getUniqueId());
                 if (accountModel != null) {
                     yield params.equalsIgnoreCase("balance_formatted")

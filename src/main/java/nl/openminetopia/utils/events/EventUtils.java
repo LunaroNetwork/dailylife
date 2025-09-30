@@ -1,7 +1,7 @@
 package nl.openminetopia.utils.events;
 
 import lombok.experimental.UtilityClass;
-import nl.openminetopia.OpenMinetopia;
+import nl.openminetopia.DailyLife;
 import org.bukkit.Bukkit;
 import org.bukkit.event.Cancellable;
 import org.bukkit.event.Event;
@@ -17,7 +17,7 @@ public final class EventUtils {
      */
     public static boolean callCancellable(Cancellable event) {
         // Ensure synchronous execution of the event
-        Bukkit.getScheduler().runTask(OpenMinetopia.getInstance(), () -> Bukkit.getPluginManager().callEvent((Event) event));
+        Bukkit.getScheduler().runTask(DailyLife.getInstance(), () -> Bukkit.getPluginManager().callEvent((Event) event));
 
         return event.isCancelled();
     }

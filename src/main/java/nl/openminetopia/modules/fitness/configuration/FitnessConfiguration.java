@@ -2,7 +2,7 @@ package nl.openminetopia.modules.fitness.configuration;
 
 import lombok.Getter;
 import lombok.SneakyThrows;
-import nl.openminetopia.OpenMinetopia;
+import nl.openminetopia.DailyLife;
 import nl.openminetopia.api.player.fitness.FitnessStatisticType;
 import nl.openminetopia.modules.fitness.objects.FitnessFood;
 import nl.openminetopia.modules.fitness.objects.FitnessItem;
@@ -102,13 +102,13 @@ public class FitnessConfiguration extends ConfigurateConfig {
         eatingNode.node("food-items", "cheap").childrenList().forEach((value) -> {
             Material material = Material.matchMaterial(value.node("material").getString("COOKED_BEEF"));
             if (material == null) {
-                OpenMinetopia.getInstance().getLogger().warning("Couldn't find material for " + value);
+                DailyLife.getInstance().getLogger().warning("Couldn't find material for " + value);
                 return;
             }
 
             int customModelData = value.node("custom-model-data").getInt(-1);
             if (customModelData == 0) {
-                OpenMinetopia.getInstance().getLogger().warning("Couldn't find custom model data for " + value);
+                DailyLife.getInstance().getLogger().warning("Couldn't find custom model data for " + value);
                 return;
             }
             cheapFood.add(new FitnessFood(FitnessStatisticType.EATING, material, customModelData));
@@ -117,12 +117,12 @@ public class FitnessConfiguration extends ConfigurateConfig {
         eatingNode.node("food-items", "luxury").childrenList().forEach((value) -> {
             Material material = Material.matchMaterial(value.node("material").getString("COOKED_BEEF"));
             if (material == null) {
-                OpenMinetopia.getInstance().getLogger().warning("Couldn't find material for " + value);
+                DailyLife.getInstance().getLogger().warning("Couldn't find material for " + value);
                 return;
             }
             int customModelData = value.node("custom-model-data").getInt(-1);
             if (customModelData == 0) {
-                OpenMinetopia.getInstance().getLogger().warning("Couldn't find custom model data for " + value);
+                DailyLife.getInstance().getLogger().warning("Couldn't find custom model data for " + value);
                 return;
             }
             luxuryFood.add(new FitnessFood(FitnessStatisticType.EATING, material, customModelData));
@@ -171,10 +171,10 @@ public class FitnessConfiguration extends ConfigurateConfig {
                     this.levelEffects.put(i, fitnessLevelEffect);
                 }
             } catch (SerializationException e) {
-                OpenMinetopia.getInstance().getLogger().severe("An error occurred while loading the fitness levels.");
+                DailyLife.getInstance().getLogger().severe("An error occurred while loading the fitness levels.");
                 e.printStackTrace();
             } catch (NumberFormatException e) {
-                OpenMinetopia.getInstance().getLogger().severe("Invalid level range format in configuration: " + key);
+                DailyLife.getInstance().getLogger().severe("Invalid level range format in configuration: " + key);
             }
         });
 
@@ -184,12 +184,12 @@ public class FitnessConfiguration extends ConfigurateConfig {
 
             ConfigurationNode itemNode = value.node("item");
             if (itemNode.isNull()) {
-                OpenMinetopia.getInstance().getLogger().warning("Invalid item stack for identifier: " + identifier);
+                DailyLife.getInstance().getLogger().warning("Invalid item stack for identifier: " + identifier);
                 return;
             }
             ItemStack item = ConfigUtils.deserializeItemStack(itemNode);
             if (item == null) {
-                OpenMinetopia.getInstance().getLogger().warning("Invalid item stack for identifier: " + identifier);
+                DailyLife.getInstance().getLogger().warning("Invalid item stack for identifier: " + identifier);
                 return;
             }
             int fitnessAmount = value.node("fitness", "amount").getInt(0);

@@ -1,7 +1,7 @@
 package nl.openminetopia.modules.currencies.tasks;
 
 
-import nl.openminetopia.OpenMinetopia;
+import nl.openminetopia.DailyLife;
 import nl.openminetopia.api.player.PlayerManager;
 import nl.openminetopia.api.player.objects.MinetopiaPlayer;
 import nl.openminetopia.configuration.MessageConfiguration;
@@ -41,8 +41,8 @@ public class CurrencyTask extends AbstractDirtyRunnable<UUID> {
             RegisteredCurrency configCurrency = currency.configModel();
             if (configCurrency == null) {
                 if (currencyModule.getConfiguration().isIgnoreUnused()) continue;
-                OpenMinetopia.getInstance().getLogger().warning("Currency config not found for currency " + currency.getName());
-                OpenMinetopia.getInstance().getLogger().warning("You should consider removing the currency model from the database (if it is not used) by using /currency purge-unused or enabling ignore-unused in currencies.yml");
+                DailyLife.getInstance().getLogger().warning("Currency config not found for currency " + currency.getName());
+                DailyLife.getInstance().getLogger().warning("You should consider removing the currency model from the database (if it is not used) by using /currency purge-unused or enabling ignore-unused in currencies.yml");
                 continue;
             }
             if (!configCurrency.isAutomatic()) continue;

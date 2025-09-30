@@ -1,6 +1,6 @@
 package nl.openminetopia.modules.fitness.listeners;
 
-import nl.openminetopia.OpenMinetopia;
+import nl.openminetopia.DailyLife;
 import nl.openminetopia.api.player.PlayerManager;
 import nl.openminetopia.api.player.fitness.FitnessStatisticType;
 import nl.openminetopia.api.player.objects.MinetopiaPlayer;
@@ -26,7 +26,7 @@ public class PlayerDrinkListener implements Listener {
         MinetopiaPlayer minetopiaPlayer = PlayerManager.getInstance().getOnlineMinetopiaPlayer(event.getPlayer());
         if (minetopiaPlayer == null) return;
 
-        FitnessModule fitnessModule = OpenMinetopia.getModuleManager().get(FitnessModule.class);
+        FitnessModule fitnessModule = DailyLife.getModuleManager().get(FitnessModule.class);
         FitnessConfiguration configuration = fitnessModule.getConfiguration();
 
         // check if player drank water less than 5 minutes ago

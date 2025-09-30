@@ -2,7 +2,7 @@ package nl.openminetopia.modules.staff;
 
 import nl.openminetopia.utils.modules.ExtendedSpigotModule;
 import com.jazzkuh.modulemanager.spigot.SpigotModuleManager;
-import nl.openminetopia.OpenMinetopia;
+import nl.openminetopia.DailyLife;
 import nl.openminetopia.modules.data.DataModule;
 import nl.openminetopia.modules.staff.admintool.commands.AdminToolCommand;
 import nl.openminetopia.modules.staff.admintool.commands.subcommands.AdminToolGetCommand;
@@ -19,7 +19,7 @@ import nl.openminetopia.modules.staff.mod.commands.subcommands.ModSetLevelComman
 import org.jetbrains.annotations.NotNull;
 
 public class StaffModule extends ExtendedSpigotModule {
-    public StaffModule(SpigotModuleManager<@NotNull OpenMinetopia> moduleManager, DataModule dataModule) {
+    public StaffModule(SpigotModuleManager<@NotNull DailyLife> moduleManager, DataModule dataModule) {
         super(moduleManager);
     }
 

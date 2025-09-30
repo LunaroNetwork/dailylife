@@ -2,9 +2,8 @@ package nl.openminetopia.modules.color.commands.subcommands;
 
 import co.aikar.commands.BaseCommand;
 import co.aikar.commands.annotation.*;
-import nl.openminetopia.OpenMinetopia;
+import nl.openminetopia.DailyLife;
 import nl.openminetopia.api.player.PlayerManager;
-import nl.openminetopia.api.player.objects.MinetopiaPlayer;
 import nl.openminetopia.configuration.MessageConfiguration;
 import nl.openminetopia.modules.color.ColorModule;
 import nl.openminetopia.modules.color.enums.OwnableColorType;
@@ -15,7 +14,6 @@ import nl.openminetopia.modules.color.objects.PrefixColor;
 import nl.openminetopia.utils.ChatUtils;
 import org.bukkit.OfflinePlayer;
 import org.bukkit.command.CommandSender;
-import org.bukkit.entity.Player;
 
 @CommandAlias("color")
 public class ColorAddCommand extends BaseCommand {
@@ -31,7 +29,7 @@ public class ColorAddCommand extends BaseCommand {
             return;
         }
 
-        ColorModule colorModule = OpenMinetopia.getModuleManager().get(ColorModule.class);
+        ColorModule colorModule = DailyLife.getModuleManager().get(ColorModule.class);
 
         final String colorId = draftColor.toLowerCase();
         if (!colorModule.getConfiguration().exists(colorId)) {

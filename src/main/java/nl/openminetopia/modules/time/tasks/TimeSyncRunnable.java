@@ -1,6 +1,6 @@
 package nl.openminetopia.modules.time.tasks;
 
-import nl.openminetopia.OpenMinetopia;
+import nl.openminetopia.DailyLife;
 import nl.openminetopia.modules.places.PlacesModule;
 import nl.openminetopia.modules.places.models.WorldModel;
 import org.bukkit.Bukkit;
@@ -15,8 +15,8 @@ public class TimeSyncRunnable extends BukkitRunnable {
 
     @Override
     public void run() {
-        String timeZone = OpenMinetopia.getDefaultConfiguration().getSyncTimeZone();
-        PlacesModule placesModule = OpenMinetopia.getModuleManager().get(PlacesModule.class);
+        String timeZone = DailyLife.getDefaultConfiguration().getSyncTimeZone();
+        PlacesModule placesModule = DailyLife.getModuleManager().get(PlacesModule.class);
         Calendar calendar = Calendar.getInstance(TimeZone.getTimeZone(timeZone));
 
         for (WorldModel worldModel : placesModule.worldModels) {

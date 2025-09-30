@@ -5,7 +5,7 @@ import com.craftmend.storm.api.markers.Column;
 import com.craftmend.storm.api.markers.Table;
 import lombok.Data;
 import lombok.EqualsAndHashCode;
-import nl.openminetopia.OpenMinetopia;
+import nl.openminetopia.DailyLife;
 import nl.openminetopia.modules.banking.enums.AccountPermission;
 import nl.openminetopia.modules.banking.enums.AccountType;
 import nl.openminetopia.modules.banking.tasks.AccountSavingTask;
@@ -46,7 +46,7 @@ public class BankAccountModel extends StormModel {
 
     public void initSavingTask() {
         this.savingTask = new AccountSavingTask(this);
-        this.savingTask.runTaskTimer(OpenMinetopia.getInstance(), (20 * 60 * 2), (20 * 60 * 3));
+        this.savingTask.runTaskTimer(DailyLife.getInstance(), (20 * 60 * 2), (20 * 60 * 3));
     }
 
     public void save() {

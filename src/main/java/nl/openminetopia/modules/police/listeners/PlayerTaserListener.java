@@ -1,6 +1,6 @@
 package nl.openminetopia.modules.police.listeners;
 
-import nl.openminetopia.OpenMinetopia;
+import nl.openminetopia.DailyLife;
 import nl.openminetopia.api.player.PlayerManager;
 import nl.openminetopia.api.player.objects.MinetopiaPlayer;
 import nl.openminetopia.modules.police.PoliceModule;
@@ -31,7 +31,7 @@ public class PlayerTaserListener implements Listener {
 
         ItemStack itemStack = source.getInventory().getItemInMainHand();
 
-        if (OpenMinetopia.getDefaultConfiguration().getTaserCooldown() > 0) {
+        if (DailyLife.getDefaultConfiguration().getTaserCooldown() > 0) {
             Long cooldown = PersistentDataUtil.getLong(itemStack, "openmt.cooldown");
 
             if (cooldown == null) cooldown = 0L;
@@ -41,15 +41,15 @@ public class PlayerTaserListener implements Listener {
             }
 
             ItemStack updatedItemStack = PersistentDataUtil.set(itemStack,
-                    System.currentTimeMillis() + (OpenMinetopia.getDefaultConfiguration().getTaserCooldown() * 1000L),
+                    System.currentTimeMillis() + (DailyLife.getDefaultConfiguration().getTaserCooldown() * 1000L),
                     "openmt.cooldown");
             source.getInventory().setItemInMainHand(updatedItemStack);
         }
 
-        if (OpenMinetopia.getDefaultConfiguration().isTaserUsagesEnabled()) {
+        if (DailyLife.getDefaultConfiguration().isTaserUsagesEnabled()) {
             if (PersistentDataUtil.getInteger(itemStack, "openmt.usages") == null) {
                 ItemStack finalItemStack = PersistentDataUtil.set(itemStack,
-                        OpenMinetopia.getDefaultConfiguration().getTaserMaxUsages(), "openmt.usages");
+                        DailyLife.getDefaultConfiguration().getTaserMaxUsages(), "openmt.usages");
                 source.getInventory().setItemInMainHand(finalItemStack);
             }
 
@@ -67,13 +67,13 @@ public class PlayerTaserListener implements Listener {
 
         MinetopiaPlayer minetopiaPlayer = PlayerManager.getInstance().getOnlineMinetopiaPlayer(target);
         if (minetopiaPlayer == null) return;
-        PoliceModule policeModule = OpenMinetopia.getModuleManager().get(PoliceModule.class);
+        PoliceModule policeModule = DailyLife.getModuleManager().get(PoliceModule.class);
         policeModule.getTaserManager().taser(minetopiaPlayer);
     }
 
     @EventHandler
     public void playerMove(final PlayerMoveEvent event) {
-        PoliceModule policeModule = OpenMinetopia.getModuleManager().get(PoliceModule.class);
+        PoliceModule policeModule = DailyLife.getModuleManager().get(PoliceModule.class);
         if (!policeModule.getTaserManager().isTasered(event.getPlayer())) return;
 
         Location from = event.getFrom();

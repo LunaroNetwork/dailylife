@@ -1,7 +1,7 @@
 package nl.openminetopia.modules.police.utils;
 
 import lombok.experimental.UtilityClass;
-import nl.openminetopia.OpenMinetopia;
+import nl.openminetopia.DailyLife;
 import nl.openminetopia.utils.ChatUtils;
 import nl.openminetopia.utils.item.ItemUtils;
 import org.bukkit.entity.Player;
@@ -19,7 +19,7 @@ public class BalaclavaUtils {
     }
 
     public boolean isBalaclavaItem(ItemStack head) {
-        return ItemUtils.isSimilarToAny(head, OpenMinetopia.getDefaultConfiguration().getBalaclavaItems());
+        return ItemUtils.isSimilarToAny(head, DailyLife.getDefaultConfiguration().getBalaclavaItems());
     }
 
     public boolean isWearingBalaclava(Player player) {

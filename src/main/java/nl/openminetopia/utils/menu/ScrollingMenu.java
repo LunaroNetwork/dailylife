@@ -2,7 +2,7 @@ package nl.openminetopia.utils.menu;
 
 import dev.triumphteam.gui.guis.Gui;
 import dev.triumphteam.gui.guis.ScrollingGui;
-import nl.openminetopia.OpenMinetopia;
+import nl.openminetopia.DailyLife;
 import nl.openminetopia.utils.ChatUtils;
 import org.bukkit.Bukkit;
 import org.bukkit.entity.Player;
@@ -27,6 +27,6 @@ public class ScrollingMenu {
     }
 
     public void open(Player player) {
-        Bukkit.getScheduler().runTask(OpenMinetopia.getInstance(), () -> gui.open(player));
+        Bukkit.getScheduler().runTask(DailyLife.getInstance(), () -> gui.open(player));
     }
 }

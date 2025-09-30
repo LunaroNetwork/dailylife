@@ -5,7 +5,7 @@ import co.aikar.commands.annotation.CommandAlias;
 import co.aikar.commands.annotation.CommandCompletion;
 import co.aikar.commands.annotation.CommandPermission;
 import co.aikar.commands.annotation.Subcommand;
-import nl.openminetopia.OpenMinetopia;
+import nl.openminetopia.DailyLife;
 import nl.openminetopia.modules.data.storm.StormDatabase;
 import nl.openminetopia.modules.places.PlacesModule;
 import nl.openminetopia.modules.places.models.CityModel;
@@ -19,7 +19,7 @@ public class MTCitySettingCommand extends BaseCommand {
     @CommandPermission("openminetopia.city.setcolor")
     @CommandCompletion("@cityNames")
     public void setColor(Player player, String cityName, String color) {
-        PlacesModule placesModule = OpenMinetopia.getModuleManager().get(PlacesModule.class);
+        PlacesModule placesModule = DailyLife.getModuleManager().get(PlacesModule.class);
 
         CityModel cityModel = placesModule.getCity(cityName);
         if (cityModel == null) {
@@ -36,7 +36,7 @@ public class MTCitySettingCommand extends BaseCommand {
     @CommandPermission("openminetopia.city.settemperature")
     @CommandCompletion("@cityNames")
     public void setTemperature(Player player, String cityName, Double temperature) {
-        PlacesModule placesModule = OpenMinetopia.getModuleManager().get(PlacesModule.class);
+        PlacesModule placesModule = DailyLife.getModuleManager().get(PlacesModule.class);
 
         CityModel cityModel = placesModule.getCity(cityName);
         if (cityModel == null) {
@@ -53,7 +53,7 @@ public class MTCitySettingCommand extends BaseCommand {
     @CommandPermission("openminetopia.city.setloadingname")
     @CommandCompletion("@cityNames")
     public void setLoadingName(Player player, String cityName, String loadingName) {
-        PlacesModule placesModule = OpenMinetopia.getModuleManager().get(PlacesModule.class);
+        PlacesModule placesModule = DailyLife.getModuleManager().get(PlacesModule.class);
 
         CityModel cityModel = placesModule.getCity(cityName);
         if (cityModel == null) {
@@ -70,7 +70,7 @@ public class MTCitySettingCommand extends BaseCommand {
     @CommandPermission("openminetopia.city.settitle")
     @CommandCompletion("@cityNames")
     public void setTitle(Player player, String cityName, String title) {
-        PlacesModule placesModule = OpenMinetopia.getModuleManager().get(PlacesModule.class);
+        PlacesModule placesModule = DailyLife.getModuleManager().get(PlacesModule.class);
 
         CityModel cityModel = placesModule.getCity(cityName);
         if (cityModel == null) {

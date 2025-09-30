@@ -5,13 +5,11 @@ import co.aikar.commands.annotation.CommandAlias;
 import co.aikar.commands.annotation.CommandCompletion;
 import co.aikar.commands.annotation.CommandPermission;
 import co.aikar.commands.annotation.Subcommand;
-import nl.openminetopia.OpenMinetopia;
-import nl.openminetopia.api.player.PlayerManager;
+import nl.openminetopia.DailyLife;
 import nl.openminetopia.configuration.MessageConfiguration;
 import nl.openminetopia.modules.banking.BankingModule;
 import nl.openminetopia.modules.banking.models.BankAccountModel;
 import nl.openminetopia.utils.ChatUtils;
-import org.bukkit.OfflinePlayer;
 import org.bukkit.command.CommandSender;
 
 @CommandAlias("accounts|account|rekening")
@@ -21,7 +19,7 @@ public class BankingInfoCommand extends BaseCommand {
     @CommandCompletion("@accountNames")
     @CommandPermission("openminetopia.banking.info")
     public void infoAccount(CommandSender sender, String accountName) {
-        BankingModule bankingModule = OpenMinetopia.getModuleManager().get(BankingModule.class);
+        BankingModule bankingModule = DailyLife.getModuleManager().get(BankingModule.class);
         bankingModule.getAccountByNameAsync(accountName).thenAccept(accountModel -> {
             if (accountModel == null) {
                 ChatUtils.sendMessage(sender, MessageConfiguration.message("banking_account_not_found"));

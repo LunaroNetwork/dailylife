@@ -1,7 +1,7 @@
 package nl.openminetopia.modules.police.walkietalkie.menus;
 
 import dev.triumphteam.gui.guis.GuiItem;
-import nl.openminetopia.OpenMinetopia;
+import nl.openminetopia.DailyLife;
 import nl.openminetopia.configuration.DefaultConfiguration;
 import nl.openminetopia.configuration.MessageConfiguration;
 import nl.openminetopia.modules.police.PoliceModule;
@@ -18,7 +18,7 @@ public class WalkieTalkieMenu extends Menu {
         super("<gold>Portofoon", 3);
         gui.disableAllInteractions();
 
-        PoliceModule policeModule = OpenMinetopia.getModuleManager().get(PoliceModule.class);
+        PoliceModule policeModule = DailyLife.getModuleManager().get(PoliceModule.class);
 
         boolean policeChatEnabled = policeModule.getWalkieTalkieManager().isPoliceChatEnabled(player);
         ItemBuilder policeChatBuilder = new ItemBuilder(policeChatEnabled ? Material.GREEN_TERRACOTTA : Material.RED_TERRACOTTA)
@@ -48,7 +48,7 @@ public class WalkieTalkieMenu extends Menu {
                 .setName("<red><b>NOODKNOP");
 
         GuiItem emergencyItem = new GuiItem(emergencyBuilder.toItemStack(), event -> {
-            DefaultConfiguration configuration = OpenMinetopia.getDefaultConfiguration();
+            DefaultConfiguration configuration = DailyLife.getDefaultConfiguration();
 
             if (configuration.isWalkieTalkieEmergencyCooldownEnabled()) {
                 if (policeModule.getWalkieTalkieManager().hasCooldown(player)) {

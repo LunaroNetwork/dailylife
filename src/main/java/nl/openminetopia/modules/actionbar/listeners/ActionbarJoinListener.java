@@ -1,11 +1,7 @@
 package nl.openminetopia.modules.actionbar.listeners;
 
-import nl.openminetopia.OpenMinetopia;
 import nl.openminetopia.api.player.PlayerManager;
-import nl.openminetopia.configuration.DefaultConfiguration;
-import nl.openminetopia.modules.actionbar.ActionbarModule;
 import nl.openminetopia.utils.ChatUtils;
-import org.bukkit.Bukkit;
 import org.bukkit.entity.Player;
 import org.bukkit.event.EventHandler;
 import org.bukkit.event.Listener;

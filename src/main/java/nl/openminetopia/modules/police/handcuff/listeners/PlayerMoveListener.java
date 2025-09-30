@@ -1,6 +1,6 @@
 package nl.openminetopia.modules.police.handcuff.listeners;
 
-import nl.openminetopia.OpenMinetopia;
+import nl.openminetopia.DailyLife;
 import nl.openminetopia.modules.police.handcuff.HandcuffManager;
 import org.bukkit.Location;
 import org.bukkit.event.EventHandler;
@@ -12,7 +12,7 @@ public class PlayerMoveListener implements Listener {
     @EventHandler
     public void playerMove(final PlayerMoveEvent event) {
         if (!HandcuffManager.getInstance().isHandcuffed(event.getPlayer())) return;
-        if (OpenMinetopia.getDefaultConfiguration().isHandcuffCanRunAway()) return;
+        if (DailyLife.getDefaultConfiguration().isHandcuffCanRunAway()) return;
 
         Location from = event.getFrom();
         Location to = event.getTo();

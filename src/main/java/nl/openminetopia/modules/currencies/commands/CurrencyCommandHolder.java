@@ -1,7 +1,7 @@
 package nl.openminetopia.modules.currencies.commands;
 
 import io.papermc.paper.plugin.configuration.PluginMeta;
-import nl.openminetopia.OpenMinetopia;
+import nl.openminetopia.DailyLife;
 import nl.openminetopia.configuration.MessageConfiguration;
 import nl.openminetopia.modules.currencies.CurrencyModule;
 import nl.openminetopia.modules.currencies.models.CurrencyModel;
@@ -34,7 +34,7 @@ public class CurrencyCommandHolder extends Command {
 
     @Override
     public boolean execute(@NotNull CommandSender sender, @NotNull String label, @NotNull String @NotNull [] args) {
-        PluginMeta pluginMeta = OpenMinetopia.getInstance().getPluginMeta();
+        PluginMeta pluginMeta = DailyLife.getInstance().getPluginMeta();
         String pluginPrefix = (pluginMeta.getName().toLowerCase() + ":");
 
         if (label.startsWith(pluginPrefix)) {

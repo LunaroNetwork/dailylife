@@ -2,7 +2,7 @@ package nl.openminetopia.modules.restapi.verticles.banking;
 
 import io.vertx.core.Promise;
 import io.vertx.ext.web.RoutingContext;
-import nl.openminetopia.OpenMinetopia;
+import nl.openminetopia.DailyLife;
 import nl.openminetopia.modules.banking.BankingModule;
 import nl.openminetopia.modules.restapi.base.BaseVerticle;
 import org.json.simple.JSONArray;
@@ -20,7 +20,7 @@ public class BankAccountsVerticle extends BaseVerticle {
     private void handleGetBankAccounts(RoutingContext context) {
         JSONObject responseJson = new JSONObject();
 
-        BankingModule bankingModule = OpenMinetopia.getModuleManager().get(BankingModule.class);
+        BankingModule bankingModule = DailyLife.getModuleManager().get(BankingModule.class);
 
         bankingModule.getBankAccounts().whenComplete((accounts, throwable) -> {
             if (throwable != null) {

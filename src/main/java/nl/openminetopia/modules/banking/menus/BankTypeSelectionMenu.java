@@ -1,7 +1,7 @@
 package nl.openminetopia.modules.banking.menus;
 
 import dev.triumphteam.gui.guis.GuiItem;
-import nl.openminetopia.OpenMinetopia;
+import nl.openminetopia.DailyLife;
 import nl.openminetopia.configuration.MessageConfiguration;
 import nl.openminetopia.modules.banking.BankingModule;
 import nl.openminetopia.modules.banking.enums.AccountType;
@@ -28,7 +28,7 @@ public class BankTypeSelectionMenu extends Menu {
             gui.setItem(type.getSlot(), new GuiItem(iconStack, event -> {
                 event.setCancelled(true);
 
-                BankingModule bankingModule = OpenMinetopia.getModuleManager().get(BankingModule.class);
+                BankingModule bankingModule = DailyLife.getModuleManager().get(BankingModule.class);
                 Collection<BankAccountModel> accountModels = bankingModule.getAccountsFromPlayer(player.getUniqueId())
                         .stream().filter(account -> account.getType() == type)
                         .toList();

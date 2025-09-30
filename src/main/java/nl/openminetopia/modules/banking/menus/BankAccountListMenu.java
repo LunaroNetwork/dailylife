@@ -1,7 +1,7 @@
 package nl.openminetopia.modules.banking.menus;
 
 import dev.triumphteam.gui.guis.GuiItem;
-import nl.openminetopia.OpenMinetopia;
+import nl.openminetopia.DailyLife;
 import nl.openminetopia.configuration.MessageConfiguration;
 import nl.openminetopia.modules.banking.BankingModule;
 import nl.openminetopia.modules.banking.models.BankAccountModel;
@@ -16,7 +16,7 @@ public class BankAccountListMenu extends PaginatedMenu {
         gui.setItem(51, this.nextPageItem());
         gui.setItem(47, this.previousPageItem());
 
-        BankingModule bankingModule = OpenMinetopia.getModuleManager().get(BankingModule.class);
+        BankingModule bankingModule = DailyLife.getModuleManager().get(BankingModule.class);
 
         for (BankAccountModel accountModel : bankingModule.getBankAccountModels()) {
             ItemBuilder accountStack = new ItemBuilder(accountModel.getType().getMaterial())

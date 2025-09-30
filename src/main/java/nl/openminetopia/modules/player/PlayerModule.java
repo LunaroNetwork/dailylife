@@ -5,7 +5,7 @@ import nl.openminetopia.utils.modules.ExtendedSpigotModule;
 import com.jazzkuh.modulemanager.spigot.SpigotModuleManager;
 import lombok.Getter;
 import lombok.Setter;
-import nl.openminetopia.OpenMinetopia;
+import nl.openminetopia.DailyLife;
 import nl.openminetopia.api.player.PlayerManager;
 import nl.openminetopia.api.player.objects.MinetopiaPlayer;
 import nl.openminetopia.modules.data.DataModule;
@@ -30,7 +30,7 @@ import java.util.concurrent.CompletableFuture;
 @Setter @Getter
 public class PlayerModule extends ExtendedSpigotModule {
 
-    public PlayerModule(SpigotModuleManager<@NotNull OpenMinetopia> moduleManager, DataModule dataModule) {
+    public PlayerModule(SpigotModuleManager<@NotNull DailyLife> moduleManager, DataModule dataModule) {
         super(moduleManager);
     }
 
@@ -42,23 +42,23 @@ public class PlayerModule extends ExtendedSpigotModule {
 
     @Override
     public void onEnable() {
-        configuration = new LevelCheckConfiguration(OpenMinetopia.getInstance().getDataFolder());
+        configuration = new LevelCheckConfiguration(DailyLife.getInstance().getDataFolder());
         configuration.saveConfiguration();
 
         registerComponent(new PlayerPreLoginListener());
         registerComponent(new PlayerQuitListener());
-        if (OpenMinetopia.getInstance().isNpcSupport()) registerComponent(new LevelcheckNpcListener());
+        if (DailyLife.getInstance().isNpcSupport()) registerComponent(new LevelcheckNpcListener());
 
         registerComponent(new PlaytimeCommand());
 
         levelCalculateRunnable = new LevelCalculateRunnable(this, PlayerManager.getInstance(), 5000L, 50, 30 * 1000L, () -> new ArrayList<>(PlayerManager.getInstance().getOnlinePlayers().keySet()));
-        OpenMinetopia.getInstance().registerDirtyPlayerRunnable(levelCalculateRunnable, 20L);
+        DailyLife.getInstance().registerDirtyPlayerRunnable(levelCalculateRunnable, 20L);
 
         minetopiaPlayerSaveRunnable = new MinetopiaPlayerSaveRunnable(PlayerManager.getInstance(), 5 * 60 * 1000L, 50, 30 * 60 * 1000L, () -> new ArrayList<>(PlayerManager.getInstance().getOnlinePlayers().keySet()), true);
-        OpenMinetopia.getInstance().registerDirtyPlayerRunnable(minetopiaPlayerSaveRunnable, 20L * 5);
+        DailyLife.getInstance().registerDirtyPlayerRunnable(minetopiaPlayerSaveRunnable, 20L * 5);
 
         playerPlaytimeRunnable = new PlayerPlaytimeRunnable(PlayerManager.getInstance(), 1000L * 5, 50, 20 * 1000L, () -> new ArrayList<>(PlayerManager.getInstance().getOnlinePlayers().keySet()), true);
-        OpenMinetopia.getInstance().registerDirtyPlayerRunnable(playerPlaytimeRunnable, 20L);
+        DailyLife.getInstance().registerDirtyPlayerRunnable(playerPlaytimeRunnable, 20L);
 
     }
 
@@ -70,9 +70,9 @@ public class PlayerModule extends ExtendedSpigotModule {
             minetopiaPlayer.updatePlaytime();
             minetopiaPlayer.save().join();
         }
-        OpenMinetopia.getInstance().unregisterDirtyPlayerRunnable(levelCalculateRunnable);
-        OpenMinetopia.getInstance().unregisterDirtyPlayerRunnable(minetopiaPlayerSaveRunnable);
-        OpenMinetopia.getInstance().unregisterDirtyPlayerRunnable(playerPlaytimeRunnable);
+        DailyLife.getInstance().unregisterDirtyPlayerRunnable(levelCalculateRunnable);
+        DailyLife.getInstance().unregisterDirtyPlayerRunnable(minetopiaPlayerSaveRunnable);
+        DailyLife.getInstance().unregisterDirtyPlayerRunnable(playerPlaytimeRunnable);
     }
 
     private CompletableFuture<Optional<PlayerModel>> findPlayerModel(@NotNull UUID uuid) {
@@ -83,7 +83,7 @@ public class PlayerModule extends ExtendedSpigotModule {
                         .where("uuid", Where.EQUAL, uuid.toString())
                         .limit(1).execute().join();
 
-                Bukkit.getScheduler().runTaskLaterAsynchronously(OpenMinetopia.getInstance(), () -> completableFuture.complete(playerModel.stream().findFirst()), 1L);
+                Bukkit.getScheduler().runTaskLaterAsynchronously(DailyLife.getInstance(), () -> completableFuture.complete(playerModel.stream().findFirst()), 1L);
             } catch (Exception exception) {
                 exception.printStackTrace();
                 completableFuture.completeExceptionally(exception);

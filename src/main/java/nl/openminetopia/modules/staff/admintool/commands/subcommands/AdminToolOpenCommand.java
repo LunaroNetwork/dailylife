@@ -5,7 +5,7 @@ import co.aikar.commands.annotation.CommandAlias;
 import co.aikar.commands.annotation.CommandCompletion;
 import co.aikar.commands.annotation.CommandPermission;
 import co.aikar.commands.annotation.Subcommand;
-import nl.openminetopia.OpenMinetopia;
+import nl.openminetopia.DailyLife;
 import nl.openminetopia.api.player.PlayerManager;
 import nl.openminetopia.api.player.objects.MinetopiaPlayer;
 import nl.openminetopia.modules.banking.BankingModule;
@@ -42,10 +42,10 @@ public class AdminToolOpenCommand extends BaseCommand {
             if (minetopiaPlayer == null) return;
             if (!offlinePlayer.isOnline()) minetopiaPlayer.getFitness().getFitnessModule().getFitnessRunnable().forceMarkDirty(offlinePlayer.getUniqueId());
 
-            BankingModule bankingModule = OpenMinetopia.getModuleManager().get(BankingModule.class);
+            BankingModule bankingModule = DailyLife.getModuleManager().get(BankingModule.class);
             BankAccountModel bankAccountModel = bankingModule.getAccountByIdAsync(offlinePlayer.getUniqueId()).join();
 
-            Bukkit.getScheduler().runTask(OpenMinetopia.getInstance(), () -> {
+            Bukkit.getScheduler().runTask(DailyLife.getInstance(), () -> {
                 new AdminToolMenu(player, offlinePlayer, minetopiaPlayer, bankAccountModel).open(player);
             });
         });

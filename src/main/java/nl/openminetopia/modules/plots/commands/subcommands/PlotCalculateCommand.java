@@ -11,7 +11,7 @@ import com.sk89q.worldedit.regions.Region;
 import com.sk89q.worldguard.protection.regions.ProtectedRegion;
 import net.objecthunter.exp4j.Expression;
 import net.objecthunter.exp4j.ExpressionBuilder;
-import nl.openminetopia.OpenMinetopia;
+import nl.openminetopia.DailyLife;
 import nl.openminetopia.api.player.PlayerManager;
 import nl.openminetopia.api.player.objects.MinetopiaPlayer;
 import nl.openminetopia.configuration.MessageConfiguration;
@@ -81,7 +81,7 @@ public class PlotCalculateCommand extends BaseCommand {
     private double calculatePlotPrice(Location firstLocation, Location secondLocation) {
         int minX = (int) (Math.abs(firstLocation.x() - secondLocation.x()) + 1); // Add 1 to include both ends
         int minZ = (int) (Math.abs(firstLocation.z() - secondLocation.z()) + 1); // Add 1 to include both ends
-        PlotModule plotModule = OpenMinetopia.getModuleManager().get(PlotModule.class);
+        PlotModule plotModule = DailyLife.getModuleManager().get(PlotModule.class);
         PlotCalculateConfiguration config = plotModule.getCalculateConfiguration();
         String formula = config.getCalculateFormula().replace("<length>", "l").replace("<width>", "w");
         Expression expression = new ExpressionBuilder(formula).variables("l", "w").build().setVariable("l", minX).setVariable("w", minZ);
@@ -89,7 +89,7 @@ public class PlotCalculateCommand extends BaseCommand {
     }
 
     private double calculateBuildingPrice(Location firstLocation, Location secondLocation) {
-        PlotCalculateConfiguration config = OpenMinetopia.getModuleManager().get(PlotModule.class).getCalculateConfiguration();
+        PlotCalculateConfiguration config = DailyLife.getModuleManager().get(PlotModule.class).getCalculateConfiguration();
 
         double buildingPrice = 0.0;
 
@@ -107,7 +107,7 @@ public class PlotCalculateCommand extends BaseCommand {
     }
 
     private double calculateBuildersPrice(Location firstLocation, Location secondLocation) {
-        PlotCalculateConfiguration config = OpenMinetopia.getModuleManager().get(PlotModule.class).getCalculateConfiguration();
+        PlotCalculateConfiguration config = DailyLife.getModuleManager().get(PlotModule.class).getCalculateConfiguration();
 
         int validBlocks = 0;
 

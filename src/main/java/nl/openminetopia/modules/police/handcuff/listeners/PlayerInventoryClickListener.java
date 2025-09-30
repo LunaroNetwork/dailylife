@@ -1,6 +1,6 @@
 package nl.openminetopia.modules.police.handcuff.listeners;
 
-import nl.openminetopia.OpenMinetopia;
+import nl.openminetopia.DailyLife;
 import nl.openminetopia.modules.police.handcuff.HandcuffManager;
 import org.bukkit.entity.Player;
 import org.bukkit.event.EventHandler;
@@ -15,7 +15,7 @@ public class PlayerInventoryClickListener implements Listener {
 
         if (!HandcuffManager.getInstance().isHandcuffed(player)) return;
 
-        if (!OpenMinetopia.getDefaultConfiguration().isHandcuffCanDropItems()) event.setCancelled(true);
+        if (!DailyLife.getDefaultConfiguration().isHandcuffCanDropItems()) event.setCancelled(true);
 
     }
 }

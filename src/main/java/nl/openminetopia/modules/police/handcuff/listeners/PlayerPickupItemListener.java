@@ -1,6 +1,6 @@
 package nl.openminetopia.modules.police.handcuff.listeners;
 
-import nl.openminetopia.OpenMinetopia;
+import nl.openminetopia.DailyLife;
 import nl.openminetopia.modules.police.handcuff.HandcuffManager;
 import org.bukkit.entity.Player;
 import org.bukkit.event.EventHandler;
@@ -15,6 +15,6 @@ public class PlayerPickupItemListener implements Listener {
 
         if (!HandcuffManager.getInstance().isHandcuffed(player)) return;
 
-        if (!OpenMinetopia.getDefaultConfiguration().isHandcuffCanPickupItems()) event.setCancelled(true);
+        if (!DailyLife.getDefaultConfiguration().isHandcuffCanPickupItems()) event.setCancelled(true);
     }
 }

@@ -2,7 +2,7 @@ package nl.openminetopia.modules.banking.vault;
 
 import net.milkbowl.vault.economy.Economy;
 import net.milkbowl.vault.economy.EconomyResponse;
-import nl.openminetopia.OpenMinetopia;
+import nl.openminetopia.DailyLife;
 import nl.openminetopia.modules.banking.BankingModule;
 import nl.openminetopia.modules.banking.models.BankAccountModel;
 import nl.openminetopia.modules.transactions.TransactionsModule;
@@ -18,12 +18,12 @@ import java.util.UUID;
 
 public class VaultEconomyHandler implements Economy {
 
-    private final BankingModule bankingModule = OpenMinetopia.getModuleManager().get(BankingModule.class);
-    private final TransactionsModule transactionsModule = OpenMinetopia.getModuleManager().get(TransactionsModule.class);
+    private final BankingModule bankingModule = DailyLife.getModuleManager().get(BankingModule.class);
+    private final TransactionsModule transactionsModule = DailyLife.getModuleManager().get(TransactionsModule.class);
 
     @Override
     public boolean isEnabled() {
-        return OpenMinetopia.getInstance().isEnabled();
+        return DailyLife.getInstance().isEnabled();
     }
 
     @Override

@@ -1,6 +1,6 @@
 package nl.openminetopia.modules.color.configuration;
 
-import nl.openminetopia.OpenMinetopia;
+import nl.openminetopia.DailyLife;
 import nl.openminetopia.modules.color.configuration.components.ColorComponent;
 import nl.openminetopia.modules.color.objects.OwnableColor;
 import nl.openminetopia.utils.config.ConfigurateConfig;
@@ -39,7 +39,7 @@ public class ColorsConfiguration extends ConfigurateConfig {
             colorNode.node("color_prefix").set(colorNode);
             colorNode.node("display_name").set(displayName);
         } catch (SerializationException e) {
-            OpenMinetopia.getInstance().getLogger().warning("Serialization went wrong while adding color: " + identifier);
+            DailyLife.getInstance().getLogger().warning("Serialization went wrong while adding color: " + identifier);
         }
 
         this.saveConfiguration();

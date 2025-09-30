@@ -3,7 +3,7 @@ package nl.openminetopia.api.player;
 import lombok.Getter;
 import net.megavex.scoreboardlibrary.api.ScoreboardLibrary;
 import net.megavex.scoreboardlibrary.api.sidebar.Sidebar;
-import nl.openminetopia.OpenMinetopia;
+import nl.openminetopia.DailyLife;
 import nl.openminetopia.api.player.objects.MinetopiaPlayer;
 import nl.openminetopia.modules.scoreboard.ScoreboardModule;
 import nl.openminetopia.utils.ChatUtils;
@@ -11,7 +11,6 @@ import org.bukkit.Bukkit;
 import org.bukkit.entity.Player;
 
 import java.util.*;
-import java.util.concurrent.ConcurrentHashMap;
 
 @Getter
 public class ScoreboardManager {
@@ -27,7 +26,7 @@ public class ScoreboardManager {
 
     public final HashMap<UUID, Sidebar> scoreboards = new HashMap<>();
 
-    private final ScoreboardLibrary scoreboardLibrary = OpenMinetopia.getModuleManager().get(ScoreboardModule.class).getScoreboardLibrary();
+    private final ScoreboardLibrary scoreboardLibrary = DailyLife.getModuleManager().get(ScoreboardModule.class).getScoreboardLibrary();
 
     public void updateBoard(MinetopiaPlayer minetopiaPlayer) {
         Sidebar sidebar = getScoreboard(minetopiaPlayer.getUuid());
@@ -43,7 +42,7 @@ public class ScoreboardManager {
         }
         if (!sidebar.players().contains(player)) addScoreboard(player);
 
-        List<String> lines = OpenMinetopia.getDefaultConfiguration().getScoreboardLines();
+        List<String> lines = DailyLife.getDefaultConfiguration().getScoreboardLines();
         int size = Math.min(lines.size(), 16);
         for (int i = 0; i < size; i++) {
             String line = lines.get(i);
@@ -56,7 +55,7 @@ public class ScoreboardManager {
     }
 
     public void addScoreboard(Player player) {
-        if (!OpenMinetopia.getDefaultConfiguration().isScoreboardEnabled()) return;
+        if (!DailyLife.getDefaultConfiguration().isScoreboardEnabled()) return;
         if (scoreboards.containsKey(player.getUniqueId())) return;
 
         Sidebar sidebar = scoreboardLibrary.createSidebar();

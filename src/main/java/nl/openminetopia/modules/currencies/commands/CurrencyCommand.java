@@ -4,7 +4,7 @@ import co.aikar.commands.BaseCommand;
 import co.aikar.commands.annotation.CommandAlias;
 import co.aikar.commands.annotation.CommandPermission;
 import co.aikar.commands.annotation.Subcommand;
-import nl.openminetopia.OpenMinetopia;
+import nl.openminetopia.DailyLife;
 import nl.openminetopia.modules.currencies.CurrencyModule;
 import nl.openminetopia.modules.currencies.models.CurrencyModel;
 import nl.openminetopia.modules.data.storm.StormDatabase;
@@ -26,11 +26,11 @@ public class CurrencyCommand extends BaseCommand {
     public void purgeOld(CommandSender sender) {
         if (awaitingConfirmation) {
             sender.sendMessage(ChatUtils.color("<red>Purging all unused currencies... This may take a while.</red>"));
-            CurrencyModule currencyModule = OpenMinetopia.getModuleManager().get(CurrencyModule.class);
+            CurrencyModule currencyModule = DailyLife.getModuleManager().get(CurrencyModule.class);
 
             currencyModule.getAllCurrencies().whenComplete((currencies, throwable) -> {
                 if (throwable != null) {
-                    Bukkit.getScheduler().runTask(OpenMinetopia.getInstance(), () -> {
+                    Bukkit.getScheduler().runTask(DailyLife.getInstance(), () -> {
                         sender.sendMessage(ChatUtils.color("<red>An error occurred while purging currencies: " + throwable.getMessage() + "</red>"));
                     });
                     awaitingConfirmation = false;
@@ -44,7 +44,7 @@ public class CurrencyCommand extends BaseCommand {
                     try {
                         StormDatabase.getInstance().getStorm().delete(currency);
                     } catch (SQLException e) {
-                        OpenMinetopia.getInstance().getLogger().warning("Error while deleting currency: " + currency.getName() + " for UUID: " + currency.getUniqueId());
+                        DailyLife.getInstance().getLogger().warning("Error while deleting currency: " + currency.getName() + " for UUID: " + currency.getUniqueId());
                     }
 
                     currencyModule.getCurrencyModels().values().forEach(list ->
@@ -57,7 +57,7 @@ public class CurrencyCommand extends BaseCommand {
                 currencies.removeAll(toRemove);
 
                 int removedCount = toRemove.size();
-                Bukkit.getScheduler().runTask(OpenMinetopia.getInstance(), () ->
+                Bukkit.getScheduler().runTask(DailyLife.getInstance(), () ->
                         sender.sendMessage(ChatUtils.color("<green>Successfully purged " + removedCount + " unused currencies from the database.</green>"))
                 );
 
@@ -71,6 +71,6 @@ public class CurrencyCommand extends BaseCommand {
                 "Typ het command binnen de 20 seconden opnieuw om te bevestigen.</red>"));
         awaitingConfirmation = true;
 
-        Bukkit.getScheduler().runTaskLater(OpenMinetopia.getInstance(), () -> awaitingConfirmation = false, 20 * 20L);
+        Bukkit.getScheduler().runTaskLater(DailyLife.getInstance(), () -> awaitingConfirmation = false, 20 * 20L);
     }
 }

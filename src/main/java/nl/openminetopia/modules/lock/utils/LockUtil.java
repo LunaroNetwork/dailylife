@@ -2,10 +2,8 @@ package nl.openminetopia.modules.lock.utils;
 
 import com.jeff_media.customblockdata.CustomBlockData;
 import com.jeff_media.morepersistentdatatypes.DataType;
-import com.sk89q.worldguard.protection.regions.ProtectedRegion;
 import lombok.experimental.UtilityClass;
-import nl.openminetopia.OpenMinetopia;
-import nl.openminetopia.utils.WorldGuardUtils;
+import nl.openminetopia.DailyLife;
 import org.bukkit.NamespacedKey;
 import org.bukkit.block.Barrel;
 import org.bukkit.block.Block;
@@ -22,20 +20,20 @@ import java.util.UUID;
 public class LockUtil {
 
     public void setLocked(Block block, UUID ownerUuid) {
-        PersistentDataContainer data = new CustomBlockData(block, OpenMinetopia.getInstance());
-        data.set(new NamespacedKey(OpenMinetopia.getInstance(), "lock.owner"), DataType.UUID, ownerUuid);
+        PersistentDataContainer data = new CustomBlockData(block, DailyLife.getInstance());
+        data.set(new NamespacedKey(DailyLife.getInstance(), "lock.owner"), DataType.UUID, ownerUuid);
     }
 
     public void removeLock(Block block) {
-        PersistentDataContainer data = new CustomBlockData(block, OpenMinetopia.getInstance());
-        data.remove(new NamespacedKey(OpenMinetopia.getInstance(), "lock.owner"));
-        data.remove(new NamespacedKey(OpenMinetopia.getInstance(), "lock.members"));
-        data.remove(new NamespacedKey(OpenMinetopia.getInstance(), "lock.groups"));
+        PersistentDataContainer data = new CustomBlockData(block, DailyLife.getInstance());
+        data.remove(new NamespacedKey(DailyLife.getInstance(), "lock.owner"));
+        data.remove(new NamespacedKey(DailyLife.getInstance(), "lock.members"));
+        data.remove(new NamespacedKey(DailyLife.getInstance(), "lock.groups"));
     }
 
     public void addLockMember(Block block, UUID memberUuid) {
-        PersistentDataContainer data = new CustomBlockData(block, OpenMinetopia.getInstance());
-        NamespacedKey key = new NamespacedKey(OpenMinetopia.getInstance(), "lock.members");
+        PersistentDataContainer data = new CustomBlockData(block, DailyLife.getInstance());
+        NamespacedKey key = new NamespacedKey(DailyLife.getInstance(), "lock.members");
 
         String[] members = data.get(key, DataType.STRING_ARRAY);
         List<String> updatedMembers = members != null ? new ArrayList<>(List.of(members)) : new ArrayList<>();
@@ -48,8 +46,8 @@ public class LockUtil {
     }
 
     public void removeLockMember(Block block, UUID memberUuid) {
-        PersistentDataContainer data = new CustomBlockData(block, OpenMinetopia.getInstance());
-        NamespacedKey key = new NamespacedKey(OpenMinetopia.getInstance(), "lock.members");
+        PersistentDataContainer data = new CustomBlockData(block, DailyLife.getInstance());
+        NamespacedKey key = new NamespacedKey(DailyLife.getInstance(), "lock.members");
 
         String[] members = data.get(key, DataType.STRING_ARRAY);
         if (members == null) return;
@@ -61,8 +59,8 @@ public class LockUtil {
     }
 
     public List<UUID> getLockMembers(Block block) {
-        PersistentDataContainer data = new CustomBlockData(block, OpenMinetopia.getInstance());
-        NamespacedKey key = new NamespacedKey(OpenMinetopia.getInstance(), "lock.members");
+        PersistentDataContainer data = new CustomBlockData(block, DailyLife.getInstance());
+        NamespacedKey key = new NamespacedKey(DailyLife.getInstance(), "lock.members");
 
         String[] members = data.get(key, DataType.STRING_ARRAY);
         List<UUID> uuids = new ArrayList<>();
@@ -76,8 +74,8 @@ public class LockUtil {
     }
 
     public void addLockGroup(Block block, String group) {
-        PersistentDataContainer data = new CustomBlockData(block, OpenMinetopia.getInstance());
-        NamespacedKey key = new NamespacedKey(OpenMinetopia.getInstance(), "lock.groups");
+        PersistentDataContainer data = new CustomBlockData(block, DailyLife.getInstance());
+        NamespacedKey key = new NamespacedKey(DailyLife.getInstance(), "lock.groups");
 
         String[] groups = data.get(key, DataType.STRING_ARRAY);
         List<String> updatedGroups = groups != null ? new ArrayList<>(List.of(groups)) : new ArrayList<>();
@@ -90,8 +88,8 @@ public class LockUtil {
     }
 
     public void removeLockGroup(Block block, String group) {
-        PersistentDataContainer data = new CustomBlockData(block, OpenMinetopia.getInstance());
-        NamespacedKey key = new NamespacedKey(OpenMinetopia.getInstance(), "lock.groups");
+        PersistentDataContainer data = new CustomBlockData(block, DailyLife.getInstance());
+        NamespacedKey key = new NamespacedKey(DailyLife.getInstance(), "lock.groups");
 
         String[] groups = data.get(key, DataType.STRING_ARRAY);
         if (groups == null) return;
@@ -103,8 +101,8 @@ public class LockUtil {
     }
 
     public List<String> getLockGroups(Block block) {
-        PersistentDataContainer data = new CustomBlockData(block, OpenMinetopia.getInstance());
-        NamespacedKey key = new NamespacedKey(OpenMinetopia.getInstance(), "lock.groups");
+        PersistentDataContainer data = new CustomBlockData(block, DailyLife.getInstance());
+        NamespacedKey key = new NamespacedKey(DailyLife.getInstance(), "lock.groups");
 
         String[] groups = data.get(key, DataType.STRING_ARRAY);
         List<String> groupList = new ArrayList<>();
@@ -116,22 +114,22 @@ public class LockUtil {
     }
 
     public UUID getLockOwner(Block block) {
-        PersistentDataContainer data = new CustomBlockData(block, OpenMinetopia.getInstance());
-        return data.get(new NamespacedKey(OpenMinetopia.getInstance(), "lock.owner"), DataType.UUID);
+        PersistentDataContainer data = new CustomBlockData(block, DailyLife.getInstance());
+        return data.get(new NamespacedKey(DailyLife.getInstance(), "lock.owner"), DataType.UUID);
     }
 
     public boolean isLocked(Block block) {
-        PersistentDataContainer data = new CustomBlockData(block, OpenMinetopia.getInstance());
-        return data.has(new NamespacedKey(OpenMinetopia.getInstance(), "lock.owner"), DataType.UUID);
+        PersistentDataContainer data = new CustomBlockData(block, DailyLife.getInstance());
+        return data.has(new NamespacedKey(DailyLife.getInstance(), "lock.owner"), DataType.UUID);
     }
 
     public boolean canOpen(Block block, Player player) {
-        PersistentDataContainer data = new CustomBlockData(block, OpenMinetopia.getInstance());
+        PersistentDataContainer data = new CustomBlockData(block, DailyLife.getInstance());
         if (!isLocked(block)) return true;
 
         if (player.hasPermission("openminetopia.lock.bypass")) return true;
 
-        UUID ownerUuid = data.get(new NamespacedKey(OpenMinetopia.getInstance(), "lock.owner"), DataType.UUID);
+        UUID ownerUuid = data.get(new NamespacedKey(DailyLife.getInstance(), "lock.owner"), DataType.UUID);
         if (ownerUuid == null) return false;
 
         if (ownerUuid.equals(player.getUniqueId())) return true;

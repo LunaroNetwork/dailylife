@@ -1,6 +1,6 @@
 package nl.openminetopia.modules.police.walkietalkie.listeners;
 
-import nl.openminetopia.OpenMinetopia;
+import nl.openminetopia.DailyLife;
 import nl.openminetopia.api.player.PlayerManager;
 import nl.openminetopia.api.player.objects.MinetopiaPlayer;
 import nl.openminetopia.modules.police.walkietalkie.menus.WalkieTalkieMenu;
@@ -17,7 +17,7 @@ public class PlayerInteractListener implements Listener {
         ItemStack item = event.getItem();
         if (item == null) return;
 
-        if (!ItemUtils.isSimilarToAny(item, OpenMinetopia.getDefaultConfiguration().getWalkieTalkieItems())) return;
+        if (!ItemUtils.isSimilarToAny(item, DailyLife.getDefaultConfiguration().getWalkieTalkieItems())) return;
         if (!event.getPlayer().hasPermission("openminetopia.walkietalkie")) return;
 
         MinetopiaPlayer minetopiaPlayer = PlayerManager.getInstance().getOnlineMinetopiaPlayer(event.getPlayer());

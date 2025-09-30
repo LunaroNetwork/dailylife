@@ -1,7 +1,7 @@
 package nl.openminetopia.configuration;
 
 import net.kyori.adventure.text.Component;
-import nl.openminetopia.OpenMinetopia;
+import nl.openminetopia.DailyLife;
 import nl.openminetopia.utils.ChatUtils;
 import nl.openminetopia.utils.config.ConfigurateConfig;
 
@@ -23,9 +23,9 @@ public class MessageConfiguration extends ConfigurateConfig {
     }
 
     public static String message(String identifier) {
-        if (OpenMinetopia.getMessageConfiguration() == null) return identifier + " was not found.";
+        if (DailyLife.getMessageConfiguration() == null) return identifier + " was not found.";
 
-        String message = OpenMinetopia.getMessageConfiguration().messages.get(identifier);
+        String message = DailyLife.getMessageConfiguration().messages.get(identifier);
         if (message == null) message = identifier + " was not found.";
 
         return message;

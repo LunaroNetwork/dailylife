@@ -1,7 +1,7 @@
 package nl.openminetopia.modules.items.configuration;
 
 import lombok.SneakyThrows;
-import nl.openminetopia.OpenMinetopia;
+import nl.openminetopia.DailyLife;
 import nl.openminetopia.modules.items.ItemsModule;
 import nl.openminetopia.modules.items.configuration.objects.CustomItem;
 import nl.openminetopia.modules.items.configuration.objects.ItemCategory;
@@ -22,17 +22,17 @@ public class ItemConfiguration extends ConfigurateConfig {
     public ItemConfiguration(File file, String fileName) {
         super(file, fileName, "", false);
 
-        ItemsModule module = OpenMinetopia.getModuleManager().get(ItemsModule.class);
+        ItemsModule module = DailyLife.getModuleManager().get(ItemsModule.class);
 
         String namespace = rootNode.node("namespace").getString();
         if (namespace == null || namespace.isEmpty()) {
-            OpenMinetopia.getInstance().getLogger().warning("Namespace is not defined in the configuration file: " + fileName);
+            DailyLife.getInstance().getLogger().warning("Namespace is not defined in the configuration file: " + fileName);
             return;
         }
 
         Optional<ItemCategory> categoryOpt = module.getCategoriesConfiguration().category(namespace);
         if (categoryOpt.isEmpty()) {
-            OpenMinetopia.getInstance().getLogger().warning("No category found with namespace: " + namespace);
+            DailyLife.getInstance().getLogger().warning("No category found with namespace: " + namespace);
             return;
         }
         ItemCategory category = categoryOpt.get();
@@ -42,25 +42,25 @@ public class ItemConfiguration extends ConfigurateConfig {
 
         itemsNode.childrenMap().forEach((key, value) -> {
             if (!(key instanceof String identifier)) {
-                OpenMinetopia.getInstance().getLogger().warning("Item identifier is not a string: " + key);
+                DailyLife.getInstance().getLogger().warning("Item identifier is not a string: " + key);
                 return;
             }
 
             final String itemName = value.node("name").getString();
             if (itemName == null || itemName.isEmpty()) {
-                OpenMinetopia.getInstance().getLogger().warning("Item " + identifier + " has no name defined");
+                DailyLife.getInstance().getLogger().warning("Item " + identifier + " has no name defined");
                 return;
             }
 
             final String materialName = value.node("material").getString();
             if (materialName == null || materialName.isEmpty()) {
-                OpenMinetopia.getInstance().getLogger().warning("Item " + itemName + " has no material defined");
+                DailyLife.getInstance().getLogger().warning("Item " + itemName + " has no material defined");
                 return;
             }
 
             final Material material = Material.getMaterial(materialName.toUpperCase());
             if (material == null) {
-                OpenMinetopia.getInstance().getLogger().warning("Item " + itemName + " has an invalid material: " + materialName);
+                DailyLife.getInstance().getLogger().warning("Item " + itemName + " has an invalid material: " + materialName);
                 return;
             }
 
@@ -74,7 +74,7 @@ public class ItemConfiguration extends ConfigurateConfig {
                         try {
                             return EquipmentSlot.valueOf(s.toUpperCase());
                         } catch (IllegalArgumentException e) {
-                            OpenMinetopia.getInstance().getLogger().warning("Invalid equippable slot for item " + identifier + ": " + s);
+                            DailyLife.getInstance().getLogger().warning("Invalid equippable slot for item " + identifier + ": " + s);
                             return null;
                         }
                     });
@@ -83,7 +83,7 @@ public class ItemConfiguration extends ConfigurateConfig {
                     .map(s -> {
                         String[] parts = s.split(":");
                         if (parts.length != 2) {
-                            OpenMinetopia.getInstance().getLogger().warning("Equippable asset_id is not in the format 'namespace:id': " + s + " for item " + identifier);
+                            DailyLife.getInstance().getLogger().warning("Equippable asset_id is not in the format 'namespace:id': " + s + " for item " + identifier);
                             return null;
                         }
                         return new NamespacedKey(parts[0], parts[1]);

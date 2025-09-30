@@ -1,6 +1,6 @@
 package nl.openminetopia.modules.player.listeners;
 
-import nl.openminetopia.OpenMinetopia;
+import nl.openminetopia.DailyLife;
 import nl.openminetopia.api.player.PlayerManager;
 import nl.openminetopia.modules.banking.BankingModule;
 import nl.openminetopia.modules.banking.models.BankAccountModel;
@@ -16,7 +16,7 @@ public class PlayerQuitListener implements Listener {
     public void playerQuit(PlayerQuitEvent event) {
         Player player = event.getPlayer();
 
-        BankingModule bankingModule = OpenMinetopia.getModuleManager().get(BankingModule.class);
+        BankingModule bankingModule = DailyLife.getModuleManager().get(BankingModule.class);
         BankAccountModel accountModel = bankingModule.getAccountById(player.getUniqueId());
 
         if(accountModel != null) {
@@ -30,10 +30,10 @@ public class PlayerQuitListener implements Listener {
             minetopiaPlayer.updatePlaytime();
             minetopiaPlayer.save().whenComplete((unused, throwable1) -> {
                 if (throwable1 != null) {
-                    OpenMinetopia.getInstance().getLogger().severe("Couldn't save Player (" + player.getName() + "): " + throwable1.getMessage());
+                    DailyLife.getInstance().getLogger().severe("Couldn't save Player (" + player.getName() + "): " + throwable1.getMessage());
                     return;
                 }
-                OpenMinetopia.getInstance().getLogger().info("Saved player data for " + player.getName());
+                DailyLife.getInstance().getLogger().info("Saved player data for " + player.getName());
             });
 
             PlayerManager.getInstance().getOnlinePlayers().remove(player.getUniqueId());

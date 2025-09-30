@@ -3,7 +3,7 @@ package nl.openminetopia.configuration;
 import nl.openminetopia.utils.modules.ExtendedSpigotModule;
 import lombok.Getter;
 import lombok.SneakyThrows;
-import nl.openminetopia.OpenMinetopia;
+import nl.openminetopia.DailyLife;
 import nl.openminetopia.modules.data.types.DatabaseType;
 import nl.openminetopia.modules.misc.objects.PvPItem;
 import nl.openminetopia.utils.config.ConfigUtils;
@@ -223,7 +223,7 @@ public class DefaultConfiguration extends ConfigurateConfig {
             this.databaseType = DatabaseType.valueOf(databaseTypeString);
         } catch (IllegalArgumentException e) {
             this.databaseType = DatabaseType.SQLITE;
-            OpenMinetopia.getInstance().getLogger().severe("Couldn't find database type for: " + databaseTypeString + ", defaulting to SQLite.");
+            DailyLife.getInstance().getLogger().severe("Couldn't find database type for: " + databaseTypeString + ", defaulting to SQLite.");
         }
 
         this.databaseHost = rootNode.node("database", "host").getString("localhost");
@@ -327,7 +327,7 @@ public class DefaultConfiguration extends ConfigurateConfig {
             safeBlocks.put(Material.BLACK_CONCRETE.toString(), Material.LIME_CONCRETE.toString());
             safeBlocks.put(Material.BLACK_TERRACOTTA.toString(), Material.LIME_TERRACOTTA.toString());
             safeBlocks.put(Material.BLACK_STAINED_GLASS.toString(), Material.LIME_STAINED_GLASS.toString());
-            OpenMinetopia.getInstance().getLogger().info("loading new blocks.");
+            DailyLife.getInstance().getLogger().info("loading new blocks.");
             safeBlocks.forEach((key, value) -> {
                 safeBlocksNode.node(key).getString(value);
             });

@@ -7,7 +7,7 @@ import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.EqualsAndHashCode;
 import lombok.NoArgsConstructor;
-import nl.openminetopia.OpenMinetopia;
+import nl.openminetopia.DailyLife;
 import nl.openminetopia.modules.currencies.CurrencyModule;
 import nl.openminetopia.modules.currencies.objects.RegisteredCurrency;
 
@@ -33,7 +33,7 @@ public class CurrencyModel extends StormModel {
     private Long lastReward;
 
     public RegisteredCurrency configModel() {
-        CurrencyModule currencyModule = OpenMinetopia.getModuleManager().get(CurrencyModule.class);
+        CurrencyModule currencyModule = DailyLife.getModuleManager().get(CurrencyModule.class);
         return currencyModule.getCurrencies().stream()
                 .filter(model -> model.getId().equalsIgnoreCase(name))
                 .findAny()

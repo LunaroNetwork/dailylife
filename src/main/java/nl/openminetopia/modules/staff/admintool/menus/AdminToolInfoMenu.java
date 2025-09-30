@@ -2,7 +2,7 @@ package nl.openminetopia.modules.staff.admintool.menus;
 
 import dev.triumphteam.gui.guis.GuiItem;
 import lombok.Getter;
-import nl.openminetopia.OpenMinetopia;
+import nl.openminetopia.DailyLife;
 import nl.openminetopia.api.player.fitness.Fitness;
 import nl.openminetopia.api.player.objects.MinetopiaPlayer;
 import nl.openminetopia.modules.banking.BankingModule;
@@ -107,7 +107,7 @@ public class AdminToolInfoMenu extends Menu {
 
         /* -------- Fitness -------- */
 
-        FitnessModule fitnessModule = OpenMinetopia.getModuleManager().get(FitnessModule.class);
+        FitnessModule fitnessModule = DailyLife.getModuleManager().get(FitnessModule.class);
         Fitness fitness = minetopiaPlayer.getFitness();
         ItemBuilder fitnessItemBuilder = new ItemBuilder(Material.MUSHROOM_STEW)
                 .setName("<gold>Fitheid")
@@ -123,7 +123,7 @@ public class AdminToolInfoMenu extends Menu {
 
         /* -------- Banking -------- */
 
-        BankingModule bankingModule = OpenMinetopia.getModuleManager().get(BankingModule.class);
+        BankingModule bankingModule = DailyLife.getModuleManager().get(BankingModule.class);
 
         ItemBuilder bankItemBuilder;
         GuiItem targetBankItem;

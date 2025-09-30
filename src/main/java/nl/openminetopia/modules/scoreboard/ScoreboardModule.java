@@ -6,7 +6,7 @@ import lombok.Getter;
 import net.megavex.scoreboardlibrary.api.ScoreboardLibrary;
 import net.megavex.scoreboardlibrary.api.exception.NoPacketAdapterAvailableException;
 import net.megavex.scoreboardlibrary.api.noop.NoopScoreboardLibrary;
-import nl.openminetopia.OpenMinetopia;
+import nl.openminetopia.DailyLife;
 import nl.openminetopia.api.player.PlayerManager;
 import nl.openminetopia.api.player.ScoreboardManager;
 import nl.openminetopia.configuration.DefaultConfiguration;
@@ -22,7 +22,7 @@ import java.util.ArrayList;
 @Getter
 public class ScoreboardModule extends ExtendedSpigotModule {
 
-    public ScoreboardModule(SpigotModuleManager<@NotNull OpenMinetopia> moduleManager, DataModule dataModule) {
+    public ScoreboardModule(SpigotModuleManager<@NotNull DailyLife> moduleManager, DataModule dataModule) {
         super(moduleManager);
     }
 
@@ -31,7 +31,7 @@ public class ScoreboardModule extends ExtendedSpigotModule {
 
     @Override
     public void onEnable() {
-        DefaultConfiguration configuration = OpenMinetopia.getDefaultConfiguration();
+        DefaultConfiguration configuration = DailyLife.getDefaultConfiguration();
         if (!configuration.isScoreboardEnabled()) return;
 
         registerComponent(new PlayerJoinListener());
@@ -40,19 +40,19 @@ public class ScoreboardModule extends ExtendedSpigotModule {
         registerComponent(new ScoreboardCommand(this));
 
         try {
-            scoreboardLibrary = ScoreboardLibrary.loadScoreboardLibrary(OpenMinetopia.getInstance());
+            scoreboardLibrary = ScoreboardLibrary.loadScoreboardLibrary(DailyLife.getInstance());
         } catch (NoPacketAdapterAvailableException e) {
             // If no packet adapter was found, you can fallback to the no-op implementation:
             scoreboardLibrary = new NoopScoreboardLibrary();
-            OpenMinetopia.getInstance().getLogger().info("No scoreboard packet adapter available!");
+            DailyLife.getInstance().getLogger().info("No scoreboard packet adapter available!");
         }
         scoreboardUpdateRunnable = new ScoreboardUpdateRunnable(ScoreboardManager.getInstance(), PlayerManager.getInstance(),5000L, 50, 30 * 1000L, () -> new ArrayList<>(ScoreboardManager.getInstance().getScoreboards().keySet()));
-        OpenMinetopia.getInstance().registerDirtyPlayerRunnable(scoreboardUpdateRunnable, 20L);
+        DailyLife.getInstance().registerDirtyPlayerRunnable(scoreboardUpdateRunnable, 20L);
     }
 
     @Override
     public void onDisable() {
         if (scoreboardLibrary != null) scoreboardLibrary.close();
-        if (scoreboardUpdateRunnable != null) OpenMinetopia.getInstance().unregisterDirtyPlayerRunnable(scoreboardUpdateRunnable);
+        if (scoreboardUpdateRunnable != null) DailyLife.getInstance().unregisterDirtyPlayerRunnable(scoreboardUpdateRunnable);
     }
 }

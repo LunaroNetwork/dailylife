@@ -5,7 +5,7 @@ import nl.openminetopia.utils.modules.ExtendedSpigotModule;
 import com.jazzkuh.modulemanager.spigot.SpigotModuleManager;
 import lombok.AllArgsConstructor;
 import lombok.Getter;
-import nl.openminetopia.OpenMinetopia;
+import nl.openminetopia.DailyLife;
 import nl.openminetopia.modules.data.storm.StormDatabase;
 import nl.openminetopia.modules.transactions.commands.TransactionCommand;
 import nl.openminetopia.modules.transactions.enums.TransactionType;
@@ -18,7 +18,7 @@ import java.util.concurrent.CompletableFuture;
 
 public class TransactionsModule extends ExtendedSpigotModule {
 
-    public TransactionsModule(SpigotModuleManager<@NotNull OpenMinetopia> moduleManager) {
+    public TransactionsModule(SpigotModuleManager<@NotNull DailyLife> moduleManager) {
         super(moduleManager);
     }
 

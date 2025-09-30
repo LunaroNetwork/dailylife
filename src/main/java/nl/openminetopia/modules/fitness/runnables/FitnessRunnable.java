@@ -1,7 +1,6 @@
 package nl.openminetopia.modules.fitness.runnables;
 
-import lombok.SneakyThrows;
-import nl.openminetopia.OpenMinetopia;
+import nl.openminetopia.DailyLife;
 import nl.openminetopia.api.player.PlayerManager;
 import nl.openminetopia.api.player.fitness.Fitness;
 import nl.openminetopia.api.player.fitness.FitnessStatisticType;
@@ -81,7 +80,7 @@ public class FitnessRunnable extends AbstractDirtyRunnable<UUID> {
     }
 
     private void updateEatingFitness(Fitness fitness) {
-        FitnessConfiguration config = OpenMinetopia.getModuleManager().get(FitnessModule.class).getConfiguration();
+        FitnessConfiguration config = DailyLife.getModuleManager().get(FitnessModule.class).getConfiguration();
 
         FitnessStatisticModel eatingStat = fitness.getStatistic(FitnessStatisticType.EATING);
         double eatingPoints = (eatingStat.getSecondaryPoints() * config.getPointsForCheapFood())

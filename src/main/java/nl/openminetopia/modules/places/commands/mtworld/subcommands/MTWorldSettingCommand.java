@@ -5,7 +5,7 @@ import co.aikar.commands.annotation.CommandAlias;
 import co.aikar.commands.annotation.CommandCompletion;
 import co.aikar.commands.annotation.CommandPermission;
 import co.aikar.commands.annotation.Subcommand;
-import nl.openminetopia.OpenMinetopia;
+import nl.openminetopia.DailyLife;
 import nl.openminetopia.modules.data.storm.StormDatabase;
 import nl.openminetopia.modules.places.PlacesModule;
 import nl.openminetopia.modules.places.models.WorldModel;
@@ -15,7 +15,7 @@ import org.bukkit.entity.Player;
 @CommandAlias("mtwereld|mtworld")
 public class MTWorldSettingCommand extends BaseCommand {
 
-    private final PlacesModule placesModule = OpenMinetopia.getModuleManager().get(PlacesModule.class);
+    private final PlacesModule placesModule = DailyLife.getModuleManager().get(PlacesModule.class);
 
     @Subcommand("setcolor")
     @CommandPermission("openminetopia.world.setcolor")

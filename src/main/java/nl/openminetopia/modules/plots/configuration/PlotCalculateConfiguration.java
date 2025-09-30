@@ -1,7 +1,7 @@
 package nl.openminetopia.modules.plots.configuration;
 
 import lombok.Getter;
-import nl.openminetopia.OpenMinetopia;
+import nl.openminetopia.DailyLife;
 import nl.openminetopia.utils.config.ConfigurateConfig;
 import org.bukkit.Material;
 
@@ -25,7 +25,7 @@ public class PlotCalculateConfiguration extends ConfigurateConfig {
             if (!(key instanceof String materialName)) return;
             Material material = Material.matchMaterial(materialName);
             if (material == null) {
-                OpenMinetopia.getInstance().getLogger().warning("Invalid material in plotcalculate.yml: " + key);
+                DailyLife.getInstance().getLogger().warning("Invalid material in plotcalculate.yml: " + key);
                 return;
             }
             double valueDouble = value.getDouble(0);

@@ -1,6 +1,6 @@
 package nl.openminetopia.modules.staff.admintool.listeners;
 
-import nl.openminetopia.OpenMinetopia;
+import nl.openminetopia.DailyLife;
 import nl.openminetopia.api.player.PlayerManager;
 import nl.openminetopia.api.player.objects.MinetopiaPlayer;
 import nl.openminetopia.modules.banking.BankingModule;
@@ -29,7 +29,7 @@ public class PlayerInteractListener implements Listener {
 
         if (minetopiaPlayer == null) return;
 
-        BankingModule bankingModule = OpenMinetopia.getModuleManager().get(BankingModule.class);
+        BankingModule bankingModule = DailyLife.getModuleManager().get(BankingModule.class);
         BankAccountModel bankAccountModel = bankingModule.getAccountByIdAsync(event.getPlayer().getUniqueId()).join();
 
         new AdminToolMenu(event.getPlayer(), event.getPlayer(), minetopiaPlayer, bankAccountModel).open(event.getPlayer());

@@ -1,7 +1,7 @@
 package nl.openminetopia.modules.police.utils;
 
 import lombok.experimental.UtilityClass;
-import nl.openminetopia.OpenMinetopia;
+import nl.openminetopia.DailyLife;
 import nl.openminetopia.configuration.DefaultConfiguration;
 import nl.openminetopia.utils.item.ItemUtils;
 import org.bukkit.entity.Player;
@@ -11,12 +11,12 @@ import org.bukkit.inventory.ItemStack;
 public class PeppersprayUtils {
 
     public void applyPeppersprayEffects(Player target) {
-        DefaultConfiguration configuration = OpenMinetopia.getDefaultConfiguration();
+        DefaultConfiguration configuration = DailyLife.getDefaultConfiguration();
 
         ItemUtils.applyEffects(target, configuration.getPeppersprayEffects(), configuration.getPeppersprayEffectsDuration() * 20);
     }
 
     public boolean isPeppersprayItem(ItemStack item) {
-        return ItemUtils.isSimilarToAny(item, OpenMinetopia.getDefaultConfiguration().getPeppersprayItems());
+        return ItemUtils.isSimilarToAny(item, DailyLife.getDefaultConfiguration().getPeppersprayItems());
     }
 }

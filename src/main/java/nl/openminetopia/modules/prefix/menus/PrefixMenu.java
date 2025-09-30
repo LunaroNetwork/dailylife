@@ -1,7 +1,7 @@
 package nl.openminetopia.modules.prefix.menus;
 
 import dev.triumphteam.gui.guis.GuiItem;
-import nl.openminetopia.OpenMinetopia;
+import nl.openminetopia.DailyLife;
 import nl.openminetopia.api.player.objects.MinetopiaPlayer;
 import nl.openminetopia.configuration.MessageConfiguration;
 import nl.openminetopia.modules.prefix.events.PlayerChangePrefixEvent;
@@ -28,7 +28,7 @@ public class PrefixMenu extends PaginatedMenu {
         List<Prefix> prefixes = new ArrayList<>(minetopiaPlayer.getPrefixes());
 
         if (minetopiaPlayer.getActivePrefix() != null && minetopiaPlayer.getActivePrefix().getId() != -1) {
-            prefixes.add(new Prefix(-1, OpenMinetopia.getDefaultConfiguration().getDefaultPrefix(), -1));
+            prefixes.add(new Prefix(-1, DailyLife.getDefaultConfiguration().getDefaultPrefix(), -1));
         }
 
         prefixes.removeIf(prefix -> prefix.getId() == minetopiaPlayer.getActivePrefix().getId());
@@ -62,7 +62,7 @@ public class PrefixMenu extends PaginatedMenu {
                     event -> {
                         event.setCancelled(true);
 
-                        Prefix toSet = prefix.getId() == -1 ? new Prefix(-1, OpenMinetopia.getDefaultConfiguration().getDefaultPrefix(), -1) : prefix;
+                        Prefix toSet = prefix.getId() == -1 ? new Prefix(-1, DailyLife.getDefaultConfiguration().getDefaultPrefix(), -1) : prefix;
 
                         PlayerChangePrefixEvent changePrefixEvent = new PlayerChangePrefixEvent(player, toSet);
                         if (EventUtils.callCancellable(changePrefixEvent)) return;

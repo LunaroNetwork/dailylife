@@ -4,7 +4,7 @@ import nl.openminetopia.utils.modules.ExtendedSpigotModule;
 import com.jazzkuh.modulemanager.spigot.SpigotModuleManager;
 import lombok.Getter;
 import lombok.Setter;
-import nl.openminetopia.OpenMinetopia;
+import nl.openminetopia.DailyLife;
 import nl.openminetopia.api.player.PlayerManager;
 import nl.openminetopia.modules.data.DataModule;
 import nl.openminetopia.modules.fitness.commands.FitnessCommand;
@@ -24,7 +24,7 @@ import java.util.UUID;
 @Getter
 public class FitnessModule extends ExtendedSpigotModule {
 
-    public FitnessModule(SpigotModuleManager<@NotNull OpenMinetopia> moduleManager, DataModule dataModule) {
+    public FitnessModule(SpigotModuleManager<@NotNull DailyLife> moduleManager, DataModule dataModule) {
         super(moduleManager);
     }
 
@@ -38,7 +38,7 @@ public class FitnessModule extends ExtendedSpigotModule {
     private FitnessConfiguration configuration;
 
     public void onEnable() {
-        configuration = new FitnessConfiguration(OpenMinetopia.getInstance().getDataFolder());
+        configuration = new FitnessConfiguration(DailyLife.getInstance().getDataFolder());
         configuration.saveConfiguration();
 
         registerComponent(new FitnessCommand());
@@ -52,13 +52,13 @@ public class FitnessModule extends ExtendedSpigotModule {
         registerComponent(new PlayerConsumeBoosterListener());
 
         healthStatisticRunnable = new HealthStatisticRunnable(PlayerManager.getInstance(), 15000L, 50, 50 * 1000L, () -> new ArrayList<>(PlayerManager.getInstance().getOnlinePlayers().keySet()));
-        OpenMinetopia.getInstance().registerDirtyPlayerRunnable(healthStatisticRunnable, 20L * 3);
+        DailyLife.getInstance().registerDirtyPlayerRunnable(healthStatisticRunnable, 20L * 3);
 
         fitnessRunnable = new FitnessRunnable(PlayerManager.getInstance(), this, 60000L, 50, 60 * 5 * 1000L, () -> new ArrayList<>(PlayerManager.getInstance().getOnlinePlayers().keySet()));
-        OpenMinetopia.getInstance().registerDirtyPlayerRunnable(fitnessRunnable, 20L * 2);
+        DailyLife.getInstance().registerDirtyPlayerRunnable(fitnessRunnable, 20L * 2);
     }
 
     public void onDisable() {
-        OpenMinetopia.getInstance().unregisterDirtyPlayerRunnable(healthStatisticRunnable);
+        DailyLife.getInstance().unregisterDirtyPlayerRunnable(healthStatisticRunnable);
     }
 }

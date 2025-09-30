@@ -1,6 +1,6 @@
 package nl.openminetopia.modules.banking.listeners;
 
-import nl.openminetopia.OpenMinetopia;
+import nl.openminetopia.DailyLife;
 import nl.openminetopia.modules.banking.BankingModule;
 import nl.openminetopia.modules.banking.configuration.BankingConfiguration;
 import nl.openminetopia.modules.banking.menus.BankTypeSelectionMenu;
@@ -24,7 +24,7 @@ public class BankingInteractionListener implements Listener {
 
         Material material = block.getType();
 
-        BankingModule bankingModule = OpenMinetopia.getModuleManager().get(BankingModule.class);
+        BankingModule bankingModule = DailyLife.getModuleManager().get(BankingModule.class);
         BankingConfiguration bankingConfiguration = bankingModule.getConfiguration();
 
         if(!bankingConfiguration.getAtmMaterials().contains(material)) return;

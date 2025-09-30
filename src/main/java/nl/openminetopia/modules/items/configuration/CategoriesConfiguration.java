@@ -1,7 +1,7 @@
 package nl.openminetopia.modules.items.configuration;
 
 import lombok.Getter;
-import nl.openminetopia.OpenMinetopia;
+import nl.openminetopia.DailyLife;
 import nl.openminetopia.modules.items.configuration.objects.ItemCategory;
 import nl.openminetopia.utils.config.ConfigurateConfig;
 import nl.openminetopia.utils.item.ItemBuilder;
@@ -23,7 +23,7 @@ public class CategoriesConfiguration extends ConfigurateConfig {
 
         rootNode.childrenMap().forEach((key, value) -> {
             if (!(key instanceof String id)) {
-                OpenMinetopia.getInstance().getLogger().warning("Category namespace is not a string: " + key);
+                DailyLife.getInstance().getLogger().warning("Category namespace is not a string: " + key);
                 return;
             }
 
@@ -43,12 +43,12 @@ public class CategoriesConfiguration extends ConfigurateConfig {
             if (iconItemCustomModelData >= 0) iconItem.setCustomModelData(iconItemCustomModelData);
 
             if (name == null || name.isEmpty()) {
-                OpenMinetopia.getInstance().getLogger().warning("Category name is not defined for: " + key);
+                DailyLife.getInstance().getLogger().warning("Category name is not defined for: " + key);
                 return;
             }
 
             if (namespace == null || namespace.isEmpty()) {
-                OpenMinetopia.getInstance().getLogger().warning("Category namespace is not defined for: " + id);
+                DailyLife.getInstance().getLogger().warning("Category namespace is not defined for: " + id);
                 return;
             }
 

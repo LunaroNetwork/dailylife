@@ -4,7 +4,7 @@ import co.aikar.commands.BaseCommand;
 import co.aikar.commands.RootCommand;
 import co.aikar.commands.annotation.*;
 import lombok.SneakyThrows;
-import nl.openminetopia.OpenMinetopia;
+import nl.openminetopia.DailyLife;
 import nl.openminetopia.configuration.DefaultConfiguration;
 import nl.openminetopia.configuration.MessageConfiguration;
 import nl.openminetopia.modules.banking.BankingModule;
@@ -36,43 +36,43 @@ public class OpenMinetopiaCommand extends BaseCommand {
     @SneakyThrows
     @CommandPermission("openminetopia.reload")
     public void reload(CommandSender sender) {
-        File dataFolder = OpenMinetopia.getInstance().getDataFolder();
+        File dataFolder = DailyLife.getInstance().getDataFolder();
 
-        OpenMinetopia.setDefaultConfiguration(new DefaultConfiguration(dataFolder));
-        OpenMinetopia.getDefaultConfiguration().saveConfiguration();
+        DailyLife.setDefaultConfiguration(new DefaultConfiguration(dataFolder));
+        DailyLife.getDefaultConfiguration().saveConfiguration();
 
-        OpenMinetopia.setMessageConfiguration(new MessageConfiguration(dataFolder));
-        OpenMinetopia.getMessageConfiguration().saveConfiguration();
+        DailyLife.setMessageConfiguration(new MessageConfiguration(dataFolder));
+        DailyLife.getMessageConfiguration().saveConfiguration();
 
-        PlayerModule playerModule = OpenMinetopia.getModuleManager().get(PlayerModule.class);
+        PlayerModule playerModule = DailyLife.getModuleManager().get(PlayerModule.class);
         playerModule.setConfiguration(new LevelCheckConfiguration(dataFolder));
         playerModule.getConfiguration().saveConfiguration();
 
-        ColorModule colorModule = OpenMinetopia.getModuleManager().get(ColorModule.class);
+        ColorModule colorModule = DailyLife.getModuleManager().get(ColorModule.class);
         colorModule.setConfiguration(new ColorsConfiguration(dataFolder));
         colorModule.getConfiguration().saveConfiguration();
 
-        FitnessModule fitnessModule = OpenMinetopia.getModuleManager().get(FitnessModule.class);
+        FitnessModule fitnessModule = DailyLife.getModuleManager().get(FitnessModule.class);
         fitnessModule.setConfiguration(new FitnessConfiguration(dataFolder));
         fitnessModule.getConfiguration().saveConfiguration();
 
-        BankingModule bankingModule = OpenMinetopia.getModuleManager().get(BankingModule.class);
+        BankingModule bankingModule = DailyLife.getModuleManager().get(BankingModule.class);
         bankingModule.setConfiguration(new BankingConfiguration(dataFolder));
         bankingModule.getConfiguration().saveConfiguration();
 
-        PlotModule plotModule = OpenMinetopia.getModuleManager().get(PlotModule.class);
+        PlotModule plotModule = DailyLife.getModuleManager().get(PlotModule.class);
         plotModule.setCalculateConfiguration(new PlotCalculateConfiguration(dataFolder));
         plotModule.getCalculateConfiguration().saveConfiguration();
 
-        BooksModule booksModule = OpenMinetopia.getModuleManager().get(BooksModule.class);
+        BooksModule booksModule = DailyLife.getModuleManager().get(BooksModule.class);
         booksModule.setConfiguration(new BooksConfiguration(dataFolder));
         booksModule.getConfiguration().saveConfiguration();
 
-        LabymodModule labymodModule = OpenMinetopia.getModuleManager().get(LabymodModule.class);
+        LabymodModule labymodModule = DailyLife.getModuleManager().get(LabymodModule.class);
         labymodModule.setConfiguration(new LabymodConfiguration(dataFolder));
         labymodModule.getConfiguration().saveConfiguration();
 
-        ItemsModule module = OpenMinetopia.getModuleManager().get(ItemsModule.class);
+        ItemsModule module = DailyLife.getModuleManager().get(ItemsModule.class);
         module.reload();
 
         sender.sendMessage(ChatUtils.color("<gold>De configuratiebestanden zijn succesvol herladen!"));
@@ -81,8 +81,8 @@ public class OpenMinetopiaCommand extends BaseCommand {
     @Default
     public void onCommand(Player player) {
         player.sendMessage(ChatUtils.color(" "));
-        player.sendMessage(ChatUtils.color("<gold>Deze server maakt gebruik van <yellow>OpenMinetopia <gold>versie <yellow>" + OpenMinetopia.getInstance().getDescription().getVersion()));
-        player.sendMessage(ChatUtils.color("<gold>Auteurs: <yellow>" + OpenMinetopia.getInstance().getDescription().getAuthors().toString().replace("[", "").replace("]", "")));
+        player.sendMessage(ChatUtils.color("<gold>Deze server maakt gebruik van <yellow>OpenMinetopia <gold>versie <yellow>" + DailyLife.getInstance().getDescription().getVersion()));
+        player.sendMessage(ChatUtils.color("<gold>Auteurs: <yellow>" + DailyLife.getInstance().getDescription().getAuthors().toString().replace("[", "").replace("]", "")));
         player.sendMessage(ChatUtils.color(" "));
     }
 
@@ -90,7 +90,7 @@ public class OpenMinetopiaCommand extends BaseCommand {
     @CommandPermission("openminetopia.help")
     @Description("Laat alle commando's zien die beschikbaar zijn in OpenMinetopia")
     public void help(CommandSender sender, @Optional Integer page) {
-        List<RootCommand> rootCommands = OpenMinetopia.getCommandManager().getRegisteredRootCommands().stream().toList();
+        List<RootCommand> rootCommands = DailyLife.getCommandManager().getRegisteredRootCommands().stream().toList();
 
         // paginated help
         int pageSize = 10;

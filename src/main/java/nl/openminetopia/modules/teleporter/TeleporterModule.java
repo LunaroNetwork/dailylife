@@ -2,7 +2,7 @@ package nl.openminetopia.modules.teleporter;
 
 import nl.openminetopia.utils.modules.ExtendedSpigotModule;
 import com.jazzkuh.modulemanager.spigot.SpigotModuleManager;
-import nl.openminetopia.OpenMinetopia;
+import nl.openminetopia.DailyLife;
 import nl.openminetopia.modules.data.DataModule;
 import nl.openminetopia.modules.teleporter.commands.TeleporterCommand;
 import nl.openminetopia.modules.teleporter.commands.subcommands.TeleporterCreateCommand;
@@ -13,7 +13,7 @@ import org.jetbrains.annotations.NotNull;
 
 public final class TeleporterModule extends ExtendedSpigotModule {
 
-    public TeleporterModule(SpigotModuleManager<@NotNull OpenMinetopia> moduleManager, DataModule dataModule) {
+    public TeleporterModule(SpigotModuleManager<@NotNull DailyLife> moduleManager, DataModule dataModule) {
         super(moduleManager);
     }
 

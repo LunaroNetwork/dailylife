@@ -3,7 +3,7 @@ package nl.openminetopia.modules.banking.menus;
 import dev.triumphteam.gui.guis.GuiItem;
 import lombok.Getter;
 import lombok.RequiredArgsConstructor;
-import nl.openminetopia.OpenMinetopia;
+import nl.openminetopia.DailyLife;
 import nl.openminetopia.api.player.PlayerManager;
 import nl.openminetopia.api.player.objects.MinetopiaPlayer;
 import nl.openminetopia.configuration.MessageConfiguration;
@@ -27,21 +27,21 @@ import java.util.List;
 @Getter
 public class BankContentsMenu extends Menu {
 
-    private static final BankingModule bankingModule = OpenMinetopia.getModuleManager().get(BankingModule.class);
+    private static final BankingModule bankingModule = DailyLife.getModuleManager().get(BankingModule.class);
 
     private final Player player;
     private final BankAccountModel accountModel;
     private final boolean asAdmin;
 
     public BankContentsMenu(Player player, BankAccountModel accountModel, boolean asAdmin) {
-        super(accountModel.getType().getColor() + accountModel.getName() + "<reset> | <red>" + OpenMinetopia.getModuleManager().get(BankingModule.class).format(accountModel.getBalance()), 6);
+        super(accountModel.getType().getColor() + accountModel.getName() + "<reset> | <red>" + DailyLife.getModuleManager().get(BankingModule.class).format(accountModel.getBalance()), 6);
         this.player = player;
         this.accountModel = accountModel;
         this.asAdmin = asAdmin;
 
         gui.disableAllInteractions();
 
-        BankingModule bankingModule = OpenMinetopia.getModuleManager().get(BankingModule.class);
+        BankingModule bankingModule = DailyLife.getModuleManager().get(BankingModule.class);
         List<BankNote> bankNotes = bankingModule.getConfiguration().getBankNotes();
 
         for (int i = 36; i < 45; i++) {
@@ -111,7 +111,7 @@ public class BankContentsMenu extends Menu {
             ChatUtils.sendFormattedMessage(minetopiaPlayer, MessageConfiguration.message("banking_deposit_message")
                     .replace("<deposit_value>", bankingModule.format(totalValue)));
 
-            TransactionsModule transactionsModule = OpenMinetopia.getModuleManager().get(TransactionsModule.class);
+            TransactionsModule transactionsModule = DailyLife.getModuleManager().get(TransactionsModule.class);
             transactionsModule.createTransactionLog(System.currentTimeMillis(), player.getUniqueId(), player.getName(), TransactionType.DEPOSIT, totalValue, accountModel.getUniqueId(), "Deposited from ATM.");
 
             new BankContentsMenu(player, accountModel, isAsAdmin()).open(player);
@@ -148,7 +148,7 @@ public class BankContentsMenu extends Menu {
         ChatUtils.sendFormattedMessage(minetopiaPlayer, MessageConfiguration.message("banking_withdraw_message")
                 .replace("<withdraw_value>", bankingModule.format(totalValue)));
 
-        TransactionsModule transactionsModule = OpenMinetopia.getModuleManager().get(TransactionsModule.class);
+        TransactionsModule transactionsModule = DailyLife.getModuleManager().get(TransactionsModule.class);
         transactionsModule.createTransactionLog(System.currentTimeMillis(), player.getUniqueId(), player.getName(), TransactionType.WITHDRAW, totalValue, accountModel.getUniqueId(), "Withdrawn in ATM.");
 
         new BankContentsMenu(player, accountModel, isAsAdmin()).open(player);

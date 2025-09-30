@@ -1,6 +1,6 @@
 package nl.openminetopia.modules.misc.listeners;
 
-import nl.openminetopia.OpenMinetopia;
+import nl.openminetopia.DailyLife;
 import nl.openminetopia.api.places.MTPlaceManager;
 import nl.openminetopia.api.player.PlayerManager;
 import nl.openminetopia.api.player.objects.MinetopiaPlayer;
@@ -24,7 +24,7 @@ public class PlayerAttackListener implements Listener {
     @EventHandler
     public void damagePlayer(final EntityDamageByEntityEvent event) {
         if (MTPlaceManager.getInstance().getPlace(event.getDamager().getLocation()) == null) return;
-        if (!OpenMinetopia.getDefaultConfiguration().isPvpEnabled()) return;
+        if (!DailyLife.getDefaultConfiguration().isPvpEnabled()) return;
 
         // Anti-armorstand shooting
         if (event.getEntity() instanceof ArmorStand && event.getDamager() instanceof Arrow) {
@@ -56,7 +56,7 @@ public class PlayerAttackListener implements Listener {
         if (!(event.getEntity() instanceof Player target)) return;
 
         MinetopiaPlayer minetopiaPlayer = PlayerManager.getInstance().getOnlineMinetopiaPlayer(player);
-        if (HandcuffManager.getInstance().isHandcuffed(player) && !OpenMinetopia.getDefaultConfiguration().isHandcuffCanPvP()) {
+        if (HandcuffManager.getInstance().isHandcuffed(player) && !DailyLife.getDefaultConfiguration().isHandcuffCanPvP()) {
             event.setCancelled(true);
             player.sendMessage(ChatUtils.format(minetopiaPlayer, MessageConfiguration.message("police_handcuff_cant_pvp")
                     .replace("<victim>", target.getName())

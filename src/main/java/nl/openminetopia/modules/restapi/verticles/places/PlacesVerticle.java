@@ -2,7 +2,7 @@ package nl.openminetopia.modules.restapi.verticles.places;
 
 import io.vertx.core.Promise;
 import io.vertx.ext.web.RoutingContext;
-import nl.openminetopia.OpenMinetopia;
+import nl.openminetopia.DailyLife;
 import nl.openminetopia.modules.places.PlacesModule;
 import nl.openminetopia.modules.places.models.WorldModel;
 import nl.openminetopia.modules.restapi.base.BaseVerticle;
@@ -24,7 +24,7 @@ public class PlacesVerticle extends BaseVerticle {
     private void handleGetWorlds(RoutingContext context) {
         JSONObject responseJson = new JSONObject();
         try {
-            PlacesModule placesModule = OpenMinetopia.getModuleManager().get(PlacesModule.class);
+            PlacesModule placesModule = DailyLife.getModuleManager().get(PlacesModule.class);
 
             JSONArray worldsArray = new JSONArray();
             placesModule.getWorldModels().forEach(worldModel -> {
@@ -48,7 +48,7 @@ public class PlacesVerticle extends BaseVerticle {
     private void handleGetCities(RoutingContext context) {
         JSONObject responseJson = new JSONObject();
         try {
-            PlacesModule placesModule = OpenMinetopia.getModuleManager().get(PlacesModule.class);
+            PlacesModule placesModule = DailyLife.getModuleManager().get(PlacesModule.class);
 
             JSONArray citiesArray = new JSONArray();
             placesModule.getCityModels().forEach(cityModel -> {
@@ -80,6 +80,6 @@ public class PlacesVerticle extends BaseVerticle {
         responseJson.put("success", false);
         responseJson.put("error", errorMessage);
         context.response().setStatusCode(statusCode).end(responseJson.toJSONString());
-        OpenMinetopia.getInstance().getLogger().severe("Error: " + errorMessage + " - " + e.getMessage());
+        DailyLife.getInstance().getLogger().severe("Error: " + errorMessage + " - " + e.getMessage());
     }
 }

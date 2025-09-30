@@ -3,14 +3,12 @@ package nl.openminetopia.api.player.fitness;
 import lombok.Getter;
 import lombok.Setter;
 import lombok.SneakyThrows;
-import nl.openminetopia.OpenMinetopia;
+import nl.openminetopia.DailyLife;
 import nl.openminetopia.api.player.objects.MinetopiaPlayer;
 import nl.openminetopia.modules.data.storm.StormDatabase;
 import nl.openminetopia.modules.fitness.FitnessModule;
 import nl.openminetopia.modules.fitness.models.FitnessBoosterModel;
 import nl.openminetopia.modules.fitness.models.FitnessStatisticModel;
-import nl.openminetopia.modules.fitness.runnables.FitnessRunnable;
-import nl.openminetopia.modules.fitness.runnables.HealthStatisticRunnable;
 import nl.openminetopia.modules.fitness.utils.FitnessUtils;
 import nl.openminetopia.modules.player.models.PlayerModel;
 import org.bukkit.Bukkit;
@@ -32,7 +30,7 @@ public class Fitness {
 
     private @Setter int totalFitness;
 
-    private final FitnessModule fitnessModule = OpenMinetopia.getModuleManager().get(FitnessModule.class);
+    private final FitnessModule fitnessModule = DailyLife.getModuleManager().get(FitnessModule.class);
 
     public Fitness(MinetopiaPlayer minetopiaPlayer) {
         this.minetopiaPlayer = minetopiaPlayer;
@@ -158,7 +156,7 @@ public class Fitness {
         });
         playerModel.getBoosters().clear();
 
-        this.totalFitness = OpenMinetopia.getModuleManager().get(FitnessModule.class).getConfiguration().getDefaultFitnessLevel();
+        this.totalFitness = DailyLife.getModuleManager().get(FitnessModule.class).getConfiguration().getDefaultFitnessLevel();
 
         FitnessUtils.clearFitnessEffects(minetopiaPlayer.getBukkit().getPlayer());
 

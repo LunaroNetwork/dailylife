@@ -10,7 +10,7 @@ import com.sk89q.worldguard.protection.flags.registry.FlagRegistry;
 import com.sk89q.worldguard.protection.regions.ProtectedRegion;
 import lombok.Getter;
 import lombok.Setter;
-import nl.openminetopia.OpenMinetopia;
+import nl.openminetopia.DailyLife;
 import nl.openminetopia.modules.plots.commands.PlotCommand;
 import nl.openminetopia.modules.plots.commands.subcommands.*;
 import nl.openminetopia.modules.plots.configuration.PlotCalculateConfiguration;
@@ -20,7 +20,7 @@ import org.jetbrains.annotations.NotNull;
 @Setter @Getter
 public class PlotModule extends ExtendedSpigotModule {
 
-    public PlotModule(SpigotModuleManager<@NotNull OpenMinetopia> moduleManager) {
+    public PlotModule(SpigotModuleManager<@NotNull DailyLife> moduleManager) {
         super(moduleManager);
     }
 
@@ -28,7 +28,7 @@ public class PlotModule extends ExtendedSpigotModule {
 
     @Override
     public void onEnable() {
-        calculateConfiguration = new PlotCalculateConfiguration(OpenMinetopia.getInstance().getDataFolder());
+        calculateConfiguration = new PlotCalculateConfiguration(DailyLife.getInstance().getDataFolder());
         calculateConfiguration.saveConfiguration();
 
         registerComponent(new PlotInfoCommand());
@@ -45,7 +45,7 @@ public class PlotModule extends ExtendedSpigotModule {
         registerComponent(new PlotTransferCommand());
         registerComponent(new PlotCalculateCommand());
 
-        OpenMinetopia.getCommandManager().getCommandCompletions().registerCompletion("plotName", context ->
+        DailyLife.getCommandManager().getCommandCompletions().registerCompletion("plotName", context ->
                 WorldGuardUtils.getProtectedRegions(priority -> priority >= 0).stream()
                         .filter(region -> region.getFlag(PLOT_FLAG) != null)
                         .map(ProtectedRegion::getId).toList());

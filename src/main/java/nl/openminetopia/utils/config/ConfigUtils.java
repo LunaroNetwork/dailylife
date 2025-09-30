@@ -2,7 +2,7 @@ package nl.openminetopia.utils.config;
 
 import lombok.SneakyThrows;
 import lombok.experimental.UtilityClass;
-import nl.openminetopia.OpenMinetopia;
+import nl.openminetopia.DailyLife;
 import nl.openminetopia.utils.VersionUtil;
 import nl.openminetopia.utils.item.ItemBuilder;
 import org.bukkit.Material;
@@ -59,7 +59,7 @@ public class ConfigUtils {
                 itemMap.put("item-model", itemStack.getItemMeta().getItemModel().toString());
             }
         } catch (Exception e) {
-            OpenMinetopia.getInstance().getLogger().warning("Failed to serialize item: " + itemStack.getType().name());
+            DailyLife.getInstance().getLogger().warning("Failed to serialize item: " + itemStack.getType().name());
         }
         return itemMap;
     }
@@ -92,7 +92,7 @@ public class ConfigUtils {
 
                 PotionEffectType potionEffectType = Registry.EFFECT.get(effectKey);
                 if (potionEffectType == null) {
-                    OpenMinetopia.getInstance().getLogger().warning("Invalid potion effect: " + effectKey);
+                    DailyLife.getInstance().getLogger().warning("Invalid potion effect: " + effectKey);
                     return;
                 }
 
@@ -106,7 +106,7 @@ public class ConfigUtils {
                     effectNode.node("amplifier").set(amplifier);
                     effectNode.node("duration").set(duration);
                 } catch (Exception e) {
-                    OpenMinetopia.getInstance().getLogger().warning("Failed to load effect: " + effectName);
+                    DailyLife.getInstance().getLogger().warning("Failed to load effect: " + effectName);
                 }
             });
         }
@@ -118,7 +118,7 @@ public class ConfigUtils {
             PotionEffectType potionEffectType = Registry.EFFECT.get(NamespacedKey.minecraft(effectName));
 
             if (potionEffectType == null) {
-                OpenMinetopia.getInstance().getLogger().warning("Invalid potion effect: " + effectName);
+                DailyLife.getInstance().getLogger().warning("Invalid potion effect: " + effectName);
                 return;
             }
 

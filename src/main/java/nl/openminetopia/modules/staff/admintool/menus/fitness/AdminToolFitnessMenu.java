@@ -2,7 +2,7 @@ package nl.openminetopia.modules.staff.admintool.menus.fitness;
 
 import dev.triumphteam.gui.guis.GuiItem;
 import lombok.Getter;
-import nl.openminetopia.OpenMinetopia;
+import nl.openminetopia.DailyLife;
 import nl.openminetopia.api.player.fitness.FitnessStatisticType;
 import nl.openminetopia.api.player.objects.MinetopiaPlayer;
 import nl.openminetopia.modules.banking.models.BankAccountModel;
@@ -35,7 +35,7 @@ public class AdminToolFitnessMenu extends Menu {
         gui.disableAllInteractions();
         if (minetopiaPlayer == null) return;
 
-        FitnessConfiguration configuration = OpenMinetopia.getModuleManager().get(FitnessModule.class).getConfiguration();
+        FitnessConfiguration configuration = DailyLife.getModuleManager().get(FitnessModule.class).getConfiguration();
 
         FitnessStatisticModel drinkingStatistic = minetopiaPlayer.getFitness().getStatistic(FitnessStatisticType.DRINKING);
         ItemBuilder drinkingItemBuilder = new ItemBuilder(Material.POTION)

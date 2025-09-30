@@ -2,7 +2,7 @@ package nl.openminetopia.modules.restapi.verticles;
 
 import io.vertx.core.Promise;
 import io.vertx.ext.web.RoutingContext;
-import nl.openminetopia.OpenMinetopia;
+import nl.openminetopia.DailyLife;
 import nl.openminetopia.modules.restapi.base.BaseVerticle;
 
 public class MainVerticle extends BaseVerticle {
@@ -21,12 +21,12 @@ public class MainVerticle extends BaseVerticle {
                 .requestHandler(router)
                 // Start listening
                 .listen(
-                        OpenMinetopia.getDefaultConfiguration().getRestApiPort(),
-                        OpenMinetopia.getDefaultConfiguration().getRestApiHost()
+                        DailyLife.getDefaultConfiguration().getRestApiPort(),
+                        DailyLife.getDefaultConfiguration().getRestApiHost()
                 )
                 // Print the port on success
                 .onSuccess(server -> {
-                    OpenMinetopia.getInstance().getLogger().info("HTTP server started on port " + server.actualPort() + " and host " + OpenMinetopia.getDefaultConfiguration().getRestApiHost());
+                    DailyLife.getInstance().getLogger().info("HTTP server started on port " + server.actualPort() + " and host " + DailyLife.getDefaultConfiguration().getRestApiHost());
                     startPromise.complete();
                 })
                 // Print the problem on failure
@@ -38,7 +38,7 @@ public class MainVerticle extends BaseVerticle {
 
     private void validateApiKey(RoutingContext context) {
         String apiKey = context.request().getHeader("X-API-Key");
-        if (apiKey == null || !apiKey.equals(OpenMinetopia.getDefaultConfiguration().getRestApiKey())) {
+        if (apiKey == null || !apiKey.equals(DailyLife.getDefaultConfiguration().getRestApiKey())) {
             context.response().setStatusCode(401).end("Unauthorized request");
         } else {
             context.next();

@@ -1,7 +1,7 @@
 package nl.openminetopia.modules.player.listeners;
 
 import dev.triumphteam.gui.guis.GuiItem;
-import nl.openminetopia.OpenMinetopia;
+import nl.openminetopia.DailyLife;
 import nl.openminetopia.api.player.PlayerManager;
 import nl.openminetopia.api.player.objects.MinetopiaPlayer;
 import nl.openminetopia.configuration.MessageConfiguration;
@@ -15,7 +15,6 @@ import nl.openminetopia.utils.events.EventUtils;
 import nl.openminetopia.utils.item.ItemBuilder;
 import nl.openminetopia.utils.menu.Menu;
 import nl.openminetopia.utils.wrappers.CustomNpcClickEvent;
-import org.bukkit.Bukkit;
 import org.bukkit.Material;
 import org.bukkit.entity.Player;
 import org.bukkit.event.EventHandler;
@@ -42,7 +41,7 @@ public class LevelcheckNpcListener implements Listener {
             return;
         }
 
-        PlayerModule playerModule = OpenMinetopia.getModuleManager().get(PlayerModule.class);
+        PlayerModule playerModule = DailyLife.getModuleManager().get(PlayerModule.class);
         if (!playerModule.getConfiguration().isLevelUpCostEnabled()) {
             PlayerLevelChangeEvent levelChangeEvent = new PlayerLevelChangeEvent(player, level, calculatedLevel);
             if (EventUtils.callCancellable(levelChangeEvent)) return;
@@ -62,7 +61,7 @@ public class LevelcheckNpcListener implements Listener {
             super("<gold>Levelcheck", 3);
             gui.disableAllInteractions();
 
-            BankingModule bankingModule = OpenMinetopia.getModuleManager().get(BankingModule.class);
+            BankingModule bankingModule = DailyLife.getModuleManager().get(BankingModule.class);
             if (bankingModule == null) return;
 
             // Check if the player has enough money

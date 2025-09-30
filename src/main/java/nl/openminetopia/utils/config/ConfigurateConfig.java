@@ -2,7 +2,7 @@ package nl.openminetopia.utils.config;
 
 import lombok.Getter;
 import lombok.SneakyThrows;
-import nl.openminetopia.OpenMinetopia;
+import nl.openminetopia.DailyLife;
 import org.apache.commons.io.FileUtils;
 import org.spongepowered.configurate.ConfigurationNode;
 import org.spongepowered.configurate.loader.HeaderMode;
@@ -29,7 +29,7 @@ public abstract class ConfigurateConfig {
         try {
             rootNode = loader.load();
         } catch (IOException e) {
-            OpenMinetopia.getInstance().getLogger().warning("An error occurred while loading this configuration: " + e.getMessage());
+            DailyLife.getInstance().getLogger().warning("An error occurred while loading this configuration: " + e.getMessage());
         }
     }
 
@@ -37,7 +37,7 @@ public abstract class ConfigurateConfig {
         try {
             loader.save(rootNode);
         } catch (Exception e) {
-            OpenMinetopia.getInstance().getLogger().warning("Unable to save your messages configuration! Sorry! " + e.getMessage());
+            DailyLife.getInstance().getLogger().warning("Unable to save your messages configuration! Sorry! " + e.getMessage());
         }
     }
 
@@ -45,17 +45,17 @@ public abstract class ConfigurateConfig {
     private void defaultConfig(File file, String name, String def, boolean mergeDefaults) {
         File config = new File(file, name);
         if (!config.exists()) {
-            InputStream resourceStream = OpenMinetopia.class.getResourceAsStream("/" + def);
+            InputStream resourceStream = DailyLife.class.getResourceAsStream("/" + def);
             if (resourceStream == null) {
-                OpenMinetopia.getInstance().getLogger().warning("Could not find def resource: " + def);
+                DailyLife.getInstance().getLogger().warning("Could not find def resource: " + def);
                 return;
             }
 
             FileUtils.copyInputStreamToFile(resourceStream, config);
         } else if (mergeDefaults) {
-            InputStream resourceStream = OpenMinetopia.class.getResourceAsStream("/" + def);
+            InputStream resourceStream = DailyLife.class.getResourceAsStream("/" + def);
             if (resourceStream == null) {
-                OpenMinetopia.getInstance().getLogger().warning("Could not find def resource for merging: " + def);
+                DailyLife.getInstance().getLogger().warning("Could not find def resource for merging: " + def);
                 return;
             }
 

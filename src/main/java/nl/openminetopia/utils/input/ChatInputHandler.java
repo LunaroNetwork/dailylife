@@ -1,7 +1,7 @@
 package nl.openminetopia.utils.input;
 
 import io.papermc.paper.event.player.AsyncChatEvent;
-import nl.openminetopia.OpenMinetopia;
+import nl.openminetopia.DailyLife;
 import nl.openminetopia.utils.ChatUtils;
 import org.bukkit.Bukkit;
 import org.bukkit.entity.Player;
@@ -30,7 +30,7 @@ public class ChatInputHandler implements Listener {
         }
 
         // Schedule timeout
-        int taskId = Bukkit.getScheduler().runTaskLater(OpenMinetopia.getInstance(), () -> {
+        int taskId = Bukkit.getScheduler().runTaskLater(DailyLife.getInstance(), () -> {
             InputSession session = inputSessions.remove(playerId);
             if (session != null) {
                 ChatUtils.sendMessage(player, "<red>Actie afgebroken, geen invoer ontvangen.");

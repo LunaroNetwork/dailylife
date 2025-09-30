@@ -1,6 +1,6 @@
 package nl.openminetopia.modules.fitness.listeners;
 
-import nl.openminetopia.OpenMinetopia;
+import nl.openminetopia.DailyLife;
 import nl.openminetopia.api.player.PlayerManager;
 import nl.openminetopia.api.player.objects.MinetopiaPlayer;
 import nl.openminetopia.modules.fitness.FitnessModule;
@@ -41,7 +41,7 @@ public class PlayerConsumeBoosterListener implements Listener {
     }
 
     private boolean addBooster(Player player, ItemStack item) {
-        FitnessModule fitnessModule = OpenMinetopia.getModuleManager().get(FitnessModule.class);
+        FitnessModule fitnessModule = DailyLife.getModuleManager().get(FitnessModule.class);
         for (FitnessItem fitnessItem : fitnessModule.getConfiguration().getFitnessItems().values()) {
             List<ItemStack> fitnessItems = fitnessModule.getConfiguration().getFitnessItems().values().stream()
                     .map(FitnessItem::itemStack)

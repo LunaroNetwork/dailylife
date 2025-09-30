@@ -6,7 +6,7 @@ import io.vertx.core.Context;
 import io.vertx.core.Vertx;
 import io.vertx.ext.web.Router;
 import io.vertx.ext.web.handler.BodyHandler;
-import nl.openminetopia.OpenMinetopia;
+import nl.openminetopia.DailyLife;
 import nl.openminetopia.modules.data.DataModule;
 import nl.openminetopia.modules.restapi.base.VerticleManager;
 import nl.openminetopia.modules.restapi.verticles.MainVerticle;
@@ -22,7 +22,7 @@ import org.jetbrains.annotations.NotNull;
 
 public class RestAPIModule extends ExtendedSpigotModule {
 
-    public RestAPIModule(SpigotModuleManager<@NotNull OpenMinetopia> moduleManager, DataModule dataModule) {
+    public RestAPIModule(SpigotModuleManager<@NotNull DailyLife> moduleManager, DataModule dataModule) {
         super(moduleManager);
     }
 
@@ -30,8 +30,8 @@ public class RestAPIModule extends ExtendedSpigotModule {
 
     @Override
     public void onEnable() {
-        if (OpenMinetopia.getDefaultConfiguration().isRestApiEnabled()) {
-            Vertx vertx = OpenMinetopia.getInstance().getOrCreateVertx();
+        if (DailyLife.getDefaultConfiguration().isRestApiEnabled()) {
+            Vertx vertx = DailyLife.getInstance().getOrCreateVertx();
 
             Context context = vertx.getOrCreateContext();
 

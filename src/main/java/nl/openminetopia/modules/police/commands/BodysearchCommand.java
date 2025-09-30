@@ -3,7 +3,7 @@ package nl.openminetopia.modules.police.commands;
 import co.aikar.commands.BaseCommand;
 import co.aikar.commands.annotation.*;
 import co.aikar.commands.bukkit.contexts.OnlinePlayer;
-import nl.openminetopia.OpenMinetopia;
+import nl.openminetopia.DailyLife;
 import nl.openminetopia.api.player.PlayerManager;
 import nl.openminetopia.api.player.objects.MinetopiaPlayer;
 import nl.openminetopia.configuration.MessageConfiguration;
@@ -31,7 +31,7 @@ public class BodysearchCommand extends BaseCommand {
                 return;
             }
 
-            if (player.getLocation().distance(target.getLocation()) > OpenMinetopia.getDefaultConfiguration().getBodysearchRange()) {
+            if (player.getLocation().distance(target.getLocation()) > DailyLife.getDefaultConfiguration().getBodysearchRange()) {
                 ChatUtils.sendFormattedMessage(minetopiaPlayer, MessageConfiguration.message("police_bodysearch_too_far")
                         .replace("<player>", target.getName()));
                 return;

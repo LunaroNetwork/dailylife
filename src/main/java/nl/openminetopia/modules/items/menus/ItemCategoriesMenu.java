@@ -1,7 +1,7 @@
 package nl.openminetopia.modules.items.menus;
 
 import dev.triumphteam.gui.builder.item.PaperItemBuilder;
-import nl.openminetopia.OpenMinetopia;
+import nl.openminetopia.DailyLife;
 import nl.openminetopia.modules.items.ItemsModule;
 import nl.openminetopia.utils.ChatUtils;
 import nl.openminetopia.utils.menu.PaginatedMenu;
@@ -14,7 +14,7 @@ public class ItemCategoriesMenu extends PaginatedMenu {
         gui.setItem(47, this.previousPageItem());
         gui.setItem(51, this.nextPageItem());
 
-        ItemsModule module = OpenMinetopia.getModuleManager().get(ItemsModule.class);
+        ItemsModule module = DailyLife.getModuleManager().get(ItemsModule.class);
         module.getCategoriesConfiguration().getCategories().forEach((id, category)-> {
             gui.addItem(PaperItemBuilder.from(category.icon().clone())
                     .name(ChatUtils.color("<gold>" + category.name()))

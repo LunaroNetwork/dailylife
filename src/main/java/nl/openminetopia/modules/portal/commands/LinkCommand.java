@@ -4,9 +4,8 @@ import co.aikar.commands.BaseCommand;
 import co.aikar.commands.annotation.CommandAlias;
 import co.aikar.commands.annotation.Default;
 import io.vertx.core.buffer.Buffer;
-import io.vertx.ext.web.client.HttpResponse;
 import io.vertx.ext.web.client.WebClient;
-import nl.openminetopia.OpenMinetopia;
+import nl.openminetopia.DailyLife;
 import nl.openminetopia.modules.portal.PortalModule;
 import nl.openminetopia.utils.ChatUtils;
 import org.bukkit.entity.Player;
@@ -27,17 +26,17 @@ public class LinkCommand extends BaseCommand {
         requestBody.put("minecraft_username", player.getName());
         requestBody.put("minecraft_uuid", player.getUniqueId().toString());
 
-        PortalModule portalModule = OpenMinetopia.getModuleManager().get(PortalModule.class);
-        WebClient webClient = WebClient.create(OpenMinetopia.getInstance().getOrCreateVertx());
+        PortalModule portalModule = DailyLife.getModuleManager().get(PortalModule.class);
+        WebClient webClient = WebClient.create(DailyLife.getInstance().getOrCreateVertx());
 
         webClient.postAbs(portalModule.getPortalApiUrl() + "/minecraft/verify")
                 .putHeader("Content-Type", "application/json")
-                .putHeader("X-API-Key", OpenMinetopia.getDefaultConfiguration().getPortalToken())
+                .putHeader("X-API-Key", DailyLife.getDefaultConfiguration().getPortalToken())
                 .sendBuffer(Buffer.buffer(requestBody.toString()))
                 .onSuccess(response -> {
                     if (response.statusCode() != 200) {
                         ChatUtils.sendMessage(player, "<red>Er is iets fout gegaan bij het verifiëren van je account.");
-                        OpenMinetopia.getInstance().getLogger().warning(
+                        DailyLife.getInstance().getLogger().warning(
                                 "Response code " + response.statusCode() + " " + response.statusMessage()
                                         + " while trying to verify player " + player.getName()
                         );
@@ -47,7 +46,7 @@ public class LinkCommand extends BaseCommand {
                 })
                 .onFailure(err -> {
                     ChatUtils.sendMessage(player, "<red>Er is iets fout gegaan bij het verifiëren van je account.");
-                    OpenMinetopia.getInstance().getLogger().severe(
+                    DailyLife.getInstance().getLogger().severe(
                             "An error occurred while trying to verify player " + player.getName() + ": " + err.getMessage()
                     );
                 });

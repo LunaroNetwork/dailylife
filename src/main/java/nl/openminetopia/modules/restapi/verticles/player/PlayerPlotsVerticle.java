@@ -2,7 +2,7 @@ package nl.openminetopia.modules.restapi.verticles.player;
 
 import io.vertx.core.Promise;
 import io.vertx.ext.web.RoutingContext;
-import nl.openminetopia.OpenMinetopia;
+import nl.openminetopia.DailyLife;
 import nl.openminetopia.modules.plots.PlotModule;
 import nl.openminetopia.modules.restapi.base.BaseVerticle;
 import nl.openminetopia.utils.WorldGuardUtils;
@@ -93,7 +93,7 @@ public class PlayerPlotsVerticle extends BaseVerticle {
             jsonObject.put("success", false);
             jsonObject.put("error", e.getMessage());
             context.response().end(jsonObject.toJSONString());
-            OpenMinetopia.getInstance().getLogger().severe("An error occurred while handling a request: " + e.getMessage());
+            DailyLife.getInstance().getLogger().severe("An error occurred while handling a request: " + e.getMessage());
         }
     }
 }

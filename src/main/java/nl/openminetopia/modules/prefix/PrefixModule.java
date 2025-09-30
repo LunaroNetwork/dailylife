@@ -3,7 +3,7 @@ package nl.openminetopia.modules.prefix;
 import com.craftmend.storm.api.enums.Where;
 import nl.openminetopia.utils.modules.ExtendedSpigotModule;
 import com.jazzkuh.modulemanager.spigot.SpigotModuleManager;
-import nl.openminetopia.OpenMinetopia;
+import nl.openminetopia.DailyLife;
 import nl.openminetopia.api.player.PlayerManager;
 import nl.openminetopia.api.player.objects.MinetopiaPlayer;
 import nl.openminetopia.modules.data.DataModule;
@@ -30,7 +30,7 @@ public class PrefixModule extends ExtendedSpigotModule {
 
     Collection<PrefixModel> prefixModels = new ArrayList<>();
 
-    public PrefixModule(SpigotModuleManager<@NotNull OpenMinetopia> moduleManager, DataModule dataModule) {
+    public PrefixModule(SpigotModuleManager<@NotNull DailyLife> moduleManager, DataModule dataModule) {
         super(moduleManager);
     }
 
@@ -41,21 +41,21 @@ public class PrefixModule extends ExtendedSpigotModule {
         registerComponent(new PrefixAddCommand());
         registerComponent(new PrefixRemoveCommand());
 
-        Bukkit.getScheduler().runTaskLater(OpenMinetopia.getInstance(), () -> {
-            OpenMinetopia.getInstance().getLogger().info("Loading prefixes...");
+        Bukkit.getScheduler().runTaskLater(DailyLife.getInstance(), () -> {
+            DailyLife.getInstance().getLogger().info("Loading prefixes...");
 
             this.getPrefixes().whenComplete((prefixModels, throwable) -> {
                 if (throwable != null) {
-                    OpenMinetopia.getInstance().getLogger().severe("Failed to load prefixes: " + throwable.getMessage());
+                    DailyLife.getInstance().getLogger().severe("Failed to load prefixes: " + throwable.getMessage());
                     return;
                 }
 
                 this.prefixModels = prefixModels;
-                OpenMinetopia.getInstance().getLogger().info("Loaded " + prefixModels.size() + " prefixes.");
+                DailyLife.getInstance().getLogger().info("Loaded " + prefixModels.size() + " prefixes.");
             });
         }, 20L);
 
-        OpenMinetopia.getCommandManager().getCommandCompletions().registerAsyncCompletion("playerPrefixes", context -> {
+        DailyLife.getCommandManager().getCommandCompletions().registerAsyncCompletion("playerPrefixes", context -> {
             List<String> prefixes = new ArrayList<>();
 
             PlayerManager.getInstance().getMinetopiaPlayer(context.getPlayer()).whenComplete((minetopiaPlayer, throwable1) -> {

@@ -7,7 +7,7 @@ import lombok.Getter;
 import lombok.Setter;
 import lombok.SneakyThrows;
 import net.milkbowl.vault.economy.Economy;
-import nl.openminetopia.OpenMinetopia;
+import nl.openminetopia.DailyLife;
 import nl.openminetopia.api.player.PlayerManager;
 import nl.openminetopia.modules.banking.commands.BankingCommand;
 import nl.openminetopia.modules.banking.commands.subcommands.*;
@@ -39,7 +39,7 @@ import java.util.stream.Collectors;
 @Getter
 public class BankingModule extends ExtendedSpigotModule {
 
-    public BankingModule(SpigotModuleManager<@NotNull OpenMinetopia> moduleManager, DataModule dataModule, TransactionsModule transactionsModule) {
+    public BankingModule(SpigotModuleManager<@NotNull DailyLife> moduleManager, DataModule dataModule, TransactionsModule transactionsModule) {
         super(moduleManager);
     }
 
@@ -51,7 +51,7 @@ public class BankingModule extends ExtendedSpigotModule {
 
     @Override
     public void onEnable() {
-        configuration = new BankingConfiguration(OpenMinetopia.getInstance().getDataFolder());
+        configuration = new BankingConfiguration(DailyLife.getInstance().getDataFolder());
         configuration.saveConfiguration();
 
         decimalFormat = new DecimalFormat(configuration.getEconomyFormat());
@@ -59,21 +59,21 @@ public class BankingModule extends ExtendedSpigotModule {
 
         this.bankAccountModels = new ArrayList<>();
 
-        OpenMinetopia.getInstance().getLogger().info("Loading bank accounts..");
+        DailyLife.getInstance().getLogger().info("Loading bank accounts..");
         this.getBankAccounts().whenComplete((accounts, accountThrowable) -> {
             if (accountThrowable != null) {
-                OpenMinetopia.getInstance().getLogger().severe("Something went wrong while trying to load all bank accounts: " + accountThrowable.getMessage());
+                DailyLife.getInstance().getLogger().severe("Something went wrong while trying to load all bank accounts: " + accountThrowable.getMessage());
                 return;
             }
 
             bankAccountModels = accounts;
             bankAccountModels.forEach(BankAccountModel::initSavingTask);
 
-            OpenMinetopia.getInstance().getLogger().info("Loaded a total of " + bankAccountModels.size() + " accounts.");
+            DailyLife.getInstance().getLogger().info("Loaded a total of " + bankAccountModels.size() + " accounts.");
 
             this.getBankPermissions().whenComplete((permissions, throwable) -> {
                 if (throwable != null) {
-                    OpenMinetopia.getInstance().getLogger().severe("Something went wrong while trying to load all bank permissions: " + throwable.getMessage());
+                    DailyLife.getInstance().getLogger().severe("Something went wrong while trying to load all bank permissions: " + throwable.getMessage());
                     return;
                 }
 
@@ -88,11 +88,11 @@ public class BankingModule extends ExtendedSpigotModule {
                     }
                     accountModel.getUsers().put(permission.getUuid(), permission.getPermission());
                 });
-                OpenMinetopia.getInstance().getLogger().info("Found and applied " + permissions.size() + " bank permissions.");
+                DailyLife.getInstance().getLogger().info("Found and applied " + permissions.size() + " bank permissions.");
             });
         });
 
-        OpenMinetopia.getCommandManager().getCommandCompletions().registerCompletion("accountNames", context -> bankAccountModels.stream().map(BankAccountModel::getName).collect(Collectors.toList()));
+        DailyLife.getCommandManager().getCommandCompletions().registerCompletion("accountNames", context -> bankAccountModels.stream().map(BankAccountModel::getName).collect(Collectors.toList()));
 
         registerComponent(new BankingCommand());
         registerComponent(new BankingCreateCommand());
@@ -107,12 +107,12 @@ public class BankingModule extends ExtendedSpigotModule {
         registerComponent(new PlayerLoginListener());
         registerComponent(new BankingInteractionListener());
 
-        wagePaymentTask = new WagePaymentTask(OpenMinetopia.getModuleManager().get(PlayerModule.class)::getConfiguration, PlayerManager.getInstance(), 5000L, 50, 30 * 1000L, () -> new ArrayList<>(PlayerManager.getInstance().getOnlinePlayers().keySet()));
-        OpenMinetopia.getInstance().registerDirtyPlayerRunnable(wagePaymentTask, 20L);
+        wagePaymentTask = new WagePaymentTask(DailyLife.getModuleManager().get(PlayerModule.class)::getConfiguration, PlayerManager.getInstance(), 5000L, 50, 30 * 1000L, () -> new ArrayList<>(PlayerManager.getInstance().getOnlinePlayers().keySet()));
+        DailyLife.getInstance().registerDirtyPlayerRunnable(wagePaymentTask, 20L);
 
         if (Bukkit.getPluginManager().isPluginEnabled("Vault")) {
-            Bukkit.getServicesManager().register(Economy.class, new VaultEconomyHandler(), OpenMinetopia.getInstance(), ServicePriority.Normal);
-            OpenMinetopia.getInstance().getLogger().info("Registered Vault economy handler.");
+            Bukkit.getServicesManager().register(Economy.class, new VaultEconomyHandler(), DailyLife.getInstance(), ServicePriority.Normal);
+            DailyLife.getInstance().getLogger().info("Registered Vault economy handler.");
         }
     }
 
@@ -124,7 +124,7 @@ public class BankingModule extends ExtendedSpigotModule {
                 accountModel.getSavingTask().cancel();
             }
         });
-        OpenMinetopia.getInstance().unregisterDirtyPlayerRunnable(wagePaymentTask);
+        DailyLife.getInstance().unregisterDirtyPlayerRunnable(wagePaymentTask);
     }
 
     public List<BankAccountModel> getAccountsFromPlayer(UUID uuid) {

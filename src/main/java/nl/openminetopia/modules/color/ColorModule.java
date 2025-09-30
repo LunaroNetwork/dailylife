@@ -5,7 +5,7 @@ import nl.openminetopia.utils.modules.ExtendedSpigotModule;
 import com.jazzkuh.modulemanager.spigot.SpigotModuleManager;
 import lombok.Getter;
 import lombok.Setter;
-import nl.openminetopia.OpenMinetopia;
+import nl.openminetopia.DailyLife;
 import nl.openminetopia.api.player.PlayerManager;
 import nl.openminetopia.api.player.objects.MinetopiaPlayer;
 import nl.openminetopia.modules.color.commands.ColorCommand;
@@ -30,7 +30,7 @@ import java.util.stream.Collectors;
 public class ColorModule extends ExtendedSpigotModule {
 
 
-    public ColorModule(SpigotModuleManager<@NotNull OpenMinetopia> moduleManager, DataModule dataModule) {
+    public ColorModule(SpigotModuleManager<@NotNull DailyLife> moduleManager, DataModule dataModule) {
         super(moduleManager);
     }
 
@@ -42,7 +42,7 @@ public class ColorModule extends ExtendedSpigotModule {
 
     @Override
     public void onEnable() {
-        configuration = new ColorsConfiguration(OpenMinetopia.getInstance().getDataFolder());
+        configuration = new ColorsConfiguration(DailyLife.getInstance().getDataFolder());
         configuration.saveConfiguration();
 
         registerComponent(new ColorCommand());
@@ -50,15 +50,15 @@ public class ColorModule extends ExtendedSpigotModule {
         registerComponent(new ColorRemoveCommand());
         registerComponent(new ColorCreateCommand());
 
-        OpenMinetopia.getCommandManager().getCommandCompletions().registerCompletion("colorTypes", context ->
+        DailyLife.getCommandManager().getCommandCompletions().registerCompletion("colorTypes", context ->
                 Arrays.stream(OwnableColorType.values()).map(OwnableColorType::name).toList());
 
-        OpenMinetopia.getCommandManager().getCommandCompletions().registerCompletion("colorIds", context ->
+        DailyLife.getCommandManager().getCommandCompletions().registerCompletion("colorIds", context ->
                 configuration.components().stream()
                         .map(ColorComponent::identifier)
                         .toList());
 
-        OpenMinetopia.getCommandManager().getCommandCompletions().registerCompletion("playerColors", context -> {
+        DailyLife.getCommandManager().getCommandCompletions().registerCompletion("playerColors", context -> {
             MinetopiaPlayer minetopiaPlayer = PlayerManager.getInstance().getOnlineMinetopiaPlayer(context.getPlayer());
             if (minetopiaPlayer == null) return new ArrayList<>();
 

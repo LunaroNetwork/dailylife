@@ -1,7 +1,7 @@
 package nl.openminetopia.modules.police.taser;
 
 import lombok.Getter;
-import nl.openminetopia.OpenMinetopia;
+import nl.openminetopia.DailyLife;
 import nl.openminetopia.api.player.objects.MinetopiaPlayer;
 import nl.openminetopia.modules.police.utils.TaserUtils;
 import nl.openminetopia.utils.ChatUtils;
@@ -22,9 +22,9 @@ public class TaserManager {
         if (target == null) return;
 
         taseredPlayers.add(target.getUniqueId());
-        Bukkit.getScheduler().runTaskLaterAsynchronously(OpenMinetopia.getInstance(), () -> {
+        Bukkit.getScheduler().runTaskLaterAsynchronously(DailyLife.getInstance(), () -> {
             taseredPlayers.remove(target.getUniqueId());
-        }, OpenMinetopia.getDefaultConfiguration().getTaserFreezeDuration() * 20L);
+        }, DailyLife.getDefaultConfiguration().getTaserFreezeDuration() * 20L);
         target.sendMessage(ChatUtils.format(targetMinetopiaPlayer, "<red>Je bent geraakt door een tazer!"));
         TaserUtils.applyTaserEffects(target);
     }

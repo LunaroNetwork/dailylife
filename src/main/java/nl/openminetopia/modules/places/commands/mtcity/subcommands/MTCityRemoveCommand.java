@@ -4,7 +4,7 @@ import co.aikar.commands.BaseCommand;
 import co.aikar.commands.annotation.CommandAlias;
 import co.aikar.commands.annotation.CommandPermission;
 import co.aikar.commands.annotation.Subcommand;
-import nl.openminetopia.OpenMinetopia;
+import nl.openminetopia.DailyLife;
 import nl.openminetopia.modules.places.PlacesModule;
 import nl.openminetopia.modules.places.models.CityModel;
 import nl.openminetopia.utils.ChatUtils;
@@ -16,7 +16,7 @@ public class MTCityRemoveCommand extends BaseCommand {
     @Subcommand("remove")
     @CommandPermission("openminetopia.city.remove")
     public void onRemove(Player player, String cityName) {
-        PlacesModule placesModule = OpenMinetopia.getModuleManager().get(PlacesModule.class);
+        PlacesModule placesModule = DailyLife.getModuleManager().get(PlacesModule.class);
 
         CityModel cityModel = placesModule.getCity(cityName);
         if (cityModel == null) {

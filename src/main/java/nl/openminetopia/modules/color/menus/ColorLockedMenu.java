@@ -1,7 +1,7 @@
 package nl.openminetopia.modules.color.menus;
 
 import dev.triumphteam.gui.guis.GuiItem;
-import nl.openminetopia.OpenMinetopia;
+import nl.openminetopia.DailyLife;
 import nl.openminetopia.configuration.MessageConfiguration;
 import nl.openminetopia.modules.color.ColorModule;
 import nl.openminetopia.modules.color.configuration.components.ColorComponent;
@@ -21,7 +21,7 @@ public class ColorLockedMenu extends PaginatedMenu {
         gui.setItem(53, this.nextPageItem());
         gui.setItem(45, this.previousPageItem());
 
-        ColorModule colorModule = OpenMinetopia.getModuleManager().get(ColorModule.class);
+        ColorModule colorModule = DailyLife.getModuleManager().get(ColorModule.class);
         List<ColorComponent> lockedColors = colorModule.getConfiguration().lockedColors(oldMenu.getColors());
         lockedColors.forEach(component -> {
             gui.addItem(new GuiItem(new ItemBuilder(Material.IRON_INGOT).setName(component.displayName()).toItemStack()));

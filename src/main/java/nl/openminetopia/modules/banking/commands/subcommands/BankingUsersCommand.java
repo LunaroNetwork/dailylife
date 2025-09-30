@@ -2,16 +2,13 @@ package nl.openminetopia.modules.banking.commands.subcommands;
 
 import co.aikar.commands.BaseCommand;
 import co.aikar.commands.annotation.*;
-import nl.openminetopia.OpenMinetopia;
-import nl.openminetopia.api.player.PlayerManager;
+import nl.openminetopia.DailyLife;
 import nl.openminetopia.configuration.MessageConfiguration;
 import nl.openminetopia.modules.banking.BankingModule;
 import nl.openminetopia.modules.banking.enums.AccountPermission;
-import nl.openminetopia.modules.banking.models.BankAccountModel;
 import nl.openminetopia.utils.ChatUtils;
 import org.bukkit.OfflinePlayer;
 import org.bukkit.command.CommandSender;
-import org.bukkit.entity.Player;
 
 @CommandAlias("accounts|account|rekening")
 public class BankingUsersCommand extends BaseCommand {
@@ -21,7 +18,7 @@ public class BankingUsersCommand extends BaseCommand {
     @Syntax("<player> <naam> <permission>")
     @CommandCompletion("@players @accountNames")
     public void addUser(CommandSender sender, OfflinePlayer target, String accountName, AccountPermission permission) {
-        BankingModule bankingModule = OpenMinetopia.getModuleManager().get(BankingModule.class);
+        BankingModule bankingModule = DailyLife.getModuleManager().get(BankingModule.class);
         bankingModule.getAccountByNameAsync(accountName).thenAccept(accountModel -> {
             if (accountModel == null) {
                 ChatUtils.sendMessage(sender, MessageConfiguration.message("banking_account_not_found"));
@@ -54,7 +51,7 @@ public class BankingUsersCommand extends BaseCommand {
     @Syntax("<player> <naam>")
     @CommandCompletion("@players @accountNames")
     public void removeUser(CommandSender sender, OfflinePlayer target, String accountName) {
-        BankingModule bankingModule = OpenMinetopia.getModuleManager().get(BankingModule.class);
+        BankingModule bankingModule = DailyLife.getModuleManager().get(BankingModule.class);
         bankingModule.getAccountByNameAsync(accountName).thenAccept(accountModel -> {
             if (accountModel == null) {
                 ChatUtils.sendMessage(sender, MessageConfiguration.message("banking_account_not_found"));

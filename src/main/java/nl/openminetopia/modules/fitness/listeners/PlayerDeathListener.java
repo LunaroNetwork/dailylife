@@ -1,6 +1,6 @@
 package nl.openminetopia.modules.fitness.listeners;
 
-import nl.openminetopia.OpenMinetopia;
+import nl.openminetopia.DailyLife;
 import nl.openminetopia.api.player.PlayerManager;
 import nl.openminetopia.api.player.objects.MinetopiaPlayer;
 import nl.openminetopia.modules.fitness.FitnessModule;
@@ -15,7 +15,7 @@ public class PlayerDeathListener implements Listener {
 
     @EventHandler
     public void playerDeath(final PlayerDeathEvent event) {
-        FitnessModule fitnessModule = OpenMinetopia.getModuleManager().get(FitnessModule.class);
+        FitnessModule fitnessModule = DailyLife.getModuleManager().get(FitnessModule.class);
         FitnessConfiguration configuration = fitnessModule.getConfiguration();
         if (!configuration.isFitnessDeathPunishmentEnabled()) return;
 

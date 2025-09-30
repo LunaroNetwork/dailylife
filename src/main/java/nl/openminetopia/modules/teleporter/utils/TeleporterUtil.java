@@ -5,7 +5,7 @@ import com.jeff_media.morepersistentdatatypes.DataType;
 import lombok.experimental.UtilityClass;
 import net.kyori.adventure.text.Component;
 import net.kyori.adventure.text.minimessage.MiniMessage;
-import nl.openminetopia.OpenMinetopia;
+import nl.openminetopia.DailyLife;
 import nl.openminetopia.configuration.DefaultConfiguration;
 import nl.openminetopia.modules.teleporter.utils.enums.PressurePlate;
 import nl.openminetopia.utils.PersistentDataUtil;
@@ -61,17 +61,17 @@ public final class TeleporterUtil {
 
     /* Assuming a teleporter check has been done */
     public Location blockLocation(Block block) {
-        PersistentDataContainer data = new CustomBlockData(block, OpenMinetopia.getInstance());
-        return data.get(new NamespacedKey(OpenMinetopia.getInstance(), "teleporter.location"), DataType.LOCATION);
+        PersistentDataContainer data = new CustomBlockData(block, DailyLife.getInstance());
+        return data.get(new NamespacedKey(DailyLife.getInstance(), "teleporter.location"), DataType.LOCATION);
     }
 
     public void setTeleporter(Block block, Location location, boolean addDisplay) {
-        PersistentDataContainer data = new CustomBlockData(block, OpenMinetopia.getInstance());
-        data.set(new NamespacedKey(OpenMinetopia.getInstance(), "teleporter.location"), DataType.LOCATION, location);
+        PersistentDataContainer data = new CustomBlockData(block, DailyLife.getInstance());
+        data.set(new NamespacedKey(DailyLife.getInstance(), "teleporter.location"), DataType.LOCATION, location);
 
         if (!addDisplay) return;
         Entity display = addDisplay(block, location);
-        data.set(new NamespacedKey(OpenMinetopia.getInstance(), "teleporter.entity"), DataType.UUID, display.getUniqueId());
+        data.set(new NamespacedKey(DailyLife.getInstance(), "teleporter.entity"), DataType.UUID, display.getUniqueId());
     }
 
     public Entity addDisplay(Block block, Location location) {
@@ -94,7 +94,7 @@ public final class TeleporterUtil {
     }
 
     private Component displayText(Location location) {
-        DefaultConfiguration configuration = OpenMinetopia.getDefaultConfiguration();
+        DefaultConfiguration configuration = DailyLife.getDefaultConfiguration();
         String text = StringUtils.join(configuration.getTeleporterDisplayLines(), "\n<reset>");
 
         text = text
@@ -106,8 +106,8 @@ public final class TeleporterUtil {
     }
 
     public void removeTeleporter(Block block) {
-        PersistentDataContainer data = new CustomBlockData(block, OpenMinetopia.getInstance());
-        UUID uuid = data.get(new NamespacedKey(OpenMinetopia.getInstance(), "teleporter.entity"), DataType.UUID);
+        PersistentDataContainer data = new CustomBlockData(block, DailyLife.getInstance());
+        UUID uuid = data.get(new NamespacedKey(DailyLife.getInstance(), "teleporter.entity"), DataType.UUID);
         if (uuid == null) return;
 
         Entity entity = Bukkit.getEntity(uuid);
@@ -122,8 +122,8 @@ public final class TeleporterUtil {
     }
 
     public boolean isTeleporterBlock(Block block) {
-        PersistentDataContainer data = new CustomBlockData(block, OpenMinetopia.getInstance());
-        return data.has(new NamespacedKey(OpenMinetopia.getInstance(), "teleporter.location"));
+        PersistentDataContainer data = new CustomBlockData(block, DailyLife.getInstance());
+        return data.has(new NamespacedKey(DailyLife.getInstance(), "teleporter.location"));
     }
 
 }

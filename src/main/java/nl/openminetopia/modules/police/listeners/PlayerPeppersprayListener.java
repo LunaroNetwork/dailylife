@@ -1,6 +1,6 @@
 package nl.openminetopia.modules.police.listeners;
 
-import nl.openminetopia.OpenMinetopia;
+import nl.openminetopia.DailyLife;
 import nl.openminetopia.api.player.PlayerManager;
 import nl.openminetopia.api.player.objects.MinetopiaPlayer;
 import nl.openminetopia.modules.police.utils.PeppersprayUtils;
@@ -28,10 +28,10 @@ public class PlayerPeppersprayListener implements Listener {
 
         ItemStack itemStack = source.getInventory().getItemInMainHand();
 
-        if (OpenMinetopia.getDefaultConfiguration().isPeppersprayUsagesEnabled()) {
+        if (DailyLife.getDefaultConfiguration().isPeppersprayUsagesEnabled()) {
             if (PersistentDataUtil.getInteger(itemStack, "openmt.usages") == null) {
                 ItemStack finalItemStack = PersistentDataUtil.set(itemStack,
-                        OpenMinetopia.getDefaultConfiguration().getPeppersprayMaxUsages(), "openmt.usages");
+                        DailyLife.getDefaultConfiguration().getPeppersprayMaxUsages(), "openmt.usages");
                 source.getInventory().setItemInMainHand(finalItemStack);
             }
 

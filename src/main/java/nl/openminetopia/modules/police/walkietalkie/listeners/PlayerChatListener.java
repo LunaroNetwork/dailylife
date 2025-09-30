@@ -1,7 +1,7 @@
 package nl.openminetopia.modules.police.walkietalkie.listeners;
 
 import io.papermc.paper.event.player.AsyncChatEvent;
-import nl.openminetopia.OpenMinetopia;
+import nl.openminetopia.DailyLife;
 import nl.openminetopia.configuration.MessageConfiguration;
 import nl.openminetopia.modules.police.PoliceModule;
 import nl.openminetopia.utils.ChatUtils;
@@ -10,12 +10,9 @@ import org.bukkit.entity.Player;
 import org.bukkit.event.EventHandler;
 import org.bukkit.event.Listener;
 
-import java.util.ArrayList;
-import java.util.List;
-
 public class PlayerChatListener implements Listener {
 
-    private final PoliceModule policeModule = OpenMinetopia.getModuleManager().get(PoliceModule.class);
+    private final PoliceModule policeModule = DailyLife.getModuleManager().get(PoliceModule.class);
 
     @EventHandler
     public void onChat(final AsyncChatEvent event) {

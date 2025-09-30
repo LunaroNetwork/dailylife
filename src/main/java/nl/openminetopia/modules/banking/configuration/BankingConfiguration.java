@@ -3,7 +3,7 @@ package nl.openminetopia.modules.banking.configuration;
 import io.leangen.geantyref.TypeToken;
 import lombok.Getter;
 import lombok.SneakyThrows;
-import nl.openminetopia.OpenMinetopia;
+import nl.openminetopia.DailyLife;
 import nl.openminetopia.modules.banking.menus.BankContentsMenu;
 import nl.openminetopia.utils.config.ConfigurateConfig;
 import org.bukkit.Material;
@@ -40,7 +40,7 @@ public class BankingConfiguration extends ConfigurateConfig {
         )).forEach(materialString -> {
             Material material = Material.matchMaterial(materialString);
             if (material == null) {
-                OpenMinetopia.getInstance().getLogger().warning("Invalid material in atm-materials: " + materialString);
+                DailyLife.getInstance().getLogger().warning("Invalid material in atm-materials: " + materialString);
                 return;
             }
             this.atmMaterials.add(material);
@@ -84,7 +84,7 @@ public class BankingConfiguration extends ConfigurateConfig {
                     Material material = Material.matchMaterial(entry.getKey());
 
                     if (material == null) {
-                        OpenMinetopia.getInstance().getLogger().warning("No valid material for bank note: " + entry.getKey());
+                        DailyLife.getInstance().getLogger().warning("No valid material for bank note: " + entry.getKey());
                         return;
                     }
 

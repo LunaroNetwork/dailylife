@@ -14,7 +14,7 @@ import com.sk89q.worldguard.protection.managers.RegionManager;
 import com.sk89q.worldguard.protection.regions.ProtectedCuboidRegion;
 import com.sk89q.worldguard.protection.regions.ProtectedRegion;
 import com.sk89q.worldguard.protection.regions.RegionContainer;
-import nl.openminetopia.OpenMinetopia;
+import nl.openminetopia.DailyLife;
 import nl.openminetopia.api.player.PlayerManager;
 import nl.openminetopia.api.player.objects.MinetopiaPlayer;
 import nl.openminetopia.configuration.MessageConfiguration;
@@ -63,7 +63,7 @@ public class PlotCreateCommand extends BaseCommand {
 
             manager.addRegion(wgRegion);
 
-            for (String command : OpenMinetopia.getDefaultConfiguration().getPlotCommandsOnCreate()) {
+            for (String command : DailyLife.getDefaultConfiguration().getPlotCommandsOnCreate()) {
                 Bukkit.dispatchCommand(Bukkit.getConsoleSender(), command
                         .replace("<world>", bukkitWorld.getName())
                         .replace("<plot>", name)

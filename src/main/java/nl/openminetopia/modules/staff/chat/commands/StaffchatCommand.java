@@ -5,7 +5,7 @@ import co.aikar.commands.annotation.CommandAlias;
 import co.aikar.commands.annotation.CommandPermission;
 import co.aikar.commands.annotation.Default;
 import co.aikar.commands.annotation.Optional;
-import nl.openminetopia.OpenMinetopia;
+import nl.openminetopia.DailyLife;
 import nl.openminetopia.api.player.PlayerManager;
 import nl.openminetopia.api.player.objects.MinetopiaPlayer;
 import nl.openminetopia.configuration.MessageConfiguration;
@@ -17,7 +17,7 @@ import org.bukkit.entity.Player;
 @CommandAlias("staffchat|staffc|sc")
 public class StaffchatCommand extends BaseCommand {
 
-    private final PoliceModule policeModule = OpenMinetopia.getModuleManager().get(PoliceModule.class);
+    private final PoliceModule policeModule = DailyLife.getModuleManager().get(PoliceModule.class);
 
     @Default
     @CommandPermission("openminetopia.staffchat")

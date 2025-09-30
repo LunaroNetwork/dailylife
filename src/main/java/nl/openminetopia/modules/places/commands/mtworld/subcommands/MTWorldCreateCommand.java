@@ -4,7 +4,7 @@ import co.aikar.commands.BaseCommand;
 import co.aikar.commands.annotation.CommandAlias;
 import co.aikar.commands.annotation.CommandPermission;
 import co.aikar.commands.annotation.Subcommand;
-import nl.openminetopia.OpenMinetopia;
+import nl.openminetopia.DailyLife;
 import nl.openminetopia.api.player.PlayerManager;
 import nl.openminetopia.api.player.ScoreboardManager;
 import nl.openminetopia.api.player.objects.MinetopiaPlayer;
@@ -21,7 +21,7 @@ public class MTWorldCreateCommand extends BaseCommand {
     public void create(Player player, String loadingName) {
         String title = "<bold>" + loadingName.toUpperCase();
 
-        PlacesModule placesModule = OpenMinetopia.getModuleManager().get(PlacesModule.class);
+        PlacesModule placesModule = DailyLife.getModuleManager().get(PlacesModule.class);
         for (WorldModel worldModel : placesModule.getWorldModels()) {
             if (worldModel.getName().equalsIgnoreCase(player.getWorld().getName())) {
                 player.sendMessage(ChatUtils.color("<red>World <white>" + loadingName + " <red>already exists!"));

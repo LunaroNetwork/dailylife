@@ -1,7 +1,7 @@
 package nl.openminetopia.modules.banking.menus;
 
 import dev.triumphteam.gui.guis.GuiItem;
-import nl.openminetopia.OpenMinetopia;
+import nl.openminetopia.DailyLife;
 import nl.openminetopia.configuration.MessageConfiguration;
 import nl.openminetopia.modules.banking.BankingModule;
 import nl.openminetopia.modules.banking.models.BankAccountModel;
@@ -22,7 +22,7 @@ import java.util.List;
 
 public class BankTransactionsMenu extends PaginatedMenu {
 
-    private final BankingModule bankingModule = OpenMinetopia.getModuleManager().get(BankingModule.class);
+    private final BankingModule bankingModule = DailyLife.getModuleManager().get(BankingModule.class);
     private final SimpleDateFormat format = new SimpleDateFormat("dd-MM-yyyy HH:mm:ss");
     private final BankAccountModel accountModel;
 
@@ -36,7 +36,7 @@ public class BankTransactionsMenu extends PaginatedMenu {
         gui.setItem(13, new GuiItem(new ItemBuilder(Material.IRON_BLOCK).setName("<red>Transacties inladen.").toItemStack()));
         createBackButton();
 
-        TransactionsModule transactionsModule = OpenMinetopia.getModuleManager().get(TransactionsModule.class);
+        TransactionsModule transactionsModule = DailyLife.getModuleManager().get(TransactionsModule.class);
         transactionsModule.getAccountTransactions(TransactionsModule.LookupType.BANK_ACCOUNT, accountModel.getUniqueId()).whenComplete(((transactionModels, throwable) -> {
             if (throwable != null) {
                 player.closeInventory();

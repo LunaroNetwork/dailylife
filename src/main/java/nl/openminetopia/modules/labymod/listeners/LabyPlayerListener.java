@@ -4,7 +4,7 @@ import net.kyori.adventure.text.Component;
 import net.labymod.serverapi.server.bukkit.LabyModPlayer;
 import net.labymod.serverapi.server.bukkit.event.LabyModPlayerJoinEvent;
 import net.labymod.serverapi.api.model.component.ServerAPIComponent;
-import nl.openminetopia.OpenMinetopia;
+import nl.openminetopia.DailyLife;
 import nl.openminetopia.api.player.PlayerManager;
 import nl.openminetopia.modules.banking.BankingModule;
 import nl.openminetopia.modules.banking.models.BankAccountModel;
@@ -29,9 +29,9 @@ public class LabyPlayerListener implements Listener {
 	private final Map<UUID, BukkitTask> playerTasks = new HashMap<>();
 
 	public LabyPlayerListener() {
-		LabymodModule labymodModule = OpenMinetopia.getModuleManager().get(LabymodModule.class);
+		LabymodModule labymodModule = DailyLife.getModuleManager().get(LabymodModule.class);
 		this.configuration = labymodModule.getConfiguration();
-		this.bankingModule = OpenMinetopia.getModuleManager().get(BankingModule.class);
+		this.bankingModule = DailyLife.getModuleManager().get(BankingModule.class);
 	}
 
 	@EventHandler
@@ -48,7 +48,7 @@ public class LabyPlayerListener implements Listener {
 		}
 
 		BukkitTask task = Bukkit.getScheduler().runTaskTimer(
-				OpenMinetopia.getInstance(),
+				DailyLife.getInstance(),
 				() -> {
 
 					if (!player.isOnline()) {

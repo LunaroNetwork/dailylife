@@ -1,6 +1,6 @@
 package nl.openminetopia.modules.misc.listeners;
 
-import nl.openminetopia.OpenMinetopia;
+import nl.openminetopia.DailyLife;
 import nl.openminetopia.api.player.PlayerManager;
 import nl.openminetopia.api.player.objects.MinetopiaPlayer;
 import nl.openminetopia.configuration.MessageConfiguration;
@@ -22,13 +22,13 @@ public class TrashcanListener implements Listener {
         if (block == null) return;
         Player player = event.getPlayer();
 
-        if (!OpenMinetopia.getDefaultConfiguration().getTrashcanBlocks().contains(block.getType())) return;
-        if (!OpenMinetopia.getDefaultConfiguration().isTrashcanEnabled()) return;
+        if (!DailyLife.getDefaultConfiguration().getTrashcanBlocks().contains(block.getType())) return;
+        if (!DailyLife.getDefaultConfiguration().isTrashcanEnabled()) return;
         if (event.getAction() == Action.LEFT_CLICK_BLOCK && player.getGameMode() == GameMode.CREATIVE) return;
 
         event.setCancelled(true);
 
-        if (!OpenMinetopia.getDefaultConfiguration().isTrashcanUseDropperInventory()) new TrashcanMenu().open(event.getPlayer());
+        if (!DailyLife.getDefaultConfiguration().isTrashcanUseDropperInventory()) new TrashcanMenu().open(event.getPlayer());
         else new TrashcanMenu().open(event.getPlayer()); // TODO: Implement dropper inventory once Triumph GUI supports it
 
         MinetopiaPlayer minetopiaPlayer = PlayerManager.getInstance().getOnlineMinetopiaPlayer(player);

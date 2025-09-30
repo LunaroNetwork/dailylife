@@ -3,7 +3,7 @@ package nl.openminetopia.modules.items;
 import nl.openminetopia.utils.modules.ExtendedSpigotModule;
 import com.jazzkuh.modulemanager.spigot.SpigotModuleManager;
 import lombok.Getter;
-import nl.openminetopia.OpenMinetopia;
+import nl.openminetopia.DailyLife;
 import nl.openminetopia.modules.items.commands.ItemsCommand;
 import nl.openminetopia.modules.items.configuration.CategoriesConfiguration;
 import nl.openminetopia.modules.items.configuration.ItemConfiguration;
@@ -20,7 +20,7 @@ import java.util.stream.Stream;
 
 @Getter
 public class ItemsModule extends ExtendedSpigotModule {
-    public ItemsModule(SpigotModuleManager<@NotNull OpenMinetopia> moduleManager) {
+    public ItemsModule(SpigotModuleManager<@NotNull DailyLife> moduleManager) {
         super(moduleManager);
     }
 
@@ -30,7 +30,7 @@ public class ItemsModule extends ExtendedSpigotModule {
     public void onEnable() {
         reload();
 
-        OpenMinetopia.getCommandManager().getCommandCompletions().registerAsyncCompletion("items",
+        DailyLife.getCommandManager().getCommandCompletions().registerAsyncCompletion("items",
                 c -> categoriesConfiguration.getCategories().values().stream()
                         .flatMap(category -> category.items().stream())
                         .map(item -> item.namespacedKey().asString())
@@ -41,14 +41,14 @@ public class ItemsModule extends ExtendedSpigotModule {
     }
 
     public void reload() {
-        Path itemsPath = OpenMinetopia.getInstance().getDataFolder().toPath().resolve("items");
+        Path itemsPath = DailyLife.getInstance().getDataFolder().toPath().resolve("items");
         try {
             if (!Files.exists(itemsPath)) {
                 Files.createDirectories(itemsPath);
                 copyResources("default/items", itemsPath);
             }
         } catch (Exception e) {
-            OpenMinetopia.getInstance().getLogger().warning("Failed to create items folder or copy resources.");
+            DailyLife.getInstance().getLogger().warning("Failed to create items folder or copy resources.");
             e.printStackTrace();
             return;
         }
@@ -63,7 +63,7 @@ public class ItemsModule extends ExtendedSpigotModule {
     }
 
     private void copyResources(String resourcePath, Path destination) throws URISyntaxException, IOException {
-        URI uri = OpenMinetopia.class.getResource("/" + resourcePath).toURI();
+        URI uri = DailyLife.class.getResource("/" + resourcePath).toURI();
         Path myPath;
 
         if (uri.getScheme().equals("jar")) {

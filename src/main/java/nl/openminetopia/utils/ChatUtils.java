@@ -7,10 +7,9 @@ import net.kyori.adventure.text.format.TextColor;
 import net.kyori.adventure.text.format.TextDecoration;
 import net.kyori.adventure.text.minimessage.MiniMessage;
 import net.kyori.adventure.title.Title;
-import nl.openminetopia.OpenMinetopia;
+import nl.openminetopia.DailyLife;
 import nl.openminetopia.api.player.objects.MinetopiaPlayer;
 import nl.openminetopia.modules.banking.BankingModule;
-import nl.openminetopia.modules.banking.models.BankAccountModel;
 import nl.openminetopia.modules.color.enums.OwnableColorType;
 import nl.openminetopia.modules.currencies.CurrencyModule;
 import nl.openminetopia.modules.currencies.models.CurrencyModel;
@@ -19,11 +18,9 @@ import nl.openminetopia.modules.police.utils.BalaclavaUtils;
 import org.bukkit.command.CommandSender;
 import org.bukkit.entity.Player;
 
-import java.text.SimpleDateFormat;
 import java.time.LocalDate;
 import java.time.LocalTime;
 import java.time.format.DateTimeFormatter;
-import java.util.Date;
 
 @UtilityClass
 public class ChatUtils {
@@ -55,7 +52,7 @@ public class ChatUtils {
         Player player = mtp.getBukkit().getPlayer();
         if (player == null) return Component.empty();
 
-        final var modules = OpenMinetopia.getModuleManager();
+        final var modules = DailyLife.getModuleManager();
         final CurrencyModule currencyModule = modules.get(CurrencyModule.class);
         final FitnessModule fitnessModule   = modules.get(FitnessModule.class);
         final BankingModule bankingModule   = modules.get(BankingModule.class);
@@ -135,7 +132,7 @@ public class ChatUtils {
 
 
     private static boolean hasPlaceholderAPI() {
-        return OpenMinetopia.getInstance().getServer().getPluginManager().getPlugin("PlaceholderAPI") != null;
+        return DailyLife.getInstance().getServer().getPluginManager().getPlugin("PlaceholderAPI") != null;
     }
 
     public void sendMessage(Player player, String message) {

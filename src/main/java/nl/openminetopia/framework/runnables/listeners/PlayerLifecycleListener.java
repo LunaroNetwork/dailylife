@@ -1,6 +1,6 @@
 package nl.openminetopia.framework.runnables.listeners;
 
-import nl.openminetopia.OpenMinetopia;
+import nl.openminetopia.DailyLife;
 import nl.openminetopia.framework.runnables.AbstractDirtyRunnable;
 import org.bukkit.Bukkit;
 import org.bukkit.event.EventHandler;
@@ -12,9 +12,9 @@ import java.util.UUID;
 
 public class PlayerLifecycleListener implements Listener {
 
-    private final OpenMinetopia openMinetopia;
+    private final DailyLife openMinetopia;
 
-    public PlayerLifecycleListener(OpenMinetopia plugin) {
+    public PlayerLifecycleListener(DailyLife plugin) {
         this.openMinetopia = plugin;
     }
 

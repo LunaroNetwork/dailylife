@@ -2,7 +2,7 @@ package nl.openminetopia.modules.chat.listeners;
 
 import io.papermc.paper.event.player.AsyncChatEvent;
 import net.kyori.adventure.text.Component;
-import nl.openminetopia.OpenMinetopia;
+import nl.openminetopia.DailyLife;
 import nl.openminetopia.api.player.PlayerManager;
 import nl.openminetopia.api.player.objects.MinetopiaPlayer;
 import nl.openminetopia.configuration.DefaultConfiguration;
@@ -31,7 +31,7 @@ public class PlayerChatListener implements Listener {
 
         if (minetopiaPlayer == null) return;
 
-        DefaultConfiguration configuration = OpenMinetopia.getDefaultConfiguration();
+        DefaultConfiguration configuration = DailyLife.getDefaultConfiguration();
 
         String originalMessage = ChatUtils.rawMiniMessage(event.message());
         SpyUtils.chatSpy(source, originalMessage, new ArrayList<>());
@@ -40,7 +40,7 @@ public class PlayerChatListener implements Listener {
         if (!minetopiaPlayer.isInPlace()) return;
         if (minetopiaPlayer.isStaffchatEnabled()) return;
 
-        PoliceModule policeModule = OpenMinetopia.getModuleManager().get(PoliceModule.class);
+        PoliceModule policeModule = DailyLife.getModuleManager().get(PoliceModule.class);
         if (policeModule.getWalkieTalkieManager().isPoliceChatEnabled(source)) return;
 
         event.setCancelled(true);

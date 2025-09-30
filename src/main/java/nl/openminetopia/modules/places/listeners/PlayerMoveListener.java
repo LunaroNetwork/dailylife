@@ -1,7 +1,7 @@
 package nl.openminetopia.modules.places.listeners;
 
 import net.kyori.adventure.title.Title;
-import nl.openminetopia.OpenMinetopia;
+import nl.openminetopia.DailyLife;
 import nl.openminetopia.api.places.MTPlaceManager;
 import nl.openminetopia.api.places.objects.MTPlace;
 import nl.openminetopia.api.player.PlayerManager;
@@ -18,7 +18,7 @@ public class PlayerMoveListener implements Listener {
 
     @EventHandler
     public void playerMove(PlayerMoveEvent event) {
-        Bukkit.getScheduler().runTaskAsynchronously(OpenMinetopia.getInstance(), () -> {
+        Bukkit.getScheduler().runTaskAsynchronously(DailyLife.getInstance(), () -> {
             Player player = event.getPlayer();
             MinetopiaPlayer minetopiaPlayer = PlayerManager.getInstance().getOnlineMinetopiaPlayer(player);
 

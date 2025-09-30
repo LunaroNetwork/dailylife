@@ -1,6 +1,6 @@
 package nl.openminetopia.modules.detectiongates.listeners;
 
-import nl.openminetopia.OpenMinetopia;
+import nl.openminetopia.DailyLife;
 import nl.openminetopia.configuration.DefaultConfiguration;
 import nl.openminetopia.modules.detectiongates.DetectionModule;
 import org.bukkit.Bukkit;
@@ -28,7 +28,7 @@ public class DetectionListener implements Listener {
         Player player = event.getPlayer();
 
         if (event.getAction() != Action.PHYSICAL) return;
-        DefaultConfiguration configuration = OpenMinetopia.getDefaultConfiguration();
+        DefaultConfiguration configuration = DailyLife.getDefaultConfiguration();
         if(!configuration.isDetectionGateEnabled()) return;
         Block block = event.getClickedBlock();
         if (block == null) return;
@@ -36,7 +36,7 @@ public class DetectionListener implements Listener {
         if (block.getRelative(BlockFace.DOWN).getType() != configuration.getDetectionActivationBlock()) return;
         if (cooldown.contains(block)) return;
 
-        DetectionModule detectionModule = OpenMinetopia.getModuleManager().get(DetectionModule.class);
+        DetectionModule detectionModule = DailyLife.getModuleManager().get(DetectionModule.class);
         List<ItemStack> flaggedItems = detectionModule.getFlaggedItems(player);
 
         Map<Material, Material> replacementBlocks = (flaggedItems.isEmpty() ? configuration.getDetectionSafeBlocks() : configuration.getDetectionFlaggedBlocks());
@@ -52,7 +52,7 @@ public class DetectionListener implements Listener {
             }
         }
 
-        Bukkit.getScheduler().runTaskLater(OpenMinetopia.getInstance(), () -> {
+        Bukkit.getScheduler().runTaskLater(DailyLife.getInstance(), () -> {
             detectionModule.getBlocks().forEach((location, material) -> {
                 if (location.getBlock().getType().isAir()) return;
                 location.getBlock().setType(material);

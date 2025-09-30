@@ -5,10 +5,9 @@ import co.aikar.commands.annotation.CommandAlias;
 import co.aikar.commands.annotation.CommandCompletion;
 import co.aikar.commands.annotation.CommandPermission;
 import co.aikar.commands.annotation.Subcommand;
-import nl.openminetopia.OpenMinetopia;
+import nl.openminetopia.DailyLife;
 import nl.openminetopia.configuration.MessageConfiguration;
 import nl.openminetopia.modules.banking.BankingModule;
-import nl.openminetopia.modules.banking.models.BankAccountModel;
 import nl.openminetopia.modules.transactions.TransactionsModule;
 import nl.openminetopia.modules.transactions.enums.TransactionType;
 import nl.openminetopia.modules.transactions.events.TransactionUpdateEvent;
@@ -26,7 +25,7 @@ public class BankingBalanceCommand extends BaseCommand {
     @CommandCompletion("@accountNames")
     @CommandPermission("openminetopia.banking.setbalance")
     public void setBalance(CommandSender sender, String accountName, double balance) {
-        BankingModule bankingModule = OpenMinetopia.getModuleManager().get(BankingModule.class);
+        BankingModule bankingModule = DailyLife.getModuleManager().get(BankingModule.class);
         bankingModule.getAccountByNameAsync(accountName).whenComplete((accountModel, throwable) -> {
             if (accountModel == null) {
                 sender.sendMessage(MessageConfiguration.component("banking_account_not_found"));
@@ -45,7 +44,7 @@ public class BankingBalanceCommand extends BaseCommand {
             accountModel.setBalance(balance); 
             accountModel.save();
 
-            TransactionsModule transactionsModule = OpenMinetopia.getModuleManager().get(TransactionsModule.class);
+            TransactionsModule transactionsModule = DailyLife.getModuleManager().get(TransactionsModule.class);
             transactionsModule.createTransactionLog(System.currentTimeMillis(), executorUuid, username, TransactionType.SET, balance, accountModel.getUniqueId(), "Set via '/account setbalance'");
 
             sender.sendMessage(ChatUtils.color("<gold>De balans van <red>" + accountModel.getName() + " <gold>is nu ingesteld op <red>" + bankingModule.format(balance) + "<gold>."));

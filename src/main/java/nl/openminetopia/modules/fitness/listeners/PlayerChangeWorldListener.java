@@ -1,6 +1,6 @@
 package nl.openminetopia.modules.fitness.listeners;
 
-import nl.openminetopia.OpenMinetopia;
+import nl.openminetopia.DailyLife;
 import nl.openminetopia.api.player.PlayerManager;
 import nl.openminetopia.api.player.objects.MinetopiaPlayer;
 import nl.openminetopia.modules.places.PlacesModule;
@@ -12,7 +12,7 @@ public class PlayerChangeWorldListener implements Listener {
 
     @EventHandler
     public void worldChange(final PlayerChangedWorldEvent event) {
-        PlacesModule placesModule = OpenMinetopia.getModuleManager().get(PlacesModule.class);
+        PlacesModule placesModule = DailyLife.getModuleManager().get(PlacesModule.class);
         if (placesModule.getWorld(event.getFrom().getSpawnLocation()) != null) return;
         MinetopiaPlayer minetopiaPlayer = PlayerManager.getInstance().getOnlineMinetopiaPlayer(event.getPlayer());
         if (minetopiaPlayer == null) return;

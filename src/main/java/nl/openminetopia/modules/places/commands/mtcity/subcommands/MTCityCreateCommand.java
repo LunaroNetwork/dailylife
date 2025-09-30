@@ -5,7 +5,7 @@ import co.aikar.commands.annotation.CommandAlias;
 import co.aikar.commands.annotation.CommandPermission;
 import co.aikar.commands.annotation.Subcommand;
 import com.sk89q.worldguard.protection.regions.ProtectedRegion;
-import nl.openminetopia.OpenMinetopia;
+import nl.openminetopia.DailyLife;
 import nl.openminetopia.api.player.PlayerManager;
 import nl.openminetopia.modules.places.PlacesModule;
 import nl.openminetopia.modules.places.models.CityModel;
@@ -21,7 +21,7 @@ public class MTCityCreateCommand extends BaseCommand {
     @CommandPermission("openminetopia.city.create")
     public void create(Player player, String name, String loadingName) {
 
-        PlacesModule placesModule = OpenMinetopia.getModuleManager().get(PlacesModule.class);
+        PlacesModule placesModule = DailyLife.getModuleManager().get(PlacesModule.class);
 
         PlayerManager.getInstance().getMinetopiaPlayer(player).whenComplete((minetopiaPlayer, throwable) -> {
             if (minetopiaPlayer == null) return;

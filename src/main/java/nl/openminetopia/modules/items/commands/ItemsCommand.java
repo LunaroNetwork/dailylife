@@ -2,7 +2,7 @@ package nl.openminetopia.modules.items.commands;
 
 import co.aikar.commands.BaseCommand;
 import co.aikar.commands.annotation.*;
-import nl.openminetopia.OpenMinetopia;
+import nl.openminetopia.DailyLife;
 import nl.openminetopia.modules.items.ItemsModule;
 import nl.openminetopia.modules.items.configuration.objects.CustomItem;
 import nl.openminetopia.modules.items.configuration.objects.ItemCategory;
@@ -26,7 +26,7 @@ public class ItemsCommand extends BaseCommand {
     @CommandPermission("openminetopia.items.get")
     @CommandCompletion("@items")
     public void getCommand(Player player, String identifier) {
-        ItemsModule module = OpenMinetopia.getModuleManager().get(ItemsModule.class);
+        ItemsModule module = DailyLife.getModuleManager().get(ItemsModule.class);
 
         String[] namespacedKey = identifier.split(":");
         if (namespacedKey.length != 2) {
