@@ -281,7 +281,7 @@ public class DefaultConfiguration extends ConfigurateConfig {
         this.scoreboardEnabled = rootNode.node("scoreboard", "enabled").getBoolean(true);
         this.scoreboardLines = rootNode.node("scoreboard", "lines").getList(String.class, List.of(
                 "<bold><world_title>",
-                "<city_color><city_title>",
+                "<city_color><city_loadingname>",
                 " ",
                 "<city_color>Datum/Tijd:",
                 "<data> / <time>",
