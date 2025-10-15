@@ -132,4 +132,79 @@ colors:
     display_name: "<bold><#000033>Near-Black Blue (Bold)"
     color_prefix: "<bold><#000033>"
 
-# TODO: Aanvullen met kleuren
+  success_green:
+    display_name: "<#22A559> Success Green"
+    color_prefix: "<#22A559>"
+  success_green_bold:
+    display_name: "<bold><#22A559> Success Green (Bold)"
+    color_prefix: "<bold><#22A559>"
+
+  minty:
+    display_name: "<#98FB98>Minty"
+    color_prefix: "<#98FB98>"
+  minty_bold:
+    display_name: "<bold><#98FB98>Minty (Bold)"
+    color_prefix: "<bold><#98FB98>"
+
+  slimeball:
+    display_name: "<#7FFF00>Slimeball"
+    color_prefix: "<#7FFF00>"
+  slimeball_bold:
+    display_name: "<bold><#7FFF00>Slimeball (Bold)"
+    color_prefix: "<bold><#7FFF00>"
+
+  glowstick:
+    display_name: "<#ADFF2F>Glowstick"
+    color_prefix: "<#ADFF2F>"
+  glowstick_bold:
+    display_name: "<bold><#ADFF2F>Glowstick (Bold)"
+    color_prefix: "<bold><#ADFF2F>"
+
+  neon_lime:
+    display_name: "<#00FF7F>Neon Lime"
+    color_prefix: "<#00FF7F>"
+  neon_lime_bold:
+    display_name: "<bold><#00FF7F>Neon Lime (Bold)"
+    color_prefix: "<bold><#00FF7F>"
+
+  yoshi:
+    display_name: "<#32CD32>Yoshi"
+    color_prefix: "<#32CD32>"
+  yoshi_bold:
+    display_name: "<bold><#32CD32>Yoshi (Bold)"
+    color_prefix: "<bold><#32CD32>"
+
+  hulk:
+    display_name: "<#228B22>Hulk"
+    color_prefix: "<#228B22>"
+  hulk_bold:
+    display_name: "<bold><#228B22>Hulk (Bold)"
+    color_prefix: "<bold><#228B22>"
+
+  forest:
+    display_name: "<#98FB98>Forest"
+    color_prefix: "<#98FB98>"
+  forest_bold:
+    display_name: "<bold><#006400>Forest (Bold)"
+    color_prefix: "<bold><#006400>"
+
+  jungle:
+    display_name: "<#006B3C>Jungle"
+    color_prefix: "<#006B3C>"
+  jungle_bold:
+    display_name: "<bold><#006B3C>Jungle (Bold)"
+    color_prefix: "<bold><#006B3C>"
+
+  swampy:
+    display_name: "<#004225>Swampy"
+    color_prefix: "<#004225>"
+  swampy_bold:
+    display_name: "<bold><#004225>Swampy (Bold)"
+    color_prefix: "<bold><#004225>"
+
+  night_moss:
+    display_name: "<#013220>Night Moss"
+    color_prefix: "<#013220>"
+  night_moss_bold:
+    display_name: "<bold><#013220>Night Moss (Bold)"
+    color_prefix: "<bold><#013220>"
