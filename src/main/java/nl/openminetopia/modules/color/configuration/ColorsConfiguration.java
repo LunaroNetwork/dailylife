@@ -29,6 +29,7 @@ public class ColorsConfiguration extends ConfigurateConfig {
 
             components.put(identifier, new ColorComponent(identifier, displayName, colorPrefix));
         });
+        System.out.println(components);
     }
 
     public void createColor(String identifier, String displayName, String colorPrefix) {

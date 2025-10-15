@@ -3,7 +3,7 @@ version: '1.0.0'
 main: nl.openminetopia.DailyLife
 api-version: '1.21'
 loader: nl.openminetopia.DailyLifeLoader
-authors: [ '_GamingSkill' ]
+authors: [ '_GamingSkill_' ]
 dependencies:
   server:
     PlaceholderAPI:

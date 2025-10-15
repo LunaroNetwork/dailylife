@@ -1,6 +1,0 @@
-namespace: machines
-items:
-  juwelen_machine:
-    material: PAPER
-    item_model: minecraft:custom/machines/juwelen_machine
-    name: Juwelen Machine

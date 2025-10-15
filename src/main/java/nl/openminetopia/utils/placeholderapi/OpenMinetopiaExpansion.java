@@ -6,6 +6,7 @@ import nl.openminetopia.api.player.PlayerManager;
 import nl.openminetopia.api.player.objects.MinetopiaPlayer;
 import nl.openminetopia.modules.banking.BankingModule;
 import nl.openminetopia.modules.banking.models.BankAccountModel;
+import nl.openminetopia.modules.color.ColorModule;
 import nl.openminetopia.modules.color.enums.OwnableColorType;
 import nl.openminetopia.modules.currencies.CurrencyModule;
 import nl.openminetopia.modules.currencies.models.CurrencyModel;
@@ -71,7 +72,7 @@ public class OpenMinetopiaExpansion extends PlaceholderExpansion {
             case "city_color" -> minetopiaPlayer.getPlace().getColor();
             case "world_color" -> minetopiaPlayer.getWorld().getColor();
             case "prefix_color" -> minetopiaPlayer.getActiveColor(OwnableColorType.PREFIX).color();
-            case "name_color" -> minetopiaPlayer.getActiveColor(OwnableColorType.NAME).color();
+            case "name_color" -> DailyLife.getModuleManager().get(ColorModule.class).getConfiguration().color(minetopiaPlayer.getHometown().getColorId()).colorPrefix();
             case "chat_color" -> minetopiaPlayer.getActiveColor(OwnableColorType.CHAT).color();
             case "level_color" -> minetopiaPlayer.getActiveColor(OwnableColorType.LEVEL).color();
             case "balance", "balance_formatted" -> {

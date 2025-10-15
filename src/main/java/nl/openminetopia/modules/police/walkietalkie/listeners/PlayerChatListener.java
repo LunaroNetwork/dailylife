@@ -2,7 +2,7 @@ package nl.openminetopia.modules.police.walkietalkie.listeners;
 
 import io.papermc.paper.event.player.AsyncChatEvent;
 import nl.openminetopia.DailyLife;
-import nl.openminetopia.configuration.MessageConfiguration;
+import nl.openminetopia.configuration.language.MessageConfiguration;
 import nl.openminetopia.modules.police.PoliceModule;
 import nl.openminetopia.utils.ChatUtils;
 import org.bukkit.Bukkit;

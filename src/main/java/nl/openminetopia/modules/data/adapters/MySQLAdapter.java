@@ -15,6 +15,8 @@ import nl.openminetopia.modules.banking.models.BankAccountModel;
 import nl.openminetopia.modules.banking.models.BankPermissionModel;
 import nl.openminetopia.modules.color.enums.OwnableColorType;
 import nl.openminetopia.modules.color.models.ColorModel;
+import nl.openminetopia.modules.color.models.HometownModel;
+import nl.openminetopia.modules.color.objects.Hometown;
 import nl.openminetopia.modules.currencies.models.CurrencyModel;
 import nl.openminetopia.modules.data.storm.StormDatabase;
 import nl.openminetopia.modules.data.storm.adapters.*;
@@ -67,7 +69,9 @@ public class MySQLAdapter implements DatabaseAdapter {
         TypeRegistry.registerAdapter(Boolean.class, new FixedBooleanAdapter());
         TypeRegistry.registerAdapter(TransactionType.class, new TransactionTypeAdapter());
         TypeRegistry.registerAdapter(Long.class, new LongTypeAdapter());
+        TypeRegistry.registerAdapter(Hometown.class, new HometownAdapter());
 
+        registerStormModel(new HometownModel());
         registerStormModel(new BankAccountModel());
         registerStormModel(new BankPermissionModel());
         registerStormModel(new PlayerModel());

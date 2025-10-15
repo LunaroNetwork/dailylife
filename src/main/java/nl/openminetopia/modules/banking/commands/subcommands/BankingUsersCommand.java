@@ -3,7 +3,7 @@ package nl.openminetopia.modules.banking.commands.subcommands;
 import co.aikar.commands.BaseCommand;
 import co.aikar.commands.annotation.*;
 import nl.openminetopia.DailyLife;
-import nl.openminetopia.configuration.MessageConfiguration;
+import nl.openminetopia.configuration.language.MessageConfiguration;
 import nl.openminetopia.modules.banking.BankingModule;
 import nl.openminetopia.modules.banking.enums.AccountPermission;
 import nl.openminetopia.utils.ChatUtils;

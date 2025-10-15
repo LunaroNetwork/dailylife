@@ -29,3 +29,9 @@ pvp:
         type: ARROW
       attacker-message: "<red>Je hebt <dark_red><victim> <red>geraakt met jouw schot"
       victim-message: "<red>Je bent geraakt met een schot!"
+
+message-colors:
+  primary: "#e2c044"
+  value: "#ffffff"
+  success: "#22A559"
+  error: "#D32F2F"

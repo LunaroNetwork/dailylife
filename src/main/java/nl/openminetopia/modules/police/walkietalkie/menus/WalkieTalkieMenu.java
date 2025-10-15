@@ -3,7 +3,7 @@ package nl.openminetopia.modules.police.walkietalkie.menus;
 import dev.triumphteam.gui.guis.GuiItem;
 import nl.openminetopia.DailyLife;
 import nl.openminetopia.configuration.DefaultConfiguration;
-import nl.openminetopia.configuration.MessageConfiguration;
+import nl.openminetopia.configuration.language.MessageConfiguration;
 import nl.openminetopia.modules.police.PoliceModule;
 import nl.openminetopia.utils.ChatUtils;
 import nl.openminetopia.utils.item.ItemBuilder;

@@ -105,7 +105,6 @@ public class PlayerModule extends ExtendedSpigotModule {
                 createdModel.setActivePrefixId(-1);
                 createdModel.setActivePrefixColorId(-1);
                 createdModel.setActiveChatColorId(-1);
-                createdModel.setActiveNameColorId(-1);
                 createdModel.setActiveLevelColorId(-1);
                 createdModel.setStaffchatEnabled(false);
                 createdModel.setCommandSpyEnabled(false);

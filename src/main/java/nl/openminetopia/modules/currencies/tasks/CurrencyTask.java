@@ -4,7 +4,7 @@ package nl.openminetopia.modules.currencies.tasks;
 import nl.openminetopia.DailyLife;
 import nl.openminetopia.api.player.PlayerManager;
 import nl.openminetopia.api.player.objects.MinetopiaPlayer;
-import nl.openminetopia.configuration.MessageConfiguration;
+import nl.openminetopia.configuration.language.MessageConfiguration;
 import nl.openminetopia.framework.runnables.AbstractDirtyRunnable;
 import nl.openminetopia.modules.currencies.CurrencyModule;
 import nl.openminetopia.modules.currencies.models.CurrencyModel;

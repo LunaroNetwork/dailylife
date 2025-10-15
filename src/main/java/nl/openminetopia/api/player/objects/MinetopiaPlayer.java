@@ -10,6 +10,7 @@ import nl.openminetopia.api.player.fitness.Fitness;
 import nl.openminetopia.configuration.DefaultConfiguration;
 import nl.openminetopia.modules.color.ColorModule;
 import nl.openminetopia.modules.color.enums.OwnableColorType;
+import nl.openminetopia.modules.color.models.HometownModel;
 import nl.openminetopia.modules.color.objects.*;
 import nl.openminetopia.modules.data.storm.StormDatabase;
 import nl.openminetopia.modules.fitness.FitnessModule;
@@ -57,9 +58,10 @@ public class MinetopiaPlayer {
 
     private List<OwnableColor> colors;
     private PrefixColor activePrefixColor;
-    private NameColor activeNameColor;
     private ChatColor activeChatColor;
     private LevelColor activeLevelColor;
+
+    private Hometown hometown;
 
     private @Setter Fitness fitness;
 
@@ -98,14 +100,14 @@ public class MinetopiaPlayer {
         this.activeChatColor = (ChatColor) colorModule.getActiveColorFromPlayer(this.playerModel, OwnableColorType.CHAT)
                 .orElse(OwnableColorType.CHAT.defaultColor());
 
-        this.activeNameColor = (NameColor) colorModule.getActiveColorFromPlayer(this.playerModel, OwnableColorType.NAME)
-                .orElse(OwnableColorType.NAME.defaultColor());
-
         this.activePrefixColor = (PrefixColor) colorModule.getActiveColorFromPlayer(this.playerModel, OwnableColorType.PREFIX)
                 .orElse(OwnableColorType.PREFIX.defaultColor());
 
         this.activeLevelColor = (LevelColor) colorModule.getActiveColorFromPlayer(this.playerModel, OwnableColorType.LEVEL)
                 .orElse(OwnableColorType.LEVEL.defaultColor());
+        this.hometown = colorModule.getHometownFromPlayer(this.playerModel)
+                .map(model -> new Hometown(model.getName(), model.getColorId()) {})
+                .orElse(null);
 
         this.prefixes = prefixModule.getPrefixesFromPlayer(this.playerModel);
         this.activePrefix = prefixModule.getActivePrefixFromPlayer(playerModel)
@@ -246,7 +248,6 @@ public class MinetopiaPlayer {
 
             switch (color.getType()) {
                 case PREFIX -> colors.add(new PrefixColor(id, color.getColorId(), color.getExpiresAt()));
-                case NAME -> colors.add(new NameColor(id, color.getColorId(), color.getExpiresAt()));
                 case CHAT -> colors.add(new ChatColor(id, color.getColorId(), color.getExpiresAt()));
                 case LEVEL -> colors.add(new LevelColor(id, color.getColorId(), color.getExpiresAt()));
             }
@@ -268,10 +269,6 @@ public class MinetopiaPlayer {
                 this.activePrefixColor = (PrefixColor) color;
                 this.playerModel.setActivePrefixColorId(color.getId());
                 break;
-            case NAME:
-                this.activeNameColor = (NameColor) color;
-                this.playerModel.setActiveNameColorId(color.getId());
-                break;
             case CHAT:
                 this.activeChatColor = (ChatColor) color;
                 this.playerModel.setActiveChatColorId(color.getId());
@@ -286,7 +283,6 @@ public class MinetopiaPlayer {
     public OwnableColor getActiveColor(OwnableColorType type) {
         OwnableColor color = switch (type) {
             case PREFIX -> this.activePrefixColor;
-            case NAME -> this.activeNameColor;
             case CHAT -> this.activeChatColor;
             case LEVEL -> this.activeLevelColor;
         };
@@ -304,6 +300,22 @@ public class MinetopiaPlayer {
         }
         return color;
     }
+
+    public void setHometown(Hometown hometown) {
+        this.hometown = hometown;
+        this.playerModel.setHometown(hometown);
+        StormDatabase.getInstance().saveStormModel(this.playerModel);
+    }
+
+    public Hometown getHometown() {
+        if (this.hometown != null) {
+            return this.hometown;
+        }
+
+        // Default hometown (virtual, niet opgeslagen)
+        return new Hometown("Default", DailyLife.getDefaultConfiguration().getDefaultNameColor()) {};
+    }
+
 
     /* ---------- Criminal record ---------- */
 
@@ -339,5 +351,14 @@ public class MinetopiaPlayer {
         long since = sinceStart();
         this.startTime = System.currentTimeMillis();
         return since;
+    }
+
+    public void setLastSeen(long timestamp) {
+        this.playerModel.setLastSeen(timestamp);
+        StormDatabase.getInstance().saveStormModel(this.playerModel);
+    }
+
+    public long getLastSeen() {
+        return this.playerModel.getLastSeen() != null ? this.playerModel.getLastSeen() : 0L;
     }
 }

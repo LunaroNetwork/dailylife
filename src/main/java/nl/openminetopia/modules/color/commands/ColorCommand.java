@@ -3,6 +3,7 @@ package nl.openminetopia.modules.color.commands;
 import co.aikar.commands.BaseCommand;
 import co.aikar.commands.CommandHelp;
 import co.aikar.commands.annotation.CommandAlias;
+import co.aikar.commands.annotation.CommandPermission;
 import co.aikar.commands.annotation.Default;
 import co.aikar.commands.annotation.HelpCommand;
 import nl.openminetopia.api.player.PlayerManager;
@@ -40,14 +41,6 @@ public class ColorCommand extends BaseCommand {
         MinetopiaPlayer minetopiaPlayer = PlayerManager.getInstance().getOnlineMinetopiaPlayer(player);
         if (minetopiaPlayer == null) return;
         new ColorSelectMenu(player, player, minetopiaPlayer, OwnableColorType.CHAT).open(player);
-    }
-
-    @CommandAlias("namecolor|naamkleur")
-    public void onNameColor(Player player) {
-        MinetopiaPlayer minetopiaPlayer = PlayerManager.getInstance().getOnlineMinetopiaPlayer(player);
-        if (minetopiaPlayer == null) return;
-        new ColorSelectMenu(player, player, minetopiaPlayer, OwnableColorType.NAME).open(player);
-
     }
 
     @CommandAlias("levelcolor|levelkleur")

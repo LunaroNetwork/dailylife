@@ -4,7 +4,7 @@ import co.aikar.commands.BaseCommand;
 import co.aikar.commands.annotation.*;
 import nl.openminetopia.DailyLife;
 import nl.openminetopia.api.player.PlayerManager;
-import nl.openminetopia.configuration.MessageConfiguration;
+import nl.openminetopia.configuration.language.MessageConfiguration;
 import nl.openminetopia.modules.banking.BankingModule;
 import nl.openminetopia.modules.banking.models.BankAccountModel;
 import nl.openminetopia.utils.ChatUtils;

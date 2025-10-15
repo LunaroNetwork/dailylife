@@ -1,7 +1,9 @@
 package nl.openminetopia.modules.player.utils;
 
 import lombok.experimental.UtilityClass;
-import nl.openminetopia.configuration.MessageConfiguration;
+import nl.openminetopia.DailyLife;
+import nl.openminetopia.configuration.language.MessageConfiguration;
+import org.bukkit.OfflinePlayer;
 
 import java.util.concurrent.TimeUnit;
 
@@ -22,6 +24,18 @@ public class PlaytimeUtil {
 
     public static long days(long time) {
         return TimeUnit.MILLISECONDS.toDays(time);
+    }
+
+    public static String formatPlaytime(long playtimeInSeconds, OfflinePlayer player) {
+        long days = days(playtimeInSeconds);
+        long hours = hours(playtimeInSeconds);
+        long minutes = minutes(playtimeInSeconds);
+        long seconds = seconds(playtimeInSeconds);
+        return DailyLife.getMessageConfiguration().message("player_time_format", player)
+                .replace("<days>", days + "")
+                .replace("<hours>", hours + "")
+                .replace("<minutes>", minutes + "")
+                .replace("<seconds>", seconds + "");
     }
 
     public static String formatPlaytime(long playtimeInSeconds) {

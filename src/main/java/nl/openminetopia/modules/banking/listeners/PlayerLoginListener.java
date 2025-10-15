@@ -1,7 +1,7 @@
 package nl.openminetopia.modules.banking.listeners;
 
 import nl.openminetopia.DailyLife;
-import nl.openminetopia.configuration.MessageConfiguration;
+import nl.openminetopia.configuration.language.MessageConfiguration;
 import nl.openminetopia.modules.banking.BankingModule;
 import nl.openminetopia.modules.banking.enums.AccountPermission;
 import nl.openminetopia.modules.banking.enums.AccountType;

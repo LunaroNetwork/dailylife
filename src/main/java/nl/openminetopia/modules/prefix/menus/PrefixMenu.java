@@ -3,7 +3,7 @@ package nl.openminetopia.modules.prefix.menus;
 import dev.triumphteam.gui.guis.GuiItem;
 import nl.openminetopia.DailyLife;
 import nl.openminetopia.api.player.objects.MinetopiaPlayer;
-import nl.openminetopia.configuration.MessageConfiguration;
+import nl.openminetopia.configuration.language.MessageConfiguration;
 import nl.openminetopia.modules.prefix.events.PlayerChangePrefixEvent;
 import nl.openminetopia.modules.prefix.objects.Prefix;
 import nl.openminetopia.utils.ChatUtils;
@@ -20,7 +20,7 @@ import java.util.List;
 public class PrefixMenu extends PaginatedMenu {
 
     public PrefixMenu(Player player, OfflinePlayer offlinePlayer, MinetopiaPlayer minetopiaPlayer) {
-        super("<black>Kies een prefix", 2, 9);
+        super(DailyLife.getMessageConfiguration().message("prefix_menu_title", player), 2, 9);
         gui.disableAllInteractions();
 
         if (minetopiaPlayer == null) return;
@@ -39,7 +39,7 @@ public class PrefixMenu extends PaginatedMenu {
         GuiItem selectedPrefixItem = new GuiItem(new ItemBuilder(Material.NAME_TAG)
                 .setName("<white>" + minetopiaPlayer.getActivePrefix().getPrefix())
                 .addLoreLine("")
-                .addLoreLine("<gold>Je hebt deze prefix geselecteerd.")
+                .addLoreLine(DailyLife.getMessageConfiguration().message("prefix_menu_lore_selected", player))
                 .setGlowing(true)
                 .toItemStack(),
                 event -> event.setCancelled(true));
@@ -49,14 +49,14 @@ public class PrefixMenu extends PaginatedMenu {
             var builder = new ItemBuilder(Material.PAPER)
                     .setName("<white>" + prefix.getPrefix())
                     .addLoreLine("")
-                    .addLoreLine("<gold>Klik <yellow>hier <gold>om deze prefix te selecteren.")
+                    .addLoreLine(DailyLife.getMessageConfiguration().message("prefix_menu_lore_select", player))
                     .addLoreLine("");
 
             if (prefix.getExpiresAt() != -1 && prefix.getExpiresAt() - System.currentTimeMillis() < -1)
-                builder.addLoreLine("<red>Deze prefix is vervallen.");
+                builder.addLoreLine(DailyLife.getMessageConfiguration().message("prefix_menu_lore_expired", player));
             if (prefix.getExpiresAt() != -1 && prefix.getExpiresAt() - System.currentTimeMillis() > -1)
-                builder.addLoreLine("<gold>Deze prefix vervalt over <yellow>" + millisToTime(prefix.getExpiresAt() - System.currentTimeMillis()) + "<gold>.");
-            if (prefix.getExpiresAt() == -1) builder.addLoreLine("<gold>Deze prefix vervalt <yellow>nooit<gold>.");
+                builder.addLoreLine(DailyLife.getMessageConfiguration().message("prefix_menu_lore_expire_time", player).replace("<expire>", millisToTime(prefix.getExpiresAt() - System.currentTimeMillis(), player)));
+            if (prefix.getExpiresAt() == -1) builder.addLoreLine(DailyLife.getMessageConfiguration().message("prefix_menu_lore_expire_never", player));
 
             GuiItem prefixItem = new GuiItem(builder.toItemStack(),
                     event -> {
@@ -68,14 +68,14 @@ public class PrefixMenu extends PaginatedMenu {
                         if (EventUtils.callCancellable(changePrefixEvent)) return;
 
                         minetopiaPlayer.setActivePrefix(toSet);
-                        player.sendMessage(ChatUtils.format(minetopiaPlayer, "<gold>Je hebt de prefix <yellow>" + prefix.getPrefix() + " <gold>geselecteerd."));
+                        player.sendMessage(ChatUtils.format(minetopiaPlayer, DailyLife.getMessageConfiguration().message("prefix_menu_selected", player).replace("<selected>", prefix.getPrefix())));
                         new PrefixMenu(player, offlinePlayer, minetopiaPlayer).open(player);
                     });
             gui.addItem(prefixItem);
         }
     }
 
-    private String millisToTime(long millis) {
+    private String millisToTime(long millis, OfflinePlayer player) {
         long totalSeconds = millis / 1000;
         long totalMinutes = totalSeconds / 60;
         long totalHours = totalMinutes / 60;
@@ -85,7 +85,7 @@ public class PrefixMenu extends PaginatedMenu {
         long minutes = totalMinutes % 60;
         long seconds = totalSeconds % 60;
 
-        return MessageConfiguration.message("time_format")
+        return DailyLife.getMessageConfiguration().message("time_format", player)
                 .replace("<days>", String.valueOf(days))
                 .replace("<hours>", String.valueOf(hours))
                 .replace("<minutes>", String.valueOf(minutes))

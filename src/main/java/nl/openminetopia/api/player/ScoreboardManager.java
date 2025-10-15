@@ -1,6 +1,8 @@
 package nl.openminetopia.api.player;
 
 import lombok.Getter;
+import net.kyori.adventure.text.Component;
+import net.kyori.adventure.text.TextComponent;
 import net.megavex.scoreboardlibrary.api.ScoreboardLibrary;
 import net.megavex.scoreboardlibrary.api.sidebar.Sidebar;
 import nl.openminetopia.DailyLife;
@@ -47,6 +49,17 @@ public class ScoreboardManager {
         for (int i = 0; i < size; i++) {
             String line = lines.get(i);
             if (i == 0) {
+                Component formatted = ChatUtils.format(minetopiaPlayer, line);
+                if (formatted instanceof TextComponent textComponent) {
+                    String upper = textComponent.content().toUpperCase();
+                    Component upperComponent = textComponent.content(upper)
+                            .style(textComponent.style())
+                            .append(textComponent.children());
+
+                    sidebar.title(upperComponent);
+                } else {
+                    sidebar.title(formatted); // fallback
+                }
                 sidebar.title(ChatUtils.format(minetopiaPlayer, line));
             } else {
                 sidebar.line(i - 1, ChatUtils.format(minetopiaPlayer, line));

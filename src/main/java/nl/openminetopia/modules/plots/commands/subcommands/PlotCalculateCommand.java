@@ -14,7 +14,7 @@ import net.objecthunter.exp4j.ExpressionBuilder;
 import nl.openminetopia.DailyLife;
 import nl.openminetopia.api.player.PlayerManager;
 import nl.openminetopia.api.player.objects.MinetopiaPlayer;
-import nl.openminetopia.configuration.MessageConfiguration;
+import nl.openminetopia.configuration.language.MessageConfiguration;
 import nl.openminetopia.modules.plots.PlotModule;
 import nl.openminetopia.modules.plots.configuration.PlotCalculateConfiguration;
 import nl.openminetopia.modules.plots.utils.PlotUtil;

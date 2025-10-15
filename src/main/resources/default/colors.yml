@@ -1,119 +1,135 @@
 colors:
-  black:
-    display_name: "<black>Zwart"
-    color_prefix: "<black>"
-  black_bold:
-    display_name: "<bold><black>Zwart (Bold)"
-    color_prefix: "<bold><black>"
+  error_red:
+    display_name: "<#D32F2F>Error Red"
+    color_prefix: "<#D32F2F>"
+  error_red_bold:
+    display_name: "<bold><#D32F2F>Error Red (Bold)"
+    color_prefix: "<bold><#D32F2F>"
 
-  dark_blue:
-    display_name: "<dark_blue>Donker Blauw"
-    color_prefix: "<dark_blue>"
-  dark_blue_bold:
-    display_name: "<bold><dark_blue>Donker Blauw (Bold)"
-    color_prefix: "<bold><dark_blue>"
+  blossom_red:
+    display_name: "<#CD5C5C>Blossom Red"
+    color_prefix: "<#CD5C5C>"
+  blossom_red_bold:
+    display_name: "<bold><#CD5C5C>Blossom Red (Bold)"
+    color_prefix: "<bold><#CD5C5C>"
 
-  dark_green:
-    display_name: "<dark_green>Donker Groen"
-    color_prefix: "<dark_green>"
-  dark_green_bold:
-    display_name: "<bold><dark_green>Donker Groen (Bold)"
-    color_prefix: "<bold><dark_green>"
+  dramaqueen:
+    display_name: "<#DC143C>Dramaqueen"
+    color_prefix: "<#DC143C>"
+  dramaqueen_bold:
+    display_name: "<bold><#DC143C>Dramaqueen (Bold)"
+    color_prefix: "<bold><#DC143C>"
 
-  dark_aqua:
-    display_name: "<dark_aqua>Donker Aqua"
-    color_prefix: "<dark_aqua>"
-  dark_aqua_bold:
-    display_name: "<bold><dark_aqua>Donker Aqua (Bold)"
-    color_prefix: "<bold><dark_aqua>"
+  stoplight:
+    display_name: "<#FF0000>Stoplight"
+    color_prefix: "<#FF0000>"
+  stoplight_bold:
+    display_name: "<bold><#FF0000>Stoplight (Bold)"
+    color_prefix: "<bold><#FF0000>"
+
+  firebrick:
+    display_name: "<#B22222>Firebrick"
+    color_prefix: "<#B22222>"
+  firebrick_bold:
+    display_name: "<bold><#B22222>Firebrick (Bold)"
+    color_prefix: "<bold><#B22222>"
 
   dark_red:
-    display_name: "<dark_red>Donker Rood"
-    color_prefix: "<dark_red>"
+    display_name: "<#8B0000>Dark Red"
+    color_prefix: "<#8B0000>"
   dark_red_bold:
-    display_name: "<bold><dark_red>Donker Rood (Bold)"
-    color_prefix: "<bold><dark_red>"
+    display_name: "<bold><#8B0000>Dark Red (Bold)"
+    color_prefix: "<bold><#8B0000>"
 
-  dark_purple:
-    display_name: "<dark_purple>Donker Paars"
-    color_prefix: "<dark_purple>"
-  dark_purple_bold:
-    display_name: "<bold><dark_purple>Donker Paars (Bold)"
-    color_prefix: "<bold><dark_purple>"
+  red_wine:
+    display_name: "<#800000>Red Wine"
+    color_prefix: "<#800000>"
+  red_wine_bold:
+    display_name: "<bold><#800000>Red Wine (Bold)"
+    color_prefix: "<bold><#800000>"
 
-  gold:
-    display_name: "<gold>Goud"
-    color_prefix: "<gold>"
-  gold_bold:
-    display_name: "<bold><gold>Goud (Bold)"
-    color_prefix: "<bold><gold>"
+  bloodstone:
+    display_name: "<#660000>Bloodstone"
+    color_prefix: "<#660000>"
+  bloodstone_bold:
+    display_name: "<bold><#660000>Bloodstone (Bold)"
+    color_prefix: "<bold><#660000>"
 
-  gray:
-    display_name: "<gray>Grijs"
-    color_prefix: "<gray>"
-  gray_bold:
-    display_name: "<bold><gray>Grijs (Bold)"
-    color_prefix: "<bold><gray>"
+  ocean:
+    display_name: "<#ADD8E6>Ocean"
+    color_prefix: "<#ADD8E6>"
+  ocean_bold:
+    display_name: "<bold><#ADD8E6>Ocean (Bold)"
+    color_prefix: "<bold><#ADD8E6>"
 
-  dark_gray:
-    display_name: "<dark_gray>Donker Grijs"
-    color_prefix: "<dark_gray>"
-  dark_gray_bold:
-    display_name: "<bold><dark_gray>Donker Grijs (Bold)"
-    color_prefix: "<bold><dark_gray>"
+  sky:
+    display_name: "<#87CEEB>Sky"
+    color_prefix: "<#87CEEB>"
+  sky_bold:
+    display_name: "<bold><#87CEEB>Sky (Bold)"
+    color_prefix: "<bold><#87CEEB>"
 
-  blue:
-    display_name: "<blue>Blauw"
-    color_prefix: "<blue>"
-  blue_bold:
-    display_name: "<bold><blue>Blauw (Bold)"
-    color_prefix: "<bold><blue>"
+  smurf:
+    display_name: "<#4695D6>Smurf"
+    color_prefix: "<#4695D6>"
+  smurf_bold:
+    display_name: "<bold><#4695D6>Smurf (Bold)"
+    color_prefix: "<bold><#4695D6>"
 
-  green:
-    display_name: "<green>Groen"
-    color_prefix: "<green>"
-  green_bold:
-    display_name: "<bold><green>Groen (Bold)"
-    color_prefix: "<bold><green>"
+  denim_jeans:
+    display_name: "<#4682B4>Denim Jeans"
+    color_prefix: "<#4682B4>"
+  denim_jeans_bold:
+    display_name: "<bold><#4682B4>Denim Jeans (Bold)"
+    color_prefix: "<bold><#4682B4>"
 
-  aqua:
-    display_name: "<aqua>Aqua"
-    color_prefix: "<aqua>"
-  aqua_bold:
-    display_name: "<bold><aqua>Aqua (Bold)"
-    color_prefix: "<bold><aqua>"
+  royal_blue:
+    display_name: "<#4169E1>Royal Blue"
+    color_prefix: "<#4169E1>"
+  royal_blue_bold:
+    display_name: "<bold><#4169E1>Royal Blue (Bold)"
+    color_prefix: "<bold><#4169E1>"
 
-  red:
-    display_name: "<red>Rood"
-    color_prefix: "<red>"
-  red_bold:
-    display_name: "<bold><red>Rood (Bold)"
-    color_prefix: "<bold><red>"
+  imessage:
+    display_name: "<#1E90FF>iMessage"
+    color_prefix: "<#1E90FF>"
+  imessage_bold:
+    display_name: "<bold><#1E90FF>iMessage (Bold)"
+    color_prefix: "<bold><#1E90FF>"
 
-  light_purple:
-    display_name: "<light_purple>Licht Paars"
-    color_prefix: "<light_purple>"
-  light_purple_bold:
-    display_name: "<bold><light_purple>Licht Paars (Bold)"
-    color_prefix: "<bold><light_purple>"
+  vibrant_blue:
+    display_name: "<#0000FF>Vibrant Blue"
+    color_prefix: "<#0000FF>"
+  vibrant_blue_bold:
+    display_name: "<bold><#0000FF>Vibrant Blue (Bold)"
+    color_prefix: "<bold><#0000FF>"
 
-  yellow:
-    display_name: "<yellow>Geel"
-    color_prefix: "<yellow>"
-  yellow_bold:
-    display_name: "<bold><yellow>Geel (Bold)"
-    color_prefix: "<bold><yellow>"
+  blue_screen:
+    display_name: "<#0000CD>Blue Screen"
+    color_prefix: "<#0000CD>"
+  blue_screen_bold:
+    display_name: "<bold><#0000CD>Blue Screen (Bold)"
+    color_prefix: "<bold><#0000CD>"
 
-  white:
-    display_name: "<white>Wit"
-    color_prefix: "<white>"
-  white_bold:
-    display_name: "<bold><white>Wit (Bold)"
-    color_prefix: "<bold><white>"
+  r2_d2:
+    display_name: "<#00008B>R2-D2"
+    color_prefix: "<#00008B>"
+  r2_d2_bold:
+    display_name: "<bold><#00008B>R2-D2 (Bold)"
+    color_prefix: "<bold><#00008B>"
 
-  rainbow:
-    display_name: "<rainbow>Rainbow"
-    color_prefix: "<rainbow>"
-  rainbow_bold:
-    display_name: "<bold><rainbow>Rainbow (Bold)"
-    color_prefix: "<bold><rainbow>"
+  dark_mode:
+    display_name: "<#191970>Dark Mode"
+    color_prefix: "<#191970>"
+  dark_mode_bold:
+    display_name: "<bold><#191970>Dark Mode (Bold)"
+    color_prefix: "<bold><#191970>"
+
+  near_black_blue:
+    display_name: "<#000033>Near-Black Blue"
+    color_prefix: "<#000033>"
+  near_black_blue_bold:
+    display_name: "<bold><#000033>Near-Black Blue (Bold)"
+    color_prefix: "<bold><#000033>"
+
+# TODO: Aanvullen met kleuren

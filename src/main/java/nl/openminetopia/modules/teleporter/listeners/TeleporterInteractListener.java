@@ -15,6 +15,7 @@ public class TeleporterInteractListener implements Listener {
     @EventHandler
     public void pressPlate(final PlayerInteractEvent event) {
         if (!event.getAction().equals(Action.PHYSICAL)) return;
+        if (!event.getPlayer().hasPermission("ln.dl.lift")) return;
 
         Block block = event.getClickedBlock();
         if (!TeleporterUtil.isTeleporterBlock(block)) return;

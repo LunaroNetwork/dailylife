@@ -4,8 +4,9 @@ import net.kyori.adventure.title.Title;
 import nl.openminetopia.api.places.MTPlaceManager;
 import nl.openminetopia.api.places.objects.MTPlace;
 import nl.openminetopia.api.player.PlayerManager;
+import nl.openminetopia.api.player.ScoreboardManager;
 import nl.openminetopia.api.player.objects.MinetopiaPlayer;
-import nl.openminetopia.configuration.MessageConfiguration;
+import nl.openminetopia.configuration.language.MessageConfiguration;
 import nl.openminetopia.utils.ChatUtils;
 import org.bukkit.entity.Player;
 import org.bukkit.event.EventHandler;
@@ -32,5 +33,6 @@ public class PlayerTeleportListener implements Listener {
                 ChatUtils.format(minetopiaPlayer, MessageConfiguration.message("place_enter_subtitle"))
         );
         player.showTitle(title);
+        ScoreboardManager.getInstance().updateBoard(minetopiaPlayer);
     }
 }

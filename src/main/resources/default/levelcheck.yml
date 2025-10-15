@@ -16,7 +16,7 @@ wage:
     0: 10
 costs:
   enabled: true
-  formula: 250 + (<level> − 50) * 250
+  formula: 250 + (<level> − 50) * 250 #250 per level (vanaf level 50)
   overrides:
     0: 0
     1: 0

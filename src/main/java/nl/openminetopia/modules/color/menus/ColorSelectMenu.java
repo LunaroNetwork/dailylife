@@ -2,8 +2,9 @@ package nl.openminetopia.modules.color.menus;
 
 import dev.triumphteam.gui.guis.GuiItem;
 import lombok.Getter;
+import nl.openminetopia.DailyLife;
 import nl.openminetopia.api.player.objects.MinetopiaPlayer;
-import nl.openminetopia.configuration.MessageConfiguration;
+import nl.openminetopia.configuration.language.MessageConfiguration;
 import nl.openminetopia.modules.color.enums.OwnableColorType;
 import nl.openminetopia.modules.color.objects.OwnableColor;
 import nl.openminetopia.utils.ChatUtils;
@@ -22,7 +23,7 @@ public class ColorSelectMenu extends PaginatedMenu {
     private final OwnableColorType type;
 
     public ColorSelectMenu(Player player, OfflinePlayer target, MinetopiaPlayer minetopiaPlayer, OwnableColorType type) {
-        super(type.getDisplayName() + "<reset><dark_gray> menu", 2, 9);
+        super(type.getDisplayName() + "<reset><black> menu", 2, 9);
 
         gui.disableAllInteractions();
 
@@ -42,13 +43,14 @@ public class ColorSelectMenu extends PaginatedMenu {
 
         ItemBuilder defaultIcon = new ItemBuilder(Material.IRON_INGOT)
                 .addLoreLine("")
-                .addLoreLine("<gold>Deze kleur vervalt <yellow>nooit<gold>.")
-                .setName(type.getDefaultColor() + "Standaard");
+                .addLoreLine(DailyLife.getMessageConfiguration().message("color_menu_lore_expire_never", player))
+                .setName(type.getDefaultColor() + DailyLife.getMessageConfiguration().message("color_menu_name_default", player));
 
         gui.addItem(new GuiItem(defaultIcon.toItemStack(), event -> {
             minetopiaPlayer.setActiveColor(null, type);
-            player.sendMessage(ChatUtils.color(type.getDisplayName() + " <reset><gray>veranderd naar: "
-                    + type.getDefaultColor() + "Standaard"));
+            player.sendMessage(ChatUtils.color(DailyLife.getMessageConfiguration().message("color_menu_selected", player)
+                    .replace("<type>", type.getDisplayName())
+                    .replace("<selected>", DailyLife.getMessageConfiguration().message("color_menu_name_default", player))));
         }));
 
         colors.forEach(color -> {
@@ -57,27 +59,28 @@ public class ColorSelectMenu extends PaginatedMenu {
                     .setName(color.displayName());
 
             if (color.getExpiresAt() != -1 && color.getExpiresAt() - System.currentTimeMillis() < -1)
-                icon.addLoreLine(MessageConfiguration.component("color_expired"));
+                icon.addLoreLine(MessageConfiguration.component("color_menu_lore_expired"));
             if (color.getExpiresAt() != -1 && color.getExpiresAt() - System.currentTimeMillis() > -1)
-                icon.addLoreLine(MessageConfiguration.message("color_expires_in")
-                        .replace("<time>", millisToTime(color.getExpiresAt() - System.currentTimeMillis())));
+                icon.addLoreLine(DailyLife.getMessageConfiguration().message("color_menu_lore_expire_time", player)
+                        .replace("<time>", millisToTime(color.getExpiresAt() - System.currentTimeMillis(), player)));
             if (color.getExpiresAt() == -1) icon.addLoreLine(MessageConfiguration.component("color_expires_never"));
 
             gui.addItem(new GuiItem(icon.toItemStack(), event -> {
                 minetopiaPlayer.setActiveColor(color, type);
-                player.sendMessage(ChatUtils.color(type.getDisplayName() + " <reset><gray>veranderd naar: "
-                        + color.displayName()));
+                player.sendMessage(ChatUtils.color(DailyLife.getMessageConfiguration().message("color_menu_selected", player)
+                        .replace("<type>", type.getDisplayName())
+                        .replace("<selected>", color.displayName())));
             }));
         });
 
-        gui.setItem(13, new GuiItem(new ItemBuilder(Material.LADDER).setName(MessageConfiguration.message("go_back")).toItemStack(),
+        gui.setItem(13, new GuiItem(new ItemBuilder(Material.LADDER).setName(DailyLife.getMessageConfiguration().message("go_back", player)).toItemStack(),
                 e -> new ColorTypeMenu(player, target, minetopiaPlayer).open(player)));
 
         gui.setItem(14, new GuiItem(new ItemBuilder(Material.BARRIER).setName("<red>Locked").toItemStack(),
                 e -> new ColorLockedMenu(player, this).open(player)));
     }
 
-    private String millisToTime(long millis) {
+    private String millisToTime(long millis, OfflinePlayer player) {
         long totalSeconds = millis / 1000;
         long totalMinutes = totalSeconds / 60;
         long totalHours = totalMinutes / 60;
@@ -87,7 +90,7 @@ public class ColorSelectMenu extends PaginatedMenu {
         long minutes = totalMinutes % 60;
         long seconds = totalSeconds % 60;
 
-        return MessageConfiguration.message("time_format")
+        return DailyLife.getMessageConfiguration().message("time_format", player)
                 .replace("<days>", String.valueOf(days))
                 .replace("<hours>", String.valueOf(hours))
                 .replace("<minutes>", String.valueOf(minutes))

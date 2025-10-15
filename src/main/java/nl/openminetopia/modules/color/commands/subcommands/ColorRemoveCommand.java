@@ -5,12 +5,11 @@ import co.aikar.commands.annotation.*;
 import nl.openminetopia.DailyLife;
 import nl.openminetopia.api.player.PlayerManager;
 import nl.openminetopia.api.player.objects.MinetopiaPlayer;
-import nl.openminetopia.configuration.MessageConfiguration;
+import nl.openminetopia.configuration.language.MessageConfiguration;
 import nl.openminetopia.modules.color.ColorModule;
 import nl.openminetopia.modules.color.enums.OwnableColorType;
 import nl.openminetopia.modules.color.objects.ChatColor;
 import nl.openminetopia.modules.color.objects.LevelColor;
-import nl.openminetopia.modules.color.objects.NameColor;
 import nl.openminetopia.modules.color.objects.PrefixColor;
 import nl.openminetopia.utils.ChatUtils;
 import org.bukkit.OfflinePlayer;
@@ -78,22 +77,6 @@ public class ColorRemoveCommand extends BaseCommand {
                     ChatUtils.sendFormattedMessage(minetopiaPlayer, MessageConfiguration.message("color_chat_removed")
                             .replace("<color>", chatColor.get().getColorId()));
                     break;
-
-                case NAME:
-                    Optional<NameColor> nameColor = targetMinetopiaPlayer.getColors().stream()
-                            .filter(c -> c.getColorId().equals(colorId) && c.getType().equals(type))
-                            .map(c -> (NameColor) c)
-                            .findAny();
-                    if (nameColor.isEmpty()) {
-                        ChatUtils.sendFormattedMessage(minetopiaPlayer, MessageConfiguration.message("color_name_not_found"));
-                        return;
-                    }
-
-                    targetMinetopiaPlayer.removeColor(nameColor.get());
-                    ChatUtils.sendFormattedMessage(minetopiaPlayer, MessageConfiguration.message("color_name_removed")
-                            .replace("<color>", nameColor.get().getColorId()));
-                    break;
-
                 case LEVEL:
                     Optional<LevelColor> levelColor = targetMinetopiaPlayer.getColors().stream()
                             .filter(c -> c.getColorId().equals(colorId) && c.getType().equals(type))

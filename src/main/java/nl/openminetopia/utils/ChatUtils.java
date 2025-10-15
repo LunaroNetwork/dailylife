@@ -1,5 +1,6 @@
 package nl.openminetopia.utils;
 
+import lombok.Setter;
 import lombok.experimental.UtilityClass;
 import me.clip.placeholderapi.PlaceholderAPI;
 import net.kyori.adventure.text.Component;
@@ -10,6 +11,8 @@ import net.kyori.adventure.title.Title;
 import nl.openminetopia.DailyLife;
 import nl.openminetopia.api.player.objects.MinetopiaPlayer;
 import nl.openminetopia.modules.banking.BankingModule;
+import nl.openminetopia.modules.color.ColorModule;
+import nl.openminetopia.modules.color.configuration.ColorsConfiguration;
 import nl.openminetopia.modules.color.enums.OwnableColorType;
 import nl.openminetopia.modules.currencies.CurrencyModule;
 import nl.openminetopia.modules.currencies.models.CurrencyModel;
@@ -25,7 +28,8 @@ import java.time.format.DateTimeFormatter;
 @UtilityClass
 public class ChatUtils {
 
-    private static final MiniMessage MM = MiniMessage.miniMessage();
+    @Setter
+    private static MiniMessage MM = DailyLife.getMiniMessage();
 
     private static String stripSectionCodes(String s) {
         int n = s.length();
@@ -68,13 +72,26 @@ public class ChatUtils {
         // vaste placeholders
         msg = msg
                 .replace("<player>", namePlain)
+                .replace("<uuid>", mtp.getUuid().toString())
                 .replace("<level_color>", mtp.getActiveColor(OwnableColorType.LEVEL).color())
                 .replace("<level>", Integer.toString(mtp.getLevel()))
                 .replace("<calculated_level>", Integer.toString(mtp.getCalculatedLevel()))
                 .replace("<levelups>", levelUps == 0 ? "<gold>0" : (levelUps > 0 ? "<green>+" + levelUps : "<red>" + levelUps))
                 .replace("<prefix_color>", mtp.getActiveColor(OwnableColorType.PREFIX).color())
                 .replace("<prefix>", mtp.getActivePrefix().getPrefix())
-                .replace("<name_color>", mtp.getActiveColor(OwnableColorType.NAME).color())
+                .replace("<name_color>",
+                        player.hasPermission("ln.dl.namecolor.admin") ? "<bold><dark_red>" :
+                        player.hasPermission("ln.dl.namecolor.staff") ? "<dark_red>" :
+                        (mtp.getHometown() != null && DailyLife.getModuleManager().get(ColorModule.class)
+                            .getConfiguration()
+                            .color(mtp.getHometown().getColorId()) != null
+                        ? DailyLife.getModuleManager()
+                            .get(ColorModule.class)
+                            .getConfiguration()
+                            .color(mtp.getHometown().getColorId())
+                            .colorPrefix()
+                        : "<gray>") // fallback default
+                )
                 .replace("<display_name>", displayName)
                 .replace("<chat_color>", mtp.getActiveColor(OwnableColorType.CHAT).color())
                 .replace("<date>", nowDate())

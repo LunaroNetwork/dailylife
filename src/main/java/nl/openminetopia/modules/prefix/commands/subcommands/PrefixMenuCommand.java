@@ -2,6 +2,7 @@ package nl.openminetopia.modules.prefix.commands.subcommands;
 
 import co.aikar.commands.BaseCommand;
 import co.aikar.commands.annotation.*;
+import nl.openminetopia.DailyLife;
 import nl.openminetopia.api.player.PlayerManager;
 import nl.openminetopia.modules.prefix.menus.PrefixMenu;
 import nl.openminetopia.utils.ChatUtils;
@@ -19,7 +20,7 @@ public class PrefixMenuCommand extends BaseCommand {
 
         if (!targetPlayer.getUniqueId().equals(player.getUniqueId()) &&
                 !player.hasPermission("openminetopia.prefix.menu.others")) {
-            ChatUtils.sendMessage(player, "<red>Je hebt geen toestemming om het prefix menu van anderen te openen.");
+            ChatUtils.sendMessage(player, DailyLife.getMessageConfiguration().message("prefix_menu_other_no_permission", player));
             return;
         }
 

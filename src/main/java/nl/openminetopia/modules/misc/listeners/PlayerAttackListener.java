@@ -4,7 +4,7 @@ import nl.openminetopia.DailyLife;
 import nl.openminetopia.api.places.MTPlaceManager;
 import nl.openminetopia.api.player.PlayerManager;
 import nl.openminetopia.api.player.objects.MinetopiaPlayer;
-import nl.openminetopia.configuration.MessageConfiguration;
+import nl.openminetopia.configuration.language.MessageConfiguration;
 import nl.openminetopia.modules.misc.objects.PvPItem;
 import nl.openminetopia.modules.misc.utils.MiscUtils;
 import nl.openminetopia.modules.police.handcuff.HandcuffManager;

@@ -9,11 +9,19 @@ import io.vertx.core.Vertx;
 import lombok.AccessLevel;
 import lombok.Getter;
 import lombok.Setter;
+import net.kyori.adventure.text.format.TextColor;
+import net.kyori.adventure.text.minimessage.MiniMessage;
+import net.kyori.adventure.text.minimessage.tag.Tag;
+import net.kyori.adventure.text.minimessage.tag.resolver.TagResolver;
+import net.kyori.adventure.text.minimessage.tag.standard.StandardTags;
 import nl.openminetopia.configuration.DefaultConfiguration;
-import nl.openminetopia.configuration.MessageConfiguration;
+import nl.openminetopia.configuration.language.MessageConfiguration;
 import nl.openminetopia.framework.runnables.AbstractDirtyRunnable;
 import nl.openminetopia.framework.runnables.listeners.PlayerLifecycleListener;
+import nl.openminetopia.modules.color.ColorModule;
+import nl.openminetopia.modules.language.LanguageDatabase;
 import nl.openminetopia.registry.CommandComponentRegistry;
+import nl.openminetopia.utils.ChatUtils;
 import nl.openminetopia.utils.input.ChatInputHandler;
 import nl.openminetopia.utils.placeholderapi.OpenMinetopiaExpansion;
 import nl.openminetopia.utils.wrappers.listeners.CitzensNpcClickListener;
@@ -25,7 +33,10 @@ import org.bukkit.ChatColor;
 import org.bukkit.plugin.java.JavaPlugin;
 import org.jetbrains.annotations.NotNull;
 
+import java.sql.SQLException;
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 import java.util.UUID;
 import java.util.concurrent.CopyOnWriteArrayList;
 
@@ -34,6 +45,9 @@ public final class DailyLife extends JavaPlugin {
 
     @Getter
     private static DailyLife instance;
+
+    @Getter @Setter
+    private static LanguageDatabase languageDatabase;
 
     @Getter @Setter(AccessLevel.PRIVATE)
     private static SpigotModuleManager<@NotNull DailyLife> moduleManager;
@@ -49,6 +63,10 @@ public final class DailyLife extends JavaPlugin {
 
     @Getter
     private static ChatInputHandler chatInputHandler;
+
+    @Getter
+    private static MiniMessage miniMessage;
+    private final Map<String, String> colorCodes = new HashMap<>();
 
     @Getter
     private final List<AbstractDirtyRunnable<UUID>> dirtyPlayerRunnables = new CopyOnWriteArrayList<>();
@@ -77,10 +95,42 @@ public final class DailyLife extends JavaPlugin {
             metrics.addCustomChart(new SimplePie("storage", () -> defaultConfiguration.getDatabaseType().toString()));
         }
 
+        languageDatabase = new LanguageDatabase();
+        try {
+            languageDatabase.connect();
+        } catch (SQLException e) {
+            throw new RuntimeException(e);
+        }
+
         commandManager.enableUnstableAPI("help");
         commandManager.setFormat(MessageType.HELP, 1, ChatColor.GOLD);
         commandManager.setFormat(MessageType.HELP, 2, ChatColor.YELLOW);
         commandManager.setFormat(MessageType.HELP, 3, ChatColor.GRAY);
+
+        if (getConfig().isConfigurationSection("message-colors")) {
+            for (String key : getConfig().getConfigurationSection("message-colors").getKeys(false)) {
+                String hex = getConfig().getString("message-colors." + key);
+                if (hex != null && TextColor.fromCSSHexString(hex) != null) {
+                    colorCodes.put(key, hex);
+                }
+            }
+        }
+
+        TagResolver.Builder resolverBuilder = TagResolver.builder();
+        resolverBuilder.resolver(StandardTags.defaults());
+
+        for (Map.Entry<String, String> entry : colorCodes.entrySet()) {
+            TextColor color = TextColor.fromCSSHexString(entry.getValue());
+            if (color != null) {
+                resolverBuilder.resolver(
+                        TagResolver.resolver(entry.getKey(), (args, ctx) -> Tag.styling(color))
+                );
+            }
+        }
+
+        this.miniMessage = MiniMessage.builder()
+                .tags(resolverBuilder.build())
+                .build();
 
         chatInputHandler = new ChatInputHandler();
         Bukkit.getPluginManager().registerEvents(chatInputHandler, this);
@@ -148,4 +198,5 @@ public final class DailyLife extends JavaPlugin {
         dirtyPlayerRunnables.remove(runnable);
         runnable.cancel();
     }
+
 }

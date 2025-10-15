@@ -1,5 +1,6 @@
 package nl.openminetopia.modules.teleporter.listeners.block;
 
+import nl.openminetopia.DailyLife;
 import nl.openminetopia.modules.teleporter.utils.TeleporterUtil;
 import nl.openminetopia.utils.ChatUtils;
 import nl.openminetopia.utils.PersistentDataUtil;
@@ -21,7 +22,7 @@ public final class TeleporterPlaceListener implements Listener {
         if (location == null) return;
 
         TeleporterUtil.setTeleporter(event.getBlockPlaced(), location, addDisplay);
-        event.getPlayer().sendMessage(ChatUtils.color("<gold>Teleporter has been placed."));
+        event.getPlayer().sendMessage(ChatUtils.color(DailyLife.getMessageConfiguration().message("teleporter_placed", event.getPlayer())));
     }
 
 }

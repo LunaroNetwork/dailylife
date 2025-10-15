@@ -202,6 +202,14 @@ public class DefaultConfiguration extends ConfigurateConfig {
     public final String chatSpyWebhookUrl;
 
     /**
+     * Message Colors Configuration
+     */
+    public final String primaryColor;
+    public final String valueColor;
+    public final String sucessColor;
+    public final String errorColor;
+
+    /**
      * Disabled modules configuration
      */
     public List<String> disabledModules = new ArrayList<>();
@@ -250,13 +258,13 @@ public class DefaultConfiguration extends ConfigurateConfig {
         /*
          * Default settings configuration
          */
-        this.defaultPrefix = rootNode.node("default", "prefix").getString("Zwerver");
+        this.defaultPrefix = rootNode.node("default", "prefix").getString("Burger");
         this.defaultPrefixColor = rootNode.node("default", "prefix-color").getString("<gray>");
         this.defaultLevel = rootNode.node("default", "level").getInt(1);
         this.defaultLevelColor = rootNode.node("default", "level-color").getString("<gray>");
 
-        this.defaultNameColor = rootNode.node("default", "name-color").getString("<white>");
-        this.defaultChatColor = rootNode.node("default", "chat-color").getString("<white>");
+        this.defaultNameColor = rootNode.node("default", "name-color").getString("<gray>");
+        this.defaultChatColor = rootNode.node("default", "chat-color").getString("<gray>");
 
         /*
          * Chat configuration
@@ -272,15 +280,22 @@ public class DefaultConfiguration extends ConfigurateConfig {
          */
         this.scoreboardEnabled = rootNode.node("scoreboard", "enabled").getBoolean(true);
         this.scoreboardLines = rootNode.node("scoreboard", "lines").getList(String.class, List.of(
-                "<world_title>",
-                "<world_color>Temperatuur:",
-                "<temperature>°C",
+                "<bold><world_title>",
+                "<city_color><city_title>",
                 " ",
-                "<world_color>Level:",
-                "<level> -> <calculated_level> (<levelups><white>)",
+                "<city_color>Datum/Tijd:",
+                "<data> / <time>",
                 " ",
-                "<world_color>Fitheid:",
-                "<fitness>/<max_fitness>"
+                "<city_color>Influence level:",
+                "<level> -> <calculated_level> (<levelups>)",
+                "",
+                "<city_color>Fitheid:",
+                "<fitness>/<max_fitness>",
+                "",
+                "<city_color>Lunars:",
+                "<currency_lunar>",
+                "",
+                "<city_color>play.lunaronetwork.com"
         ));
 
         /*
@@ -525,6 +540,14 @@ public class DefaultConfiguration extends ConfigurateConfig {
          */
         this.chatSpyWebhookUrl = rootNode.node("spy", "chat-spy-webhook").getString("");
         this.commandSpyWebhookUrl = rootNode.node("spy", "command-spy-webhook").getString("");
+
+        /*
+         * Message Colors
+         */
+        this.primaryColor = rootNode.node("message-colors", "primary").getString("#E2C044");
+        this.valueColor = rootNode.node("message-colors", "value").getString("#FFFFFF");
+        this.errorColor = rootNode.node("message-colors", "error").getString("#D32F2F");
+        this.sucessColor = rootNode.node("message-colors", "success").getString("#22A559");
 
         /*
          * Disabled modules configuration

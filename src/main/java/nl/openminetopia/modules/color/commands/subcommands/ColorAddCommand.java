@@ -4,12 +4,11 @@ import co.aikar.commands.BaseCommand;
 import co.aikar.commands.annotation.*;
 import nl.openminetopia.DailyLife;
 import nl.openminetopia.api.player.PlayerManager;
-import nl.openminetopia.configuration.MessageConfiguration;
+import nl.openminetopia.configuration.language.MessageConfiguration;
 import nl.openminetopia.modules.color.ColorModule;
 import nl.openminetopia.modules.color.enums.OwnableColorType;
 import nl.openminetopia.modules.color.objects.ChatColor;
 import nl.openminetopia.modules.color.objects.LevelColor;
-import nl.openminetopia.modules.color.objects.NameColor;
 import nl.openminetopia.modules.color.objects.PrefixColor;
 import nl.openminetopia.utils.ChatUtils;
 import org.bukkit.OfflinePlayer;
@@ -76,18 +75,6 @@ public class ColorAddCommand extends BaseCommand {
                     targetMinetopiaPlayer.setActiveColor(chatColor, OwnableColorType.CHAT);
                     ChatUtils.sendMessage(player, MessageConfiguration.message("color_chat_added")
                             .replace("<color>", chatColor.getColorId()));
-                    break;
-                case NAME:
-                    if (targetMinetopiaPlayer.getColors().stream().anyMatch(nameColor -> nameColor.getColorId().equalsIgnoreCase(colorId) && nameColor.getType() == type)) {
-                        ChatUtils.sendMessage(player, MessageConfiguration.message("color_name_exists"));
-                        return;
-                    }
-
-                    NameColor nameColor = new NameColor(colorId, expiresAtMillis);
-                    targetMinetopiaPlayer.addColor(nameColor);
-                    targetMinetopiaPlayer.setActiveColor(nameColor, OwnableColorType.NAME);
-                    ChatUtils.sendMessage(player, MessageConfiguration.message("color_name_added")
-                            .replace("<color>", nameColor.getColorId()));
                     break;
                 case LEVEL:
                     if (targetMinetopiaPlayer.getColors().stream().anyMatch(levelColor -> levelColor.getColorId().equalsIgnoreCase(colorId) && levelColor.getType() == type)) {

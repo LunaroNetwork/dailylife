@@ -2,7 +2,7 @@ package nl.openminetopia.modules.currencies.commands;
 
 import io.papermc.paper.plugin.configuration.PluginMeta;
 import nl.openminetopia.DailyLife;
-import nl.openminetopia.configuration.MessageConfiguration;
+import nl.openminetopia.configuration.language.MessageConfiguration;
 import nl.openminetopia.modules.currencies.CurrencyModule;
 import nl.openminetopia.modules.currencies.models.CurrencyModel;
 import nl.openminetopia.modules.currencies.objects.RegisteredCurrency;

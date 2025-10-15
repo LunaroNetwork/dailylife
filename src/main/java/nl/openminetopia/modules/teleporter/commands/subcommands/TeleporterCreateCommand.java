@@ -2,6 +2,7 @@ package nl.openminetopia.modules.teleporter.commands.subcommands;
 
 import co.aikar.commands.BaseCommand;
 import co.aikar.commands.annotation.*;
+import nl.openminetopia.DailyLife;
 import nl.openminetopia.modules.teleporter.utils.TeleporterUtil;
 import nl.openminetopia.modules.teleporter.utils.enums.PressurePlate;
 import nl.openminetopia.utils.ChatUtils;
@@ -17,8 +18,8 @@ public final class TeleporterCreateCommand extends BaseCommand {
     @Syntax("[plate] [addDisplay] [roundYaw]")
     public void create(Player player, @Optional PressurePlate plate, @Optional Boolean addDisplay, @Optional Boolean roundYaw) {
         if (plate == null) plate = PressurePlate.STONE_PRESSURE_PLATE;
-        if (addDisplay == null) addDisplay = true;
-        if (roundYaw == null) roundYaw = false;
+        if (addDisplay == null) addDisplay = false;
+        if (roundYaw == null) roundYaw = true;
 
         Location location = player.getLocation();
         if (roundYaw) location.setYaw(Math.round(location.getYaw() / 45) * 45);
@@ -26,7 +27,7 @@ public final class TeleporterCreateCommand extends BaseCommand {
         ItemStack item = TeleporterUtil.buildPlate(plate, location, addDisplay);
         player.getInventory().addItem(item);
 
-        player.sendMessage(ChatUtils.color("<gold>Teleporter successfully created."));
+        player.sendMessage(ChatUtils.color(DailyLife.getMessageConfiguration().message("teleporter_created", player)));
     }
 
 }

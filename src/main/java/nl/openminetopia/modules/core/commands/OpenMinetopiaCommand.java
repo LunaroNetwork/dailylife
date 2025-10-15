@@ -6,7 +6,7 @@ import co.aikar.commands.annotation.*;
 import lombok.SneakyThrows;
 import nl.openminetopia.DailyLife;
 import nl.openminetopia.configuration.DefaultConfiguration;
-import nl.openminetopia.configuration.MessageConfiguration;
+import nl.openminetopia.configuration.language.MessageConfiguration;
 import nl.openminetopia.modules.banking.BankingModule;
 import nl.openminetopia.modules.banking.configuration.BankingConfiguration;
 import nl.openminetopia.modules.books.BooksModule;
@@ -29,7 +29,7 @@ import org.bukkit.entity.Player;
 import java.io.File;
 import java.util.List;
 
-@CommandAlias("openminetopia|sdb|minetopia|omt")
+@CommandAlias("dailylife|dl|ln|lunaronetwork")
 public class OpenMinetopiaCommand extends BaseCommand {
 
     @Subcommand("reload")
@@ -81,14 +81,14 @@ public class OpenMinetopiaCommand extends BaseCommand {
     @Default
     public void onCommand(Player player) {
         player.sendMessage(ChatUtils.color(" "));
-        player.sendMessage(ChatUtils.color("<gold>Deze server maakt gebruik van <yellow>OpenMinetopia <gold>versie <yellow>" + DailyLife.getInstance().getDescription().getVersion()));
+        player.sendMessage(ChatUtils.color("<gold>Deze server maakt gebruik van <yellow>DailyLife <gold>versie <yellow>" + DailyLife.getInstance().getDescription().getVersion()));
         player.sendMessage(ChatUtils.color("<gold>Auteurs: <yellow>" + DailyLife.getInstance().getDescription().getAuthors().toString().replace("[", "").replace("]", "")));
         player.sendMessage(ChatUtils.color(" "));
     }
 
     @Subcommand("help")
     @CommandPermission("openminetopia.help")
-    @Description("Laat alle commando's zien die beschikbaar zijn in OpenMinetopia")
+    @Description("Laat alle commando's zien die beschikbaar zijn in DailyLife")
     public void help(CommandSender sender, @Optional Integer page) {
         List<RootCommand> rootCommands = DailyLife.getCommandManager().getRegisteredRootCommands().stream().toList();
 
@@ -98,7 +98,7 @@ public class OpenMinetopiaCommand extends BaseCommand {
         int currentPage = page == null ? 1 : page;
 
         ChatUtils.sendMessage(sender, " ");
-        ChatUtils.sendMessage(sender, "<gold>OpenMinetopia commando's" + " <gray>(<yellow>" + currentPage + "<gray>/<yellow>" + pages +  "<gray>)<gold>:");
+        ChatUtils.sendMessage(sender, "<gold>DailyLife commando's" + " <gray>(<yellow>" + currentPage + "<gray>/<yellow>" + pages +  "<gray>)<gold>:");
 
         if (currentPage < 1 || currentPage > pages) {
             ChatUtils.sendMessage(sender, "<red>Deze pagina bestaat niet.");
@@ -114,6 +114,6 @@ public class OpenMinetopiaCommand extends BaseCommand {
         }
 
         ChatUtils.sendMessage(sender, " ");
-        ChatUtils.sendMessage(sender, "<gold>Gebruik <yellow>/openminetopia help <pagina> <gold>om naar een andere pagina te gaan.");
+        ChatUtils.sendMessage(sender, "<gold>Gebruik <yellow>/dailylife help <pagina> <gold>om naar een andere pagina te gaan.");
     }
 }

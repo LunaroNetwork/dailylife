@@ -53,11 +53,20 @@ public class PlayerVerticle extends BaseVerticle {
                     jsonObject.put("fitness", minetopiaPlayer.getFitness().getTotalFitness());
                     jsonObject.put("active_prefix", minetopiaPlayer.getActivePrefix().getPrefix());
                     jsonObject.put("active_prefix_color", minetopiaPlayer.getActiveColor(OwnableColorType.PREFIX).displayName());
-                    jsonObject.put("active_name_color", minetopiaPlayer.getActiveColor(OwnableColorType.NAME).displayName());
                     jsonObject.put("active_level_color", minetopiaPlayer.getActiveColor(OwnableColorType.LEVEL).displayName());
                     jsonObject.put("active_chat_color", minetopiaPlayer.getActiveColor(OwnableColorType.CHAT).displayName());
                     jsonObject.put("playtimeSeconds", minetopiaPlayer.getPlaytime() / 1000);
                     jsonObject.put("online", player.isOnline());
+
+                    // Hometown toevoegen
+                    if (minetopiaPlayer.getHometown() != null) {
+                        JSONObject hometownJson = new JSONObject();
+                        hometownJson.put("name", minetopiaPlayer.getHometown().getName());
+                        hometownJson.put("colorId", minetopiaPlayer.getHometown().getColorId());
+                        jsonObject.put("hometown", hometownJson);
+                    } else {
+                        jsonObject.put("hometown", null);
+                    }
                 }
                 context.response().end(jsonObject.toJSONString());
             }).join();

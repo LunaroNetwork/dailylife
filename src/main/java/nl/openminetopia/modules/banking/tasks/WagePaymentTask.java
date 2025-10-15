@@ -5,7 +5,7 @@ import net.objecthunter.exp4j.ExpressionBuilder;
 import nl.openminetopia.DailyLife;
 import nl.openminetopia.api.player.PlayerManager;
 import nl.openminetopia.api.player.objects.MinetopiaPlayer;
-import nl.openminetopia.configuration.MessageConfiguration;
+import nl.openminetopia.configuration.language.MessageConfiguration;
 import nl.openminetopia.framework.runnables.AbstractDirtyRunnable;
 import nl.openminetopia.modules.banking.BankingModule;
 import nl.openminetopia.modules.banking.models.BankAccountModel;
@@ -66,7 +66,7 @@ public class WagePaymentTask extends AbstractDirtyRunnable<UUID > {
         if (EventUtils.callCancellable(transactionUpdateEvent)) return;
 
         bankAccountModel.setBalance(bankAccountModel.getBalance() + wage);
-        ChatUtils.sendFormattedMessage(minetopiaPlayer, MessageConfiguration.message("levelcheck_wage")
+        ChatUtils.sendFormattedMessage(minetopiaPlayer, DailyLife.getMessageConfiguration().message("levelcheck_wage")
                 .replace("<amount>", String.valueOf(wage)));
     }
 }

@@ -6,7 +6,7 @@ import co.aikar.commands.annotation.CommandCompletion;
 import co.aikar.commands.annotation.CommandPermission;
 import co.aikar.commands.annotation.Subcommand;
 import nl.openminetopia.DailyLife;
-import nl.openminetopia.configuration.MessageConfiguration;
+import nl.openminetopia.configuration.language.MessageConfiguration;
 import nl.openminetopia.modules.banking.BankingModule;
 import nl.openminetopia.modules.transactions.TransactionsModule;
 import nl.openminetopia.modules.transactions.enums.TransactionType;
@@ -28,7 +28,7 @@ public class BankingBalanceCommand extends BaseCommand {
         BankingModule bankingModule = DailyLife.getModuleManager().get(BankingModule.class);
         bankingModule.getAccountByNameAsync(accountName).whenComplete((accountModel, throwable) -> {
             if (accountModel == null) {
-                sender.sendMessage(MessageConfiguration.component("banking_account_not_found"));
+                sender.sendMessage(DailyLife.getMessageConfiguration().component("banking_account_not_found"));
                 return;
             }
 

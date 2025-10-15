@@ -6,7 +6,7 @@ import lombok.RequiredArgsConstructor;
 import nl.openminetopia.DailyLife;
 import nl.openminetopia.api.player.PlayerManager;
 import nl.openminetopia.api.player.objects.MinetopiaPlayer;
-import nl.openminetopia.configuration.MessageConfiguration;
+import nl.openminetopia.configuration.language.MessageConfiguration;
 import nl.openminetopia.modules.banking.BankingModule;
 import nl.openminetopia.modules.banking.enums.AccountPermission;
 import nl.openminetopia.modules.banking.models.BankAccountModel;
@@ -96,7 +96,7 @@ public class BankContentsMenu extends Menu {
             MinetopiaPlayer minetopiaPlayer = PlayerManager.getInstance().getOnlineMinetopiaPlayer(player);
 
             if (!isAsAdmin() && !accountModel.hasPermission(player.getUniqueId(), AccountPermission.DEPOSIT)) {
-                ChatUtils.sendFormattedMessage(minetopiaPlayer, MessageConfiguration.message("banking_no_deposit_permission"));
+                ChatUtils.sendFormattedMessage(minetopiaPlayer, DailyLife.getMessageConfiguration().message("banking_no_deposit_permission"));
                 return;
             }
 
@@ -108,7 +108,7 @@ public class BankContentsMenu extends Menu {
 
             item.setAmount(0);
             accountModel.setBalance(accountModel.getBalance() + totalValue);
-            ChatUtils.sendFormattedMessage(minetopiaPlayer, MessageConfiguration.message("banking_deposit_message")
+            ChatUtils.sendFormattedMessage(minetopiaPlayer, DailyLife.getMessageConfiguration().message("banking_deposit_message")
                     .replace("<deposit_value>", bankingModule.format(totalValue)));
 
             TransactionsModule transactionsModule = DailyLife.getModuleManager().get(TransactionsModule.class);
@@ -130,12 +130,12 @@ public class BankContentsMenu extends Menu {
         MinetopiaPlayer minetopiaPlayer = PlayerManager.getInstance().getOnlineMinetopiaPlayer(player);
 
         if (balance < totalValue) {
-            ChatUtils.sendFormattedMessage(minetopiaPlayer, MessageConfiguration.message("banking_not_enough_money"));
+            ChatUtils.sendFormattedMessage(minetopiaPlayer, DailyLife.getMessageConfiguration().message("banking_not_enough_money"));
             return;
         }
 
         if (!isAsAdmin() && !accountModel.hasPermission(player.getUniqueId(), AccountPermission.WITHDRAW)) {
-            ChatUtils.sendFormattedMessage(minetopiaPlayer, MessageConfiguration.message("banking_no_withdraw_permission"));
+            ChatUtils.sendFormattedMessage(minetopiaPlayer, DailyLife.getMessageConfiguration().message("banking_no_withdraw_permission"));
             return;
         }
 
@@ -145,7 +145,7 @@ public class BankContentsMenu extends Menu {
         accountModel.setBalance(balance - totalValue);
 
         player.getInventory().addItem(note.toNote(amount));
-        ChatUtils.sendFormattedMessage(minetopiaPlayer, MessageConfiguration.message("banking_withdraw_message")
+        ChatUtils.sendFormattedMessage(minetopiaPlayer, DailyLife.getMessageConfiguration().message("banking_withdraw_message")
                 .replace("<withdraw_value>", bankingModule.format(totalValue)));
 
         TransactionsModule transactionsModule = DailyLife.getModuleManager().get(TransactionsModule.class);

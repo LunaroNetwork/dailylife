@@ -5,8 +5,9 @@ import nl.openminetopia.DailyLife;
 import nl.openminetopia.api.places.MTPlaceManager;
 import nl.openminetopia.api.places.objects.MTPlace;
 import nl.openminetopia.api.player.PlayerManager;
+import nl.openminetopia.api.player.ScoreboardManager;
 import nl.openminetopia.api.player.objects.MinetopiaPlayer;
-import nl.openminetopia.configuration.MessageConfiguration;
+import nl.openminetopia.configuration.language.MessageConfiguration;
 import nl.openminetopia.utils.ChatUtils;
 import org.bukkit.Bukkit;
 import org.bukkit.entity.Player;
@@ -39,6 +40,7 @@ public class PlayerMoveListener implements Listener {
                     ChatUtils.format(minetopiaPlayer, MessageConfiguration.message("place_enter_subtitle"))
             );
             player.showTitle(title);
+            ScoreboardManager.getInstance().updateBoard(minetopiaPlayer);
         });
     }
 }

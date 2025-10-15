@@ -7,12 +7,17 @@ import net.kyori.adventure.text.Component;
 import net.kyori.adventure.text.minimessage.MiniMessage;
 import nl.openminetopia.DailyLife;
 import nl.openminetopia.configuration.DefaultConfiguration;
+import nl.openminetopia.modules.places.PlacesModule;
 import nl.openminetopia.modules.teleporter.utils.enums.PressurePlate;
+import nl.openminetopia.utils.ChatUtils;
 import nl.openminetopia.utils.PersistentDataUtil;
 import nl.openminetopia.utils.item.ItemBuilder;
 import org.apache.commons.lang3.StringUtils;
 import org.bukkit.*;
 import org.bukkit.block.Block;
+import org.bukkit.block.BlockFace;
+import org.bukkit.block.data.BlockData;
+import org.bukkit.block.sign.Side;
 import org.bukkit.entity.Display;
 import org.bukkit.entity.Entity;
 import org.bukkit.entity.TextDisplay;
@@ -70,8 +75,11 @@ public final class TeleporterUtil {
         data.set(new NamespacedKey(DailyLife.getInstance(), "teleporter.location"), DataType.LOCATION, location);
 
         if (!addDisplay) return;
-        Entity display = addDisplay(block, location);
-        data.set(new NamespacedKey(DailyLife.getInstance(), "teleporter.entity"), DataType.UUID, display.getUniqueId());
+        /*
+        * Entity display = addDisplay(block, location);
+        * data.set(new NamespacedKey(DailyLife.getInstance(), "teleporter.entity"), DataType.UUID, display.getUniqueId());
+        */
+        addSign(block, location);
     }
 
     public Entity addDisplay(Block block, Location location) {
@@ -91,6 +99,30 @@ public final class TeleporterUtil {
         display.setTransformation(transformation);
 
         return display;
+    }
+
+    private void addSign(Block block, Location location) {
+        Block above = block.getRelative(BlockFace.UP);
+        if (!above.getType().isAir()) return; // alleen als er lucht boven zit
+
+        // Zoek een muur om sign tegenaan te hangen
+        for (BlockFace face : new BlockFace[]{BlockFace.NORTH, BlockFace.EAST, BlockFace.SOUTH, BlockFace.WEST}) {
+            Block support = above.getRelative(face.getOppositeFace());
+            if (support.getType().isSolid()) {
+                above.setType(Material.OAK_WALL_SIGN);
+                BlockData data = above.getBlockData();
+                if (data instanceof org.bukkit.block.data.type.WallSign wallSign) {
+                    wallSign.setFacing(face);
+                    above.setBlockData(wallSign, false);
+                }
+                org.bukkit.block.Sign sign = (org.bukkit.block.Sign) above.getState();
+                sign.getSide(Side.FRONT).line(0, MiniMessage.miniMessage().deserialize("<gray>[<dark_green>T<green>eleporter<gray>]"));
+                sign.getSide(Side.FRONT).line(1, MiniMessage.miniMessage().deserialize(location.getWorld().getName()));
+                sign.getSide(Side.FRONT).line(2, MiniMessage.miniMessage().deserialize("<gray>" + location.getBlockX() + ", " + location.getBlockY() + ", " + location.getBlockZ()));
+                sign.update(true, false);
+                break;
+            }
+        }
     }
 
     private Component displayText(Location location) {

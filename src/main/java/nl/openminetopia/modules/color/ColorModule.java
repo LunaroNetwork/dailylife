@@ -1,6 +1,8 @@
 package nl.openminetopia.modules.color;
 
 import com.craftmend.storm.api.enums.Where;
+import nl.openminetopia.modules.color.models.HometownModel;
+import nl.openminetopia.modules.places.models.CityModel;
 import nl.openminetopia.utils.modules.ExtendedSpigotModule;
 import com.jazzkuh.modulemanager.spigot.SpigotModuleManager;
 import lombok.Getter;
@@ -66,6 +68,22 @@ public class ColorModule extends ExtendedSpigotModule {
                     .map(OwnableColor::getColorId)
                     .toList();
         });
+
+        DailyLife.getCommandManager().getCommandCompletions().registerCompletion("hometowns", c -> {
+            try {
+                return StormDatabase.getInstance()
+                        .getStorm()
+                        .buildQuery(HometownModel.class)
+                        .execute()
+                        .get()
+                        .stream()
+                        .map(HometownModel::getName)
+                        .toList();
+            } catch (Exception e) {
+                e.printStackTrace();
+                return List.of();
+            }
+        });
     }
 
 
@@ -76,8 +94,6 @@ public class ColorModule extends ExtendedSpigotModule {
                     new PrefixColor(colorModel.getId(), colorModel.getColorId(), colorModel.getExpiresAt());
             case OwnableColorType.CHAT ->
                     new ChatColor(colorModel.getId(), colorModel.getColorId(), colorModel.getExpiresAt());
-            case OwnableColorType.NAME ->
-                    new NameColor(colorModel.getId(), colorModel.getColorId(), colorModel.getExpiresAt());
             case OwnableColorType.LEVEL ->
                     new LevelColor(colorModel.getId(), colorModel.getColorId(), colorModel.getExpiresAt());
         }).collect(Collectors.toList());
@@ -87,7 +103,6 @@ public class ColorModule extends ExtendedSpigotModule {
         int activeId = switch (type) {
             case PREFIX -> playerModel.getActivePrefixColorId();
             case CHAT -> playerModel.getActiveChatColorId();
-            case NAME -> playerModel.getActiveNameColorId();
             case LEVEL -> playerModel.getActiveLevelColorId();
         };
 
@@ -111,4 +126,9 @@ public class ColorModule extends ExtendedSpigotModule {
         return StormUtils.deleteModelData(ColorModel.class,
                 query -> query.where("id", Where.EQUAL, color.getId()));
     }
+
+    public Optional<Hometown> getHometownFromPlayer(PlayerModel playerModel) {
+        return Optional.ofNullable(playerModel.getHometown());
+    }
+
 }

@@ -1,0 +1,259 @@
+yes: "<success>Yes"
+no: "<error>No"
+geen: "None"
+go_back: "Back"
+next_page: "Next Page"
+previous_page: "Previous Page"
+locked: "Locked"
+no_player_provided: "<error>You must provide a player."
+time_format: "<yellow><days> days, <yellow><hours> hours, <yellow><minutes> <gold>minutes and <yellow><seconds> <gold>seconds"
+
+# Database
+database_update_error: "<error>Something went wrong while updating the database information."
+database_read_error: "<error>Something went wrong while retrieving the database information."
+
+# Banking
+banking_account_not_found: "<red>No account was found with that name."
+banking_unique_private_account: "<red>You may not create a private account, these are unique per player."
+banking_account_name_no_spaces: "<red>Account name may not contain spaces."
+banking_account_name_length: "<red>Account name must be at least 3 and at most 24 characters long."
+banking_account_name_exists: "<red>An account with this name already exists."
+banking_account_name_invalid: "<red>Account name may only contain letters, numbers and underscores."
+banking_account_creation_error: "<red>Something went wrong while creating the account."
+banking_account_created: "<gold>You created the account</gold> <red><account_name></red><gold>."
+banking_account_deletion_error: "<red>Something went wrong while deleting the account."
+banking_account_deleted: "<gold>The account</gold> <red><account_name></red> <gold>has been deleted."
+banking_account_frozen: "<gold>The account <red><account_name></red> <gold>is now frozen."
+banking_account_unfrozen: "<gold>The account <red><account_name></red> <gold>is no longer frozen."
+banking_account_info_line1: "<gold>Account Name: <red><account_name></red> <gold>(<red>ID: <account_id></red> <gold>)"
+banking_account_info_line2: "<gold> , Frozen: <red><account_frozen></red>"
+banking_account_info_line3: "<gold> , Balance: <red><account_balance></red>"
+banking_account_info_line4: "<gold> , Users: <red><account_users></red>"
+banking_user_already_exists: "<red><player> has already been added to this account."
+banking_user_added: "<gold>You added</gold> <red><player></red><gold> to the account</gold> <red><account_name></red> <gold>with permissions</gold> <red><permission></red><gold>."
+banking_user_deleted: "<gold>You removed</gold> <red><player></red><gold> from the account</gold> <red><account_name></red><gold>."
+banking_private_account: "Private account" # No colors supported.
+banking_company_account: "Company account" # No colors supported.
+banking_savings_account: "Savings account" # No colors supported.
+banking_government_account: "Government account" # No colors supported.
+banking_all_accounts: "<gold>All Accounts"
+banking_select_account_type: "<gold>Select the account type:"
+banking_no_accounts_in_category: "<red>You have no accounts in this category."
+banking_not_enough_money: "<red>You do not have enough money in this account."
+banking_no_withdraw_permission: "<red>You do not have permission to withdraw money from this account."
+banking_withdraw_message: "<gold>You withdrew <red><withdraw_value></red> <gold>from your account."
+banking_no_deposit_permission: "<red>You do not have permission to deposit money into this account."
+banking_deposit_message: "<gold>You deposited <red><deposit_value></red> <gold>into your account."
+
+# Chat
+chat_no_players_in_range: "<red>There are no players nearby to hear your message!"
+chat_chatspy_format: "<dark_gray>[<gray>ChatSpy<dark_gray>]<gray> <player>: <message>"
+chat_commandspy_format: "<dark_gray>[<gray>CommandSpy<dark_gray>]<gray> <player>: <command>"
+
+# Prefix
+prefix_added: "<success>The prefix has successfully been added."
+prefix_removed: "<success>The prefix has successfully been removed."
+prefix_not_found: "<error>The prefix you’re trying to remove doesn’t exist."
+prefix_already_exists: "<error>The prefix could not be added because it already exists."
+prefix_menu_other_no_permission: "<red>You do not have permission to open other people's prefix menus."
+prefix_menu_title: "<black>Choose a prefix."
+prefix_menu_lore_selected: "<primary>You have selected this prefix."
+prefix_menu_lore_select: "<primary>Click <value>here <primary>to choose this prefix."
+prefix_menu_lore_expired: "<error>The prefix has expired."
+prefix_menu_lore_expire_time: "<primary>This prefix expires in <value><expire><primary>."
+prefix_menu_lore_expire_never: "<primary>This prefix <value>never <primary>expires."
+prefix_menu_selected: "<primary>You have selected the prefix <value><selected><primary>."
+prefix_expired: "<error>Your prefix <value><prefix> <error>has expired!"
+
+# Color
+color_not_found: "<red>This color does not exist."
+color_prefix_exists: "<red>This prefix color already exists."
+color_chat_exists: "<red>This chat color already exists."
+color_name_exists: "<red>This name color already exists."
+color_level_exists: "<red>This level color already exists."
+color_prefix_added: "<gold>You added the <color> color <gold>for prefixes."
+color_chat_added: "<gold>You added the <color> chat color<gold>."
+color_name_added: "<gold>You added the <color> name color<gold>."
+color_level_added: "<gold>You added the <color> level color<gold>."
+color_created: "<green>Successfully added, color: <color> <identifier>"
+color_prefix_not_found: "&cThis player does not have this prefix color."
+color_prefix_removed: "<gold>You removed the <color> color <gold>for prefixes."
+color_chat_not_found: "&cThis player does not have this chat color."
+color_chat_removed: "<gold>You removed the <color> chat color<gold>."
+color_name_not_found: "&cThis player does not have this name color."
+color_name_removed: "<gold>You removed the <color> name color<gold>."
+color_level_not_found: "&cThis player does not have this level color."
+color_level_removed: "<gold>You removed the <color> level color<gold>."
+color_prefix_display_name: "<red>Prefix Color"
+color_chat_display_name: "<green>Chat Color"
+color_name_display_name: "<blue>Name Color"
+color_level_display_name: "<light_purple>Level Color"
+color_menu_lore_expired: "<red>This color has expired"
+color_menu_lore_expire_time: "<gold>This color expires in <yellow><time><gold>."
+color_menu_lore_expire_never: "<gold>This color <yellow>never<gold> expires."
+color_menu_name_default: "Default"
+color_menu_selected: "color_menu_selected <type> <selected>"
+
+# Fitness
+fitness_booster_added_to: "<gold>Fitness booster added to <yellow><player><gold>."
+fitness_info_header: "<gold>Fitness information for <yellow><player><gold>:"
+fitness_booster_info: "<gold>Booster: <yellow><amount> , <expires_at>"
+fitness_drinking_points: "<gold>Drink points: <yellow><points>"
+fitness_drinking_fitness: "<gold>Fitness gained from drinking: <yellow><fitness><gold>/<yellow><max_fitness>"
+fitness_health_points: "<gold>Health points: <yellow><points>"
+fitness_health_fitness: "<gold>Fitness gained from health: <yellow><fitness><gold>/<yellow><max_fitness>"
+fitness_walking_distance: "<gold>Distance walked: <yellow><distance>km"
+fitness_walking_fitness: "<gold>Fitness gained from walking: <yellow><fitness><gold>/<yellow><max_fitness>"
+fitness_climbing_distance: "<gold>Distance climbed: <yellow><distance>km"
+fitness_climbing_fitness: "<gold>Fitness gained from climbing: <yellow><fitness><gold>/<yellow><max_fitness>"
+fitness_sprinting_distance: "<gold>Distance sprinted: <yellow><distance>km"
+fitness_sprinting_fitness: "<gold>Fitness gained from sprinting: <yellow><fitness><gold>/<yellow><max_fitness>"
+fitness_swimming_distance: "<gold>Distance swum: <yellow><distance>km"
+fitness_swimming_fitness: "<gold>Fitness gained from swimming: <yellow><fitness><gold>/<yellow><max_fitness>"
+fitness_flying_distance: "<gold>Distance flown: <yellow><distance>km"
+fitness_flying_fitness: "<gold>Fitness gained from flying: <yellow><fitness><gold>/<yellow><max_fitness>"
+fitness_total_fitness: "<gold>Total fitness: <yellow><fitness><gold>/<yellow><max_fitness>"
+fitness_drinking_cooldown: "<red>You need to wait a bit before you can drink again."
+fitness_drinking_water: "<gold>You drank water!"
+fitness_drinking_potion: "<gold>You drank a potion!"
+fitness_no_reset: "<red>You do not have a fitness reset!"
+fitness_reset_enabled: "<gold>Successfully granted a fitness reset to <yellow><player><gold>."
+fitness_reset_disabled: "<gold>Successfully removed the fitness reset from <yellow><player><gold>."
+fitness_reset: "<gold>Your fitness has been successfully <yellow>reset<gold>."
+
+# Places
+
+# Player
+player_not_found: "<error>This player does not exist."
+player_data_loaded: "<success>Your data has been loaded successfully!"
+player_data_not_loaded: "<error>An error occurred while loading your data! Please try again later."
+player_bank_data_not_loaded: "<error>An error occurred while loading your data! Please try again later."
+player_time_self: "<primary>You have spent <value><playtime> <primary>on Daily Life."
+player_time_other_player: "<primary>The playtime of <player> is currently <value><playtime><primary>."
+player_time_format: "<days> days, <hours> hours, <minutes> minutes and <seconds> seconds"
+player_server_join: "<success>[+] <value><username> <primary>joined Daily Life"
+player_server_quit: "<error>[-] <value><username> <primary>left Daily Life"
+
+
+# Plots
+plot_invalid_location: "<red>You are not standing on a valid plot."
+plot_invalid: "<red>This is not a valid plot."
+plot_clear_success: "<gold>You removed all plot <yellow>owners <gold>and <yellow>members<gold>."
+plot_creation_error: "<red>Something went wrong while creating your plot."
+plot_creation_success: "<gold>You created the plot <yellow><plot><gold>."
+plot_no_selection: "<red>You have not made a selection yet, create one with the WorldEdit wand via //wand."
+plot_region_retrieval_error: "<red>Could not retrieve regions for this world."
+plot_not_found: "<red>No region found with the name <plot>."
+plot_deletion_success: "<gold>Plot named <yellow><plot> <gold>deleted."
+plot_description_removed: "<gold>Plot description for <yellow><plot> <gold>removed."
+plot_description_updated: "<gold>Plot description for <yellow><plot> <gold>changed to <yellow><description><gold>."
+plot_not_valid: "<red>You are not on a valid plot."
+plot_info_header: "<gold><st>----------------------------------------------"
+plot_info_title: "<gold>Plot information for: <yellow><plot>"
+plot_info_owners: "<gold>Owners: <yellow><owners>"
+plot_info_members: "<gold>Members: <yellow><members>"
+plot_info_description: "<gold>Description: <yellow><description>"
+plot_info_footer: "<gold><st>----------------------------------------------"
+plot_not_owner: "<red>You are not an owner of this plot."
+plot_member_already: "<red><player> is already a member of this plot."
+plot_member_added: "<gold>You added <yellow><player><gold> to the plot."
+plot_member_not_added: "<red><player> is not a member of this plot."
+plot_member_removed: "<gold>You removed <yellow><player><gold> from this plot."
+plot_owner_already: "<red><player> is already an owner of this plot."
+plot_owner_added: "<gold>You added <yellow><player><gold> as an owner of this plot."
+plot_owner_not_added: "<red><player> is not an owner of this plot."
+plot_owner_removed: "<gold>You removed <yellow><player><gold> as an owner of this plot."
+plot_set_tranferable: "<gold>You made plot <yellow><plot><gold> transferable."
+plot_set_untranferable: "<gold>You made plot <yellow><plot><gold> non-transferable."
+plot_calculate_summary: "<white>[<red><bold>Calculate<reset><white>] <white>Costs for this building:<new_line><white>[<red><bold>Calculate<reset><white>] <white>Plot price: <red>€ <plot_price><new_line><white>[<red><bold>Calculate<reset><white>] <white>Building price: <red>€ <building_price><new_line><white>[<red><bold>Calculate<reset><white>] <white>Builders cost: <red>€ <builders_price><new_line><white>[<red><bold>Calculate<reset><white>] <white>Total cost: <red>€ <total_price>"
+
+# Emergency command
+emergency_too_soon: "<red><b>112</b></red> <dark_gray>, <gray>You cannot submit alerts so quickly in a row."
+emergency_cooldown: "<red><b>112</b></red> <dark_gray>, <gray>Try again in <white><time><gray>."
+emergency_format: "<red>[<white>112<red>] [<white><world>, <x>, <y>, <z></white><red>] <gray><sender>:</gray> <white><message></white>"
+
+# Criminal records
+police_criminal_record_date_format: "dd-MM-yyyy HH:mm:ss"
+police_criminal_record_none: "<yellow><player> <gold>has no criminal record."
+police_criminal_record_not_found: "<dark_red><player> <red>has no criminal record entry with this ID."
+police_criminal_record_added: "<gold>Successfully added <yellow><description><gold> to the criminal record of <yellow><player><gold>."
+police_criminal_record_removed: "<gold>Successfully removed <yellow><description><gold> from the criminal record of <yellow><player><gold>."
+police_criminal_record_info_entry: "<yellow><id>. <gold>, <yellow><description> <gold>on <yellow><date> <gold>by <yellow><officer>."
+
+
+# Bodysearch
+police_bodysearch_self: "<red>You cannot <dark_red>search<red> yourself!"
+police_bodysearch_too_far: "<red>This player is too far away to <dark_red>search<red>!"
+police_bodysearch_executor: "<gold>You are searching <yellow><player><gold>."
+police_bodysearch_target: "<gold>You are being searched by <yellow><player><gold>."
+
+# Walkie-talkie
+police_walkietalkie_type_your_message: "<gold>Type your message now to send to <yellow><player><gold>."
+police_walkietalkie_private_format: "<gold>[<yellow>Private Message<gold>] <gray><player> <dark_gray>-> <gray><target>: <message>"
+police_walkietalkie_format: "<gold>[<yellow>Police<gold>] <gray><player>: <message>"
+police_walkietalkie_enabled: "<gold>You are now in the <yellow>police chat"
+police_walkietalkie_disabled: "<gold>You are no longer in the <yellow>police chat"
+police_walkietalkie_emergency_cooldown: "<red>You need to wait before pressing the <dark_red>emergency button<red> again."
+police_walkietalkie_emergency_format: "<dark_red>[<red>EMERGENCY BUTTON<dark_red>] <gray><player> <dark_red>(<red><world_name>, <x>, <y>, <z><dark_red>) <gray>pressed the emergency button!"
+
+# Handcuffs
+police_handcuff_on: "<red>You have been handcuffed!"
+police_handcuff_off: "<green>You have been uncuffed!"
+police_handcuff_cant_pvp: "<red>You cannot fight while you are in <dark_red>handcuffs<red>."
+
+
+# Staffchat
+staff_chat_format: "<dark_gray>[<gold><b>Staff</b><dark_gray>] <dark_gray>(<red><b><world_name></b><dark_gray>) <green><player><white>: <message>"
+
+# Mod Info
+staff_mod_info_title: "Player Information"
+staff_mod_info_name: "Username: <value><player>"
+staff_mod_info_uuid: "UUID: <value><uuid>"
+staff_mod_info_hometown: "Hometown: <value><name_color><hometown>"
+staff_mod_info_level: "Level: <value><level> (<levelups><value>)"
+staff_mod_info_balance: "Balance: <value><balance_formatted>"
+staff_mod_info_prefix_category: "Prefixes:"
+staff_mod_info_prefix_list: "<prefixes>"
+staff_mod_info_plot_category: "Plots:"
+staff_mod_info_plot_list: "<regions>"
+
+# Mod Seen
+staff_mod_seen_online: "<primary>Player <value><player> <primary>is <success>online<primary>."
+staff_mod_seen_nodata: "<error>Couldn't load data for <value><player><error>."
+staff_mod_seen_offline: "<primary>Player <value><player> <primary>has been <error>offline <primary>since <value><time><primary>."
+
+# Trashcan
+trashcan_title: "<dark_red>TRASHCAN"
+trashcan_message: "<gold>You opened the trashcan.<new_line><red>WARNING: Everything you put in here is gone FOREVER."
+
+# Places (Cities/Worlds)
+place_enter_title: "<city_color>Welcome to"
+place_enter_subtitle: "<city_color><city_loadingname>"
+
+# Levelcheck
+levelcheck_wage: "<gold>You received your base income of <yellow><amount> <gold>euros!"
+levelcheck_already_at_level: "<new_line><dark_red>Welcome <red><player><dark_red>! At this moment I <red>cannot <dark_red>provide you with a higher level. You can see your potential level in the scoreboard next to your current level."
+levelcheck_not_enough_money: "<dark_red>You do <red>not <dark_red>have enough money to level up."
+levelcheck_success: "<gold>You successfully advanced to <yellow>level <level><gold>!"
+
+# PvP
+misc_pvp_disabled: "<error>PvP is disabled."
+
+# Currencies
+currency_automatic_reward: "<gold>You received <red><amount> <display_name><gold>."
+currency_invalid_amount: "<red>You did not specify a valid amount."
+currency_show: "<gold>You currently have <red><amount> <display_name>"
+currency_show_other: "<red><target> <gold>currently has <red><amount> <display_name><gold>."
+currency_balance_set: "<gold>You set <red><target><gold>'s <red><display_name> <gold>to <red><amount><gold>."
+currency_balance_add: "<gold>You added <red><amount> <display_name> <gold>to <red><target><gold>."
+currency_balance_remove: "<gold>You removed <red><amount> <display_name> <gold>from <red><target><gold>."
+
+# Teleporter
+teleporter_placed: "<gold>Teleporter has been placed."
+teleporter_created: "<gold>Teleporter successfully created."
+
+# Multi Line Messages
+multi_message_title: "<#5454FB>➤ <#FBD87C><text>"
+multi_message_category: "<#FBA800>➤ <#FBCB49><text>"
+multi_message_value: "<#00A8A8>➤ <gray><text>"
+multi_message_list: "<dark_gray>➤ <gray><text>"

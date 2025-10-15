@@ -3,7 +3,7 @@ package nl.openminetopia.modules.police.handcuff.objects;
 import lombok.AllArgsConstructor;
 import lombok.Data;
 import nl.openminetopia.DailyLife;
-import nl.openminetopia.configuration.MessageConfiguration;
+import nl.openminetopia.configuration.language.MessageConfiguration;
 import nl.openminetopia.modules.police.handcuff.runnables.HandcuffRunnable;
 import nl.openminetopia.modules.police.utils.HandcuffUtils;
 import nl.openminetopia.utils.ChatUtils;

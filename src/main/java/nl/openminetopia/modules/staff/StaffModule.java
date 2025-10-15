@@ -1,5 +1,6 @@
 package nl.openminetopia.modules.staff;
 
+import nl.openminetopia.modules.staff.mod.commands.subcommands.*;
 import nl.openminetopia.utils.modules.ExtendedSpigotModule;
 import com.jazzkuh.modulemanager.spigot.SpigotModuleManager;
 import nl.openminetopia.DailyLife;
@@ -13,9 +14,6 @@ import nl.openminetopia.modules.staff.admintool.listeners.PlayerInteractListener
 import nl.openminetopia.modules.staff.chat.commands.StaffchatCommand;
 import nl.openminetopia.modules.staff.chat.listeners.PlayerChatListener;
 import nl.openminetopia.modules.staff.mod.commands.ModCommand;
-import nl.openminetopia.modules.staff.mod.commands.subcommands.ModChatSpyCommand;
-import nl.openminetopia.modules.staff.mod.commands.subcommands.ModCommandSpyCommand;
-import nl.openminetopia.modules.staff.mod.commands.subcommands.ModSetLevelCommand;
 import org.jetbrains.annotations.NotNull;
 
 public class StaffModule extends ExtendedSpigotModule {
@@ -29,6 +27,8 @@ public class StaffModule extends ExtendedSpigotModule {
         registerComponent(new ModSetLevelCommand());
         registerComponent(new ModChatSpyCommand());
         registerComponent(new ModCommandSpyCommand());
+        registerComponent(new ModInfoCommand());
+        registerComponent(new ModHometownCommand());
 
         registerComponent(new AdminToolCommand());
         registerComponent(new AdminToolOpenCommand());

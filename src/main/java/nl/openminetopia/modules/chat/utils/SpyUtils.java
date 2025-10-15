@@ -5,7 +5,7 @@ import nl.openminetopia.DailyLife;
 import nl.openminetopia.api.player.PlayerManager;
 import nl.openminetopia.api.player.objects.MinetopiaPlayer;
 import nl.openminetopia.configuration.DefaultConfiguration;
-import nl.openminetopia.configuration.MessageConfiguration;
+import nl.openminetopia.configuration.language.MessageConfiguration;
 import nl.openminetopia.utils.ChatUtils;
 import nl.openminetopia.utils.webhooks.DiscordWebhook;
 import org.bukkit.Bukkit;

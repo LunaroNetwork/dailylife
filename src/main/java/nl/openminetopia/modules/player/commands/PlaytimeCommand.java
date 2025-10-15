@@ -2,9 +2,10 @@ package nl.openminetopia.modules.player.commands;
 
 import co.aikar.commands.BaseCommand;
 import co.aikar.commands.annotation.*;
+import nl.openminetopia.DailyLife;
 import nl.openminetopia.api.player.PlayerManager;
 import nl.openminetopia.api.player.objects.MinetopiaPlayer;
-import nl.openminetopia.configuration.MessageConfiguration;
+import nl.openminetopia.configuration.language.MessageConfiguration;
 import nl.openminetopia.modules.player.utils.PlaytimeUtil;
 import nl.openminetopia.utils.ChatUtils;
 import org.bukkit.OfflinePlayer;
@@ -20,25 +21,25 @@ public class PlaytimeCommand extends BaseCommand {
 
         MinetopiaPlayer minetopiaPlayer = PlayerManager.getInstance().getOnlineMinetopiaPlayer(player);
         if (minetopiaPlayer == null) {
-            ChatUtils.sendMessage(player, MessageConfiguration.message("database_read_error"));
+            ChatUtils.sendMessage(player, DailyLife.getMessageConfiguration().message("database_read_error", player));
             return;
         }
 
         if (target == null || !player.hasPermission("openminetopia.playtime.others")) {
-            ChatUtils.sendFormattedMessage(minetopiaPlayer, MessageConfiguration.message("player_time_self")
-                    .replace("<playtime>", PlaytimeUtil.formatPlaytime(minetopiaPlayer.getPlaytime())));
+            ChatUtils.sendFormattedMessage(minetopiaPlayer, DailyLife.getMessageConfiguration().message("player_time_self", player)
+                    .replace("<playtime>", PlaytimeUtil.formatPlaytime(minetopiaPlayer.getPlaytime(), player)));
             return;
         }
 
         PlayerManager.getInstance().getMinetopiaPlayer(target).whenComplete((targetMinetopiaPlayer, throwable1) -> {
             if (targetMinetopiaPlayer == null) {
-                ChatUtils.sendFormattedMessage(minetopiaPlayer, MessageConfiguration.message("player_not_found"));
+                ChatUtils.sendFormattedMessage(minetopiaPlayer, DailyLife.getMessageConfiguration().message("player_not_found", player));
                 return;
             }
 
-            ChatUtils.sendFormattedMessage(minetopiaPlayer, MessageConfiguration.message("player_time_other_player")
+            ChatUtils.sendFormattedMessage(minetopiaPlayer, DailyLife.getMessageConfiguration().message("player_time_other_player", player)
                     .replace("<player>", target.getName() == null ? "null" : target.getName())
-                    .replace("<playtime>", PlaytimeUtil.formatPlaytime(targetMinetopiaPlayer.getPlaytime())));
+                    .replace("<playtime>", PlaytimeUtil.formatPlaytime(targetMinetopiaPlayer.getPlaytime(), player)));
         });
     }
 }

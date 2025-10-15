@@ -3,7 +3,7 @@ package nl.openminetopia.modules.prefix.commands.subcommands;
 import co.aikar.commands.BaseCommand;
 import co.aikar.commands.annotation.*;
 import nl.openminetopia.api.player.PlayerManager;
-import nl.openminetopia.configuration.MessageConfiguration;
+import nl.openminetopia.configuration.language.MessageConfiguration;
 import nl.openminetopia.modules.prefix.objects.Prefix;
 import nl.openminetopia.utils.ChatUtils;
 import org.bukkit.OfflinePlayer;
@@ -14,7 +14,7 @@ public class PrefixRemoveCommand extends BaseCommand {
 
     @Subcommand("remove")
     @Syntax("<player> <prefix>")
-    @CommandPermission("openminetopia.prefix.remove")
+    @CommandPermission("ln.dl.prefix.remove")
     @CommandCompletion("@players @playerPrefixes")
     @Description("Verwijder een prefix van een speler.")
     public void removePrefix(Player player, OfflinePlayer offlinePlayer, String prefixName) {

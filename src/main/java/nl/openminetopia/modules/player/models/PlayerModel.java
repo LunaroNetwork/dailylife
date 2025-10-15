@@ -2,11 +2,14 @@ package nl.openminetopia.modules.player.models;
 
 import com.craftmend.storm.api.StormModel;
 import com.craftmend.storm.api.enums.ColumnType;
+import com.craftmend.storm.api.enums.KeyType;
 import com.craftmend.storm.api.markers.Column;
 import com.craftmend.storm.api.markers.Table;
 import lombok.Data;
 import lombok.EqualsAndHashCode;
 import nl.openminetopia.modules.color.models.ColorModel;
+import nl.openminetopia.modules.color.models.HometownModel;
+import nl.openminetopia.modules.color.objects.Hometown;
 import nl.openminetopia.modules.fitness.models.FitnessBoosterModel;
 import nl.openminetopia.modules.fitness.models.FitnessStatisticModel;
 import nl.openminetopia.modules.police.models.CriminalRecordModel;
@@ -53,14 +56,14 @@ public class PlayerModel extends StormModel {
     @Column(name = "active_prefixcolor_id")
     private Integer activePrefixColorId;
 
-    @Column(name = "active_namecolor_id")
-    private Integer activeNameColorId;
-
     @Column(name = "active_chatcolor_id")
     private Integer activeChatColorId;
 
     @Column(name = "active_levelcolor_id")
     private Integer activeLevelColorId;
+
+    @Column(name = "hometown")
+    private Hometown hometown;
 
     @Column(name = "staffchat", defaultValue = "false")
     private Boolean staffchatEnabled;
@@ -94,4 +97,7 @@ public class PlayerModel extends StormModel {
 
     @Column(name = "fitness_reset", defaultValue = "false")
     private Boolean fitnessReset;
+
+    @Column(name = "last_seen", defaultValue = "0")
+    private Long lastSeen;
 }
