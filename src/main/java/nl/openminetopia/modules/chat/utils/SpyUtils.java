@@ -2,11 +2,9 @@ package nl.openminetopia.modules.chat.utils;
 
 import lombok.experimental.UtilityClass;
 import nl.openminetopia.DailyLife;
-import nl.openminetopia.OpenMinetopia;
 import nl.openminetopia.api.player.PlayerManager;
 import nl.openminetopia.api.player.objects.MinetopiaPlayer;
 import nl.openminetopia.configuration.DefaultConfiguration;
-import nl.openminetopia.configuration.MessageConfiguration;
 import nl.openminetopia.utils.ChatUtils;
 import nl.openminetopia.utils.webhooks.DiscordWebhook;
 import org.bukkit.Bukkit;
