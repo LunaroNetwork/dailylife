@@ -1,5 +1,8 @@
 package nl.openminetopia.modules.language;
 
+import nl.openminetopia.DailyLife;
+import nl.openminetopia.configuration.DefaultConfiguration;
+
 import java.sql.*;
 import java.util.UUID;
 
@@ -7,11 +10,11 @@ public class LanguageDatabase {
     private Connection connection;
 
     // Vul hier je database gegevens in
-    private final String host = "localhost";     // of IP van je DB server
-    private final int port = 3306;               // standaard MySQL poort
-    private final String database = "lunaro_language";
-    private final String username = "lunaro_dev";
-    private final String password = "wachtwoord";
+    private final String host = DailyLife.getDefaultConfiguration().getLanguageDatabaseHost();
+    private final int port = DailyLife.getDefaultConfiguration().getLanguageDatabasePort();
+    private final String database = DailyLife.getDefaultConfiguration().getLanguageDatabaseName();;
+    private final String username = DailyLife.getDefaultConfiguration().getLanguageDatabaseUsername();;
+    private final String password = DailyLife.getDefaultConfiguration().getLanguageDatabasePassword();;
 
     public void connect() throws SQLException {
         if (connection != null && !connection.isClosed()) return;
