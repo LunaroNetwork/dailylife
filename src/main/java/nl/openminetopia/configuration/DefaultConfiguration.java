@@ -296,7 +296,7 @@ public class DefaultConfiguration extends ConfigurateConfig {
                 "<city_color><city_loadingname>",
                 " ",
                 "<city_color>Date/Time:",
-                "<data> / <time>",
+                "<date> / <time>",
                 " ",
                 "<city_color>Influence level:",
                 "<level> -> <calculated_level> (<levelups>)",
