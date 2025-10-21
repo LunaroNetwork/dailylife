@@ -299,7 +299,7 @@ public class DefaultConfiguration extends ConfigurateConfig {
                 "<date> / <time>",
                 " ",
                 "<city_color>Influence level:",
-                "<level> -> <calculated_level> (<levelups>)",
+                "<level> -> <calculated_level> <white>(<levelups><white>)",
                 "",
                 "<city_color>Fitness:",
                 "<fitness>/<max_fitness>",
