@@ -147,7 +147,7 @@ plot_description_removed: "<gold>Plot description van <yellow><plot> <gold>verwi
 plot_description_updated: "<gold>Plot description van <yellow><plot> <gold>veranderd naar <yellow><description> <gold>."
 plot_not_valid: "<red>Je staat niet op een geldig plot."
 plot_info_title: "Plot informatie"
-plot_info_number: "Plotnummer: <value><plot>"
+plot_info_plotnumber: "Plotnummer: <value><plot>"
 plot_info_owners: "Eigenaar: <value><owners>"
 plot_info_members: "Leden: <value><members>"
 plot_info_staffinfo: "Staff Informatie"

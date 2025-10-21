@@ -150,7 +150,7 @@ plot_description_removed: "<gold>Plot description for <yellow><plot> <gold>remov
 plot_description_updated: "<gold>Plot description for <yellow><plot> <gold>changed to <yellow><description><gold>."
 plot_not_valid: "<red>You are not on a valid plot."
 plot_info_title: "Plot information"
-plot_info_number: "Plotnumber: <value><plot>"
+plot_info_plotnumber: "Plotnumber: <value><plot>"
 plot_info_owners: "Owner: <value><owners>"
 plot_info_members: "Members: <value><members>"
 plot_info_staffinfo: "Staff Information"
