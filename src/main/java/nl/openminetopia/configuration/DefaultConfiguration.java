@@ -232,7 +232,7 @@ public class DefaultConfiguration extends ConfigurateConfig {
          * Database configuration
          */
 
-        String databaseTypeString = rootNode.node("database.main", "type").getString("sqlite").toUpperCase();
+        String databaseTypeString = rootNode.node("database", "main", "type").getString("sqlite").toUpperCase();
         try {
             this.databaseType = DatabaseType.valueOf(databaseTypeString);
         } catch (IllegalArgumentException e) {
@@ -240,17 +240,17 @@ public class DefaultConfiguration extends ConfigurateConfig {
             DailyLife.getInstance().getLogger().severe("Couldn't find database type for: " + databaseTypeString + ", defaulting to SQLite.");
         }
 
-        this.databaseHost = rootNode.node("database.main", "host").getString("localhost");
-        this.databasePort = rootNode.node("database.main", "port").getInt(3306);
-        this.databaseName = rootNode.node("database.main", "name").getString("dailylife");
-        this.databaseUsername = rootNode.node("database.main", "username").getString("root");
-        this.databasePassword = rootNode.node("database.main", "password").getString("password");
+        this.databaseHost = rootNode.node("database", "main", "host").getString("localhost");
+        this.databasePort = rootNode.node("database", "main", "port").getInt(3306);
+        this.databaseName = rootNode.node("database", "main", "name").getString("dailylife");
+        this.databaseUsername = rootNode.node("database", "main", "username").getString("root");
+        this.databasePassword = rootNode.node("database", "main", "password").getString("password");
 
-        this.languageDatabaseHost = rootNode.node("database.language", "host").getString("localhost");
-        this.languageDatabasePort = rootNode.node("database.language", "port").getInt(3306);
-        this.languageDatabaseName = rootNode.node("database.language", "name").getString("language");
-        this.languageDatabaseUsername = rootNode.node("database.language", "username").getString("root");
-        this.languageDatabasePassword = rootNode.node("database.language", "password").getString("password");
+        this.languageDatabaseHost = rootNode.node("database", "language", "host").getString("localhost");
+        this.languageDatabasePort = rootNode.node("database", "language", "port").getInt(3306);
+        this.languageDatabaseName = rootNode.node("database", "language", "name").getString("language");
+        this.languageDatabaseUsername = rootNode.node("database", "language", "username").getString("root");
+        this.languageDatabasePassword = rootNode.node("database", "language", "password").getString("password");
 
         /*
          * Rest API configuration
