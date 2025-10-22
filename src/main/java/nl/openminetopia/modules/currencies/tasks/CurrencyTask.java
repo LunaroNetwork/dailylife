@@ -50,7 +50,7 @@ public class CurrencyTask extends AbstractDirtyRunnable<UUID> {
             if (minetopiaPlayer.getPlaytime() - currency.getLastReward() >= configCurrency.getInterval() * 1000L) {
                 currency.setLastReward(minetopiaPlayer.getPlaytime());
 
-                String message = MessageConfiguration.message("currency_automatic_reward")
+                String message = DailyLife.getMessageConfiguration().message("currency_automatic_reward", minetopiaPlayer.getBukkit())
                         .replaceAll("<amount>", String.valueOf(configCurrency.getAmount()))
                         .replaceAll("<display_name>", configCurrency.getDisplayName());
 
