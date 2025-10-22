@@ -169,6 +169,7 @@ plot_set_tranferable: "<gold>You made plot <yellow><plot><gold> transferable."
 plot_set_untranferable: "<gold>You made plot <yellow><plot><gold> non-transferable."
 plot_calculate_summary: "<white>[<red><bold>Calculate<reset><white>] <white>Costs for this building:<new_line><white>[<red><bold>Calculate<reset><white>] <white>Plot price: <red>€ <plot_price><new_line><white>[<red><bold>Calculate<reset><white>] <white>Building price: <red>€ <building_price><new_line><white>[<red><bold>Calculate<reset><white>] <white>Builders cost: <red>€ <builders_price><new_line><white>[<red><bold>Calculate<reset><white>] <white>Total cost: <red>€ <total_price>"
 plot_error_manager_loading: "plot_error_manager_loading"
+plot_teleported: "plot_teleported"
 
 # Emergency command
 emergency_too_soon: "<red><b>112</b></red> <dark_gray>, <gray>You cannot submit alerts so quickly in a row."
