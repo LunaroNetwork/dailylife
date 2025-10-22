@@ -91,7 +91,7 @@ public class ModInfoCommand extends BaseCommand {
             RegionManager manager = container.get(world);
 
             if (manager == null) {
-                player.sendMessage(ChatUtils.format(minetopiaPlayer, "<red>Er ging iets mis met het ophalen van de regio's."));
+                player.sendMessage(DailyLife.getMessageConfiguration().component("plot_error_manager_loading", player));
                 return;
             }
 
