@@ -226,6 +226,9 @@ staff_mod_seen_online: "<primary>Player <value><player> <primary>is <success>onl
 staff_mod_seen_nodata: "<error>Couldn't load data for <value><player><error>."
 staff_mod_seen_offline: "<primary>Player <value><player> <primary>has been <error>offline <primary>since <value><time><primary>."
 
+# Mod Hometown
+staff_mod_hometown_set: "<primary>The hometown of <value><player> <primary>has been set successfully."
+
 # Trashcan
 trashcan_title: "<dark_red>TRASHCAN"
 trashcan_message: "<gold>You opened the trashcan.<new_line><red>WARNING: Everything you put in here is gone FOREVER."

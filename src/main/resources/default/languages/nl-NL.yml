@@ -214,6 +214,9 @@ staff_mod_info_balance: "Balance: <balance_formatted>"
 staff_mod_info_plot_category: "Plots:"
 staff_mod_info_plot_list: "<regions>"
 
+# Mod Hometown
+staff_mod_hometown_set: "<primary>The hometown of <value><player> <primary>has been set successfully."
+
 # Trashcan
 trashcan_title: "<dark_red>PRULLENBAK"
 trashcan_message: "<gold>Je hebt de prullenbak geopend.<new_line><red>WAARSCHUWING: Alles wat je hier in stopt, gaat voor ALTIJD weg."
