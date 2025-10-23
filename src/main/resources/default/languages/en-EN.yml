@@ -87,7 +87,7 @@ color_chat_display_name: "<primary>Chat Color"
 color_level_display_name: "<primary>Level Color"
 color_menu_lore_expired: "<red>This color has expired"
 color_menu_lore_expire_time: "<gold>This color expires in <yellow><time><gold>."
-color_menu_lore_expire_never: "<gold>This color <yellow>never<gold> expires."
+color_menu_lore_expire_never: "<primary>This color <value>never<primary> expires."
 color_menu_name_default: "Default"
 color_menu_selected: "color_menu_selected <type> <selected>"
 
