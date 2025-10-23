@@ -19,5 +19,4 @@ public class RegisteredCurrency {
     private boolean automatic = false;
     private int interval;
     private double amount;
-
 }

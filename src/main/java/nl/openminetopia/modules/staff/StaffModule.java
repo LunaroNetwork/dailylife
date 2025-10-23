@@ -29,6 +29,7 @@ public class StaffModule extends ExtendedSpigotModule {
         registerComponent(new ModCommandSpyCommand());
         registerComponent(new ModInfoCommand());
         registerComponent(new ModHometownCommand());
+        registerComponent(new ModSeenCommand());
 
         registerComponent(new AdminToolCommand());
         registerComponent(new AdminToolOpenCommand());

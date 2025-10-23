@@ -9,6 +9,7 @@ import com.sk89q.worldguard.WorldGuard;
 import com.sk89q.worldguard.protection.managers.RegionManager;
 import com.sk89q.worldguard.protection.regions.ProtectedRegion;
 import com.sk89q.worldguard.protection.regions.RegionContainer;
+import nl.openminetopia.DailyLife;
 import nl.openminetopia.api.player.PlayerManager;
 import nl.openminetopia.api.player.objects.MinetopiaPlayer;
 import nl.openminetopia.utils.ChatUtils;
@@ -33,20 +34,21 @@ public class PlotTeleportCommand extends BaseCommand {
         if (minetopiaPlayer == null) return;
 
         if (regionManager == null) {
-            player.sendMessage(ChatUtils.format(minetopiaPlayer, "<red>Kon geen regio's ophalen voor deze wereld."));
+            player.sendMessage(DailyLife.getMessageConfiguration().component("plot_error_manager_loading", player));
             return;
         }
 
         ProtectedRegion region = regionManager.getRegion(name);
 
         if (region == null) {
-            player.sendMessage(ChatUtils.format(minetopiaPlayer, "<red>Geen region gevonden met de naam " + name + "."));
+            player.sendMessage(ChatUtils.format(minetopiaPlayer, DailyLife.getMessageConfiguration().message("plot_not_found", player)
+                    .replace("<plot>", name)));
             return;
         }
 
         BlockVector3 center = region.getMaximumPoint().subtract(region.getMinimumPoint()).divide(2).add(region.getMinimumPoint());
         Location location = new Location(player.getWorld(), center.x(), center.y(), center.z());
         player.teleport(location);
-        player.sendMessage(ChatUtils.format(minetopiaPlayer, "<dark_aqua>Je bent naar plot <aqua>" + region.getId() + " <dark_aqua>geteleporteerd."));
+        player.sendMessage(ChatUtils.format(minetopiaPlayer, DailyLife.getMessageConfiguration().message("plot_teleported", player)));
     }
 }

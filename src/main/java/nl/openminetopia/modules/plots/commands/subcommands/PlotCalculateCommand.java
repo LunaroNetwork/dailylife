@@ -29,7 +29,7 @@ import org.bukkit.entity.Player;
 public class PlotCalculateCommand extends BaseCommand {
 
     @Subcommand("calculate")
-    @CommandPermission("openminetopia.plot.calculate")
+    @CommandPermission("ln.dl.plot.calculate")
     @Description("Bereken de prijs van een plot.")
     @CommandCompletion("@plotName")
     public void plotCalculate(Player player, @Optional String plotName) {
@@ -43,7 +43,7 @@ public class PlotCalculateCommand extends BaseCommand {
         if (plotName == null) region = PlotUtil.getPlot(player.getLocation());
 
         if (region == null) {
-            player.sendMessage(MessageConfiguration.component("plot_invalid_location"));
+            player.sendMessage(DailyLife.getMessageConfiguration().component("plot_invalid_location", player));
             return;
         }
 
@@ -61,7 +61,7 @@ public class PlotCalculateCommand extends BaseCommand {
                 minLocation = new Location(player.getWorld(), min.x(), min.y(), min.z());
                 maxLocation = new Location(player.getWorld(), max.x(), max.y(), max.z());
             } catch (IncompleteRegionException e) {
-                player.sendMessage(MessageConfiguration.component("plot_no_selection"));
+                player.sendMessage(DailyLife.getMessageConfiguration().component("plot_no_selection", player));
                 return;
             }
         }
@@ -71,7 +71,7 @@ public class PlotCalculateCommand extends BaseCommand {
         double plotPrice = calculatePlotPrice(minLocation, maxLocation);
         double totalPrice = buildingPrice + buildersPrice;
 
-        ChatUtils.sendFormattedMessage(minetopiaPlayer, MessageConfiguration.message("plot_calculate_summary")
+        ChatUtils.sendFormattedMessage(minetopiaPlayer, DailyLife.getMessageConfiguration().message("plot_calculate_summary", minetopiaPlayer.getBukkit())
                 .replace("<total_price>", String.valueOf(totalPrice))
                 .replace("<plot_price>", String.valueOf(plotPrice))
                 .replace("<building_price>", String.valueOf(buildingPrice))

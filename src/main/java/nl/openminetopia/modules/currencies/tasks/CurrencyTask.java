@@ -1,18 +1,14 @@
 package nl.openminetopia.modules.currencies.tasks;
 
-
 import nl.openminetopia.DailyLife;
 import nl.openminetopia.api.player.PlayerManager;
 import nl.openminetopia.api.player.objects.MinetopiaPlayer;
-import nl.openminetopia.configuration.language.MessageConfiguration;
 import nl.openminetopia.framework.runnables.AbstractDirtyRunnable;
 import nl.openminetopia.modules.currencies.CurrencyModule;
 import nl.openminetopia.modules.currencies.models.CurrencyModel;
 import nl.openminetopia.modules.currencies.objects.RegisteredCurrency;
 import nl.openminetopia.modules.data.storm.StormDatabase;
-
 import nl.openminetopia.utils.ChatUtils;
-
 
 import java.util.List;
 import java.util.UUID;
@@ -47,10 +43,14 @@ public class CurrencyTask extends AbstractDirtyRunnable<UUID> {
             }
             if (!configCurrency.isAutomatic()) continue;
 
-            if (minetopiaPlayer.getPlaytime() - currency.getLastReward() >= configCurrency.getInterval() * 1000L) {
+            // bepaal het moment vanaf wanneer de currency "actief" is
+            long referencePlaytime = Math.max(currency.getLastReward(), currency.getCreationPlaytime() != null ? currency.getCreationPlaytime() : 0);
+
+            // Controleer alleen playtime sinds de currency bestaat
+            if (minetopiaPlayer.getPlaytime() - referencePlaytime >= configCurrency.getInterval() * 1000L) {
                 currency.setLastReward(minetopiaPlayer.getPlaytime());
 
-                String message = MessageConfiguration.message("currency_automatic_reward")
+                String message = DailyLife.getMessageConfiguration().message("currency_automatic_reward", minetopiaPlayer.getBukkit())
                         .replaceAll("<amount>", String.valueOf(configCurrency.getAmount()))
                         .replaceAll("<display_name>", configCurrency.getDisplayName());
 

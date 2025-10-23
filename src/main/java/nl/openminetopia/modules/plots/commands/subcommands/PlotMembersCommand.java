@@ -4,6 +4,7 @@ import co.aikar.commands.BaseCommand;
 import co.aikar.commands.annotation.*;
 import com.destroystokyo.paper.profile.PlayerProfile;
 import com.sk89q.worldguard.protection.regions.ProtectedRegion;
+import nl.openminetopia.DailyLife;
 import nl.openminetopia.configuration.language.MessageConfiguration;
 import nl.openminetopia.modules.plots.PlotModule;
 import nl.openminetopia.modules.plots.utils.PlotUtil;
@@ -19,6 +20,7 @@ public class PlotMembersCommand extends BaseCommand {
     @Description("Voegt een speler toe aan een plot.")
     @CommandCompletion("@players @plotName")
     @Syntax("<speler> <region>")
+    @CommandPermission("ln.dl.plot.addmember")
     public void addPlotMember(Player player, OfflinePlayer offlinePlayer, @Optional String regionName) {
         ProtectedRegion region = PlotUtil.getPlot(player.getLocation());
         if (regionName != null) {
@@ -26,44 +28,51 @@ public class PlotMembersCommand extends BaseCommand {
         }
 
         if (offlinePlayer == null) {
-            ChatUtils.sendMessage(player, MessageConfiguration.message("player_not_found")
-                    .replace("<player>", offlinePlayer.getName() != null ? offlinePlayer.getName() : "Onbekend"));
+            ChatUtils.sendMessage(player, DailyLife.getMessageConfiguration().message("player_not_found", player)
+                    .replace("<player>", offlinePlayer.getName() != null ? offlinePlayer.getName() :
+                            DailyLife.getMessageConfiguration().message("unknown", player)));
             return;
         }
 
         if (region == null) {
-            ChatUtils.sendMessage(player, MessageConfiguration.message("plot_invalid_location")
-                    .replace("<player>", offlinePlayer.getName() != null ? offlinePlayer.getName() : "Onbekend"));
+            ChatUtils.sendMessage(player, DailyLife.getMessageConfiguration().message("plot_invalid_location", player)
+                    .replace("<player>", offlinePlayer.getName() != null ? offlinePlayer.getName() :
+                            DailyLife.getMessageConfiguration().message("unknown", player)));
             return;
         }
 
         if (region.getFlag(PlotModule.PLOT_FLAG) == null) {
-            ChatUtils.sendMessage(player, MessageConfiguration.message("plot_not_valid")
-                    .replace("<player>", offlinePlayer.getName() != null ? offlinePlayer.getName() : "Onbekend"));
+            ChatUtils.sendMessage(player, DailyLife.getMessageConfiguration().message("plot_not_valid", player)
+                    .replace("<player>", offlinePlayer.getName() != null ? offlinePlayer.getName() :
+                            DailyLife.getMessageConfiguration().message("unknown", player)));
             return;
         }
 
-        if (!region.getOwners().contains(player.getUniqueId()) && !player.hasPermission("openminetopia.plot.removemember")) {
-            ChatUtils.sendMessage(player, MessageConfiguration.message("plot_not_owner")
-                    .replace("<player>", offlinePlayer.getName() != null ? offlinePlayer.getName() : "Onbekend"));
+        if (!region.getOwners().contains(player.getUniqueId()) && !player.hasPermission("ln.dl.plot.addmember.other")) {
+            ChatUtils.sendMessage(player, DailyLife.getMessageConfiguration().message("plot_not_owner", player)
+                    .replace("<player>", offlinePlayer.getName() != null ? offlinePlayer.getName() :
+                            DailyLife.getMessageConfiguration().message("unknown", player)));
             return;
         }
 
         if (region.getMembers().contains(offlinePlayer.getUniqueId()) || region.getOwners().contains(offlinePlayer.getUniqueId())) {
-            ChatUtils.sendMessage(player, MessageConfiguration.message("plot_member_already")
-                    .replace("<player>", offlinePlayer.getName() != null ? offlinePlayer.getName() : "Onbekend"));
+            ChatUtils.sendMessage(player, DailyLife.getMessageConfiguration().message("plot_member_already", player)
+                    .replace("<player>", offlinePlayer.getName() != null ? offlinePlayer.getName() :
+                            DailyLife.getMessageConfiguration().message("unknown", player)));
             return;
         }
 
         region.getMembers().addPlayer(offlinePlayer.getUniqueId());
-        ChatUtils.sendMessage(player, MessageConfiguration.message("plot_member_added")
-                .replace("<player>", offlinePlayer.getName() != null ? offlinePlayer.getName() : "Onbekend"));
+        ChatUtils.sendMessage(player, DailyLife.getMessageConfiguration().message("plot_member_added", player)
+                .replace("<player>", offlinePlayer.getName() != null ? offlinePlayer.getName() :
+                        DailyLife.getMessageConfiguration().message("unknown", player)));
     }
 
     @Subcommand("removemember")
     @Description("Verwijdert een speler van een plot.")
     @CommandCompletion("@players @plotName")
     @Syntax("<speler> <region>")
+    @CommandPermission("dl.ln.plot.removemember")
     public void removePlotMember(Player player, OfflinePlayer offlinePlayer, @Optional String regionName) {
         ProtectedRegion region = WorldGuardUtils.getProtectedRegion(player.getLocation(), priority -> priority >= 0);
         if (regionName != null) {
@@ -77,31 +86,35 @@ public class PlotMembersCommand extends BaseCommand {
         PlayerProfile profile = offlinePlayer.getPlayerProfile();
 
         if (region == null) {
-            ChatUtils.sendMessage(player, MessageConfiguration.message("plot_invalid_location")
-                    .replace("<player>", profile.getName() != null ? profile.getName() : "Onbekend"));
+            ChatUtils.sendMessage(player, DailyLife.getMessageConfiguration().message("plot_invalid_location", player)
+                    .replace("<player>", profile.getName() != null ? profile.getName() :
+                            DailyLife.getMessageConfiguration().message("unknown", player)));
             return;
         }
 
         if (region.getFlag(PlotModule.PLOT_FLAG) == null) {
-            ChatUtils.sendMessage(player, MessageConfiguration.message("plot_not_valid")
-                    .replace("<player>", profile.getName() != null ? profile.getName() : "Onbekend"));
+            ChatUtils.sendMessage(player, DailyLife.getMessageConfiguration().message("plot_not_valid", player)
+                    .replace("<player>", profile.getName() != null ? profile.getName() : DailyLife.getMessageConfiguration().message("unknown", player)));
             return;
         }
 
-        if (!region.getOwners().contains(player.getUniqueId()) && !player.hasPermission("openminetopia.plot.removemember")) {
-            ChatUtils.sendMessage(player, MessageConfiguration.message("plot_not_owner")
-                    .replace("<player>", profile.getName() != null ? profile.getName() : "Onbekend"));
+        if (!region.getOwners().contains(player.getUniqueId()) && !player.hasPermission("dl.ln.plot.removemember.other")) {
+            ChatUtils.sendMessage(player, DailyLife.getMessageConfiguration().message("plot_not_owner", player)
+                    .replace("<player>", profile.getName() != null ? profile.getName() :
+                            DailyLife.getMessageConfiguration().message("unknown", player)));
             return;
         }
 
         if (!region.getMembers().contains(profile.getId())) {
-            ChatUtils.sendMessage(player, MessageConfiguration.message("plot_member_not_added")
-                    .replace("<player>", profile.getName() != null ? profile.getName() : "Onbekend"));
+            ChatUtils.sendMessage(player, DailyLife.getMessageConfiguration().message("plot_member_not_added", player)
+                    .replace("<player>", profile.getName() != null ? profile.getName() :
+                            DailyLife.getMessageConfiguration().message("unknown", player)));
             return;
         }
 
         region.getMembers().removePlayer(profile.getId());
-        ChatUtils.sendMessage(player, MessageConfiguration.message("plot_member_removed")
-                .replace("<player>", profile.getName() != null ? profile.getName() : "Onbekend"));
+        ChatUtils.sendMessage(player, DailyLife.getMessageConfiguration().message("plot_member_removed", player)
+                .replace("<player>", profile.getName() != null ? profile.getName() :
+                        DailyLife.getMessageConfiguration().message("unknown", player)));
     }
 }
