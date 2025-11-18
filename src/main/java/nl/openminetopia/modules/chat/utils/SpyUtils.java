@@ -76,7 +76,7 @@ public class SpyUtils {
                         .setTitle(type == SpyType.CHAT ? "Chat Spy" : "Command Spy")
                         .addField(type == SpyType.CHAT ? "Message: " : "Command: ", content, false)
                         .setColor(type == SpyType.CHAT ? Color.BLUE : Color.RED)
-                        .setFooter("OpenMinetopia ©️ " + Year.now().getValue(), "https://avatars.githubusercontent.com/u/185693104")
+                        .setFooter("LunaroNetwork ©️ " + Year.now().getValue(), "https://avatars.githubusercontent.com/u/185693104")
                         .setAuthor(player.getName(), "", "https://mc-heads.net/avatar/" + player.getUniqueId());
 
                 webhook.addEmbed(embed);
