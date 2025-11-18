@@ -80,6 +80,7 @@ public class PlayerPreLoginListener implements Listener {
 
         event.joinMessage(Component.text(""));
         for (Player target : Bukkit.getOnlinePlayers()) {
+            if(!target.canSee(player)) continue;
             ChatUtils.sendMessage(target,
                     DailyLife.getMessageConfiguration().message("player_server_join", target)
                             .replace("<username>", player.getName()));

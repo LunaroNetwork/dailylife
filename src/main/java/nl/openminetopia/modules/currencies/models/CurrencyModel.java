@@ -32,6 +32,10 @@ public class CurrencyModel extends StormModel {
     @Column(name = "last_reward", defaultValue = "0")
     private Long lastReward;
 
+    // Nieuw veld: playtime van de speler op moment van aanmaak van deze currency
+    @Column(name = "creation_playtime", defaultValue = "0")
+    private Long creationPlaytime;
+
     public RegisteredCurrency configModel() {
         CurrencyModule currencyModule = DailyLife.getModuleManager().get(CurrencyModule.class);
         return currencyModule.getCurrencies().stream()

@@ -11,8 +11,11 @@ import nl.openminetopia.modules.color.enums.OwnableColorType;
 import nl.openminetopia.modules.currencies.CurrencyModule;
 import nl.openminetopia.modules.currencies.models.CurrencyModel;
 import nl.openminetopia.modules.fitness.FitnessModule;
+import org.bukkit.Bukkit;
 import org.bukkit.OfflinePlayer;
 import org.jetbrains.annotations.NotNull;
+
+import java.util.Objects;
 
 public class OpenMinetopiaExpansion extends PlaceholderExpansion {
 
@@ -72,7 +75,18 @@ public class OpenMinetopiaExpansion extends PlaceholderExpansion {
             case "city_color" -> minetopiaPlayer.getPlace().getColor();
             case "world_color" -> minetopiaPlayer.getWorld().getColor();
             case "prefix_color" -> minetopiaPlayer.getActiveColor(OwnableColorType.PREFIX).color();
-            case "name_color" -> DailyLife.getModuleManager().get(ColorModule.class).getConfiguration().color(minetopiaPlayer.getHometown().getColorId()).colorPrefix();
+            case "name_color" ->
+                    Objects.requireNonNull(Bukkit.getPlayer(minetopiaPlayer.getBukkit().getUniqueId())).hasPermission("ln.dl.namecolor.admin") ? "<bold><dark_red>" :
+                            Objects.requireNonNull(Bukkit.getPlayer(minetopiaPlayer.getBukkit().getUniqueId())).hasPermission("ln.dl.namecolor.staff") ? "<dark_red>" :
+                                    (minetopiaPlayer.getHometown() != null && DailyLife.getModuleManager().get(ColorModule.class)
+                                            .getConfiguration()
+                                            .color(minetopiaPlayer.getHometown().getColorId()) != null
+                                            ? DailyLife.getModuleManager()
+                                            .get(ColorModule.class)
+                                            .getConfiguration()
+                                            .color(minetopiaPlayer.getHometown().getColorId())
+                                            .colorPrefix()
+                                            : "<gray>");
             case "chat_color" -> minetopiaPlayer.getActiveColor(OwnableColorType.CHAT).color();
             case "level_color" -> minetopiaPlayer.getActiveColor(OwnableColorType.LEVEL).color();
             case "balance", "balance_formatted" -> {

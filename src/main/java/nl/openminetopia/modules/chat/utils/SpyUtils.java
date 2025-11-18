@@ -5,7 +5,6 @@ import nl.openminetopia.DailyLife;
 import nl.openminetopia.api.player.PlayerManager;
 import nl.openminetopia.api.player.objects.MinetopiaPlayer;
 import nl.openminetopia.configuration.DefaultConfiguration;
-import nl.openminetopia.configuration.language.MessageConfiguration;
 import nl.openminetopia.utils.ChatUtils;
 import nl.openminetopia.utils.webhooks.DiscordWebhook;
 import org.bukkit.Bukkit;
@@ -27,10 +26,6 @@ public class SpyUtils {
     public void chatSpy(Player player, String message, List<Player> ignore) {
         spyToDiscord(SpyType.CHAT, player, message);
 
-        String spiedMessage = MessageConfiguration.message("chat_chatspy_format")
-                .replace("<player>", player.getName())
-                .replace("<message>", message);
-
         for (Player onlinePlayer : Bukkit.getOnlinePlayers()) {
             if (onlinePlayer.getUniqueId().equals(player.getUniqueId())) continue;
             if (ignore.contains(onlinePlayer)) continue;
@@ -38,22 +33,31 @@ public class SpyUtils {
             MinetopiaPlayer minetopiaPlayer = PlayerManager.getInstance().getOnlineMinetopiaPlayer(onlinePlayer);
             if (minetopiaPlayer == null) return;
 
-            if (minetopiaPlayer.isChatSpyEnabled()) ChatUtils.sendFormattedMessage(minetopiaPlayer, spiedMessage);
+            if (!minetopiaPlayer.isChatSpyEnabled()) continue;
+            DefaultConfiguration configuration = DailyLife.getDefaultConfiguration();
+            if (onlinePlayer.getWorld().equals(player.getWorld()) &&
+                    onlinePlayer.getLocation().distance(player.getLocation()) < configuration.getChatRadiusRange()) continue;
+
+            String spiedMessage = DailyLife.getMessageConfiguration().message("chat_chatspy_format", onlinePlayer)
+                    .replace("<player>", player.getName())
+                    .replace("<message>", message);
+
+            ChatUtils.sendFormattedMessage(minetopiaPlayer, spiedMessage);
         }
     }
 
     public void commandSpy(Player player, String command) {
         spyToDiscord(SpyType.COMMAND, player, command);
 
-        String spiedMessage = MessageConfiguration.message("chat_commandspy_format")
-                .replace("<player>", player.getName())
-                .replace("<command>", command);
-
         for (Player onlinePlayer : Bukkit.getOnlinePlayers()) {
             if (onlinePlayer.getUniqueId().equals(player.getUniqueId())) continue;
 
             MinetopiaPlayer minetopiaPlayer = PlayerManager.getInstance().getOnlineMinetopiaPlayer(onlinePlayer);
             if (minetopiaPlayer == null) return;
+
+            String spiedMessage = DailyLife.getMessageConfiguration().message("chat_commandspy_format", onlinePlayer)
+                    .replace("<player>", player.getName())
+                    .replace("<command>", command);
 
             if (minetopiaPlayer.isCommandSpyEnabled()) ChatUtils.sendFormattedMessage(minetopiaPlayer, spiedMessage);
         }
@@ -72,7 +76,7 @@ public class SpyUtils {
                         .setTitle(type == SpyType.CHAT ? "Chat Spy" : "Command Spy")
                         .addField(type == SpyType.CHAT ? "Message: " : "Command: ", content, false)
                         .setColor(type == SpyType.CHAT ? Color.BLUE : Color.RED)
-                        .setFooter("OpenMinetopia ©️ "+ Year.now().getValue(), "https://avatars.githubusercontent.com/u/185693104")
+                        .setFooter("LunaroNetwork ©️ " + Year.now().getValue(), "https://avatars.githubusercontent.com/u/185693104")
                         .setAuthor(player.getName(), "", "https://mc-heads.net/avatar/" + player.getUniqueId());
 
                 webhook.addEmbed(embed);

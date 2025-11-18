@@ -2,10 +2,12 @@ package nl.openminetopia.modules.staff.mod.commands.subcommands;
 
 import co.aikar.commands.BaseCommand;
 import co.aikar.commands.annotation.*;
+import nl.openminetopia.DailyLife;
 import nl.openminetopia.api.player.PlayerManager;
 import nl.openminetopia.modules.color.models.HometownModel;
 import nl.openminetopia.modules.color.objects.Hometown;
 import nl.openminetopia.modules.data.storm.StormDatabase;
+import nl.openminetopia.utils.ChatUtils;
 import org.bukkit.OfflinePlayer;
 import org.bukkit.entity.Player;
 
@@ -88,7 +90,10 @@ public class ModHometownCommand extends BaseCommand {
                             Hometown hometown = new Hometown(model.getName(), model.getColorId()) {};
                             minetopiaPlayer.setHometown(hometown);
 
-                            executor.sendMessage("§aHometown van §f" + target.getName() + " §ais nu ingesteld op §f" + hometown.getName() + "§a.");
+                            executor.sendMessage(ChatUtils.color(
+                                        DailyLife.getMessageConfiguration().message("staff_mod_hometown_set", executor)
+                                                .replace("<player>", minetopiaPlayer.getBukkit().getName())
+                                    ));
                         });
             } catch (Exception e) {
                 e.printStackTrace();

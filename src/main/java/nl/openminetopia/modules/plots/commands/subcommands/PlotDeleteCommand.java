@@ -13,6 +13,7 @@ import com.sk89q.worldguard.WorldGuard;
 import com.sk89q.worldguard.protection.managers.RegionManager;
 import com.sk89q.worldguard.protection.regions.ProtectedRegion;
 import com.sk89q.worldguard.protection.regions.RegionContainer;
+import nl.openminetopia.DailyLife;
 import nl.openminetopia.api.player.PlayerManager;
 import nl.openminetopia.api.player.objects.MinetopiaPlayer;
 import nl.openminetopia.configuration.language.MessageConfiguration;
@@ -23,7 +24,7 @@ import org.bukkit.entity.Player;
 public class PlotDeleteCommand extends BaseCommand {
 
     @Subcommand("delete")
-    @CommandPermission("openminetopia.plot.delete")
+    @CommandPermission("ln.dl.plot.delete")
     @Syntax("<naam>")
     @CommandCompletion("@plotName")
     @Description("Verwijder een plot.")
@@ -38,18 +39,18 @@ public class PlotDeleteCommand extends BaseCommand {
         if (minetopiaPlayer == null) return;
 
         if (regionManager == null) {
-            player.sendMessage(MessageConfiguration.component("plot_region_retrieval_error"));
+            player.sendMessage(DailyLife.getMessageConfiguration().component("plot_region_retrieval_error", player));
             return;
         }
 
         ProtectedRegion region = regionManager.getRegion(name);
 
         if (region == null) {
-            player.sendMessage(MessageConfiguration.component("plot_not_found"));
+            player.sendMessage(DailyLife.getMessageConfiguration().component("plot_not_found", player));
             return;
         }
 
-        ChatUtils.sendMessage(player, MessageConfiguration.message("plot_deletion_success")
+        ChatUtils.sendMessage(player, DailyLife.getMessageConfiguration().message("plot_deletion_success", player)
                 .replace("<plot>", region.getId()));
 
         regionManager.removeRegion(region.getId());
